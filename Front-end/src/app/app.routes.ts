@@ -12,7 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'item', component: ItemComponent },
+  { path: 'item/:id', component: ItemComponent }, 
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
@@ -21,5 +21,4 @@ export const routes: Routes = [
   { path: 'products', component: ProductsComponent }, 
   { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: '/home' } 
-
 ];
