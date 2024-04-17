@@ -1,26 +1,14 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "Back-End For E-commserce Website",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NourhanRadwan145/ecommerce-furniture-website.git"
-  },
-  "keywords": [
-    "furniture"
-  ],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NourhanRadwan145/ecommerce-furniture-website/issues"
-  },
-  "homepage": "https://github.com/NourhanRadwan145/ecommerce-furniture-website#readme",
   "dependencies": {
-    "express": "^4.19.2",
-    "mongoose": "^8.3.2"
+    "express": "^4.19.2"
   }
 }
