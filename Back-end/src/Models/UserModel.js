@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
     "email": String,
     "gender": String,
     "image": String, 
-    "orders": [ ObjectId ],  //  array of orders ids
+    "orders": [ { type: mongoose.Schema.Types.ObjectId, ref: "orders" }, ],
+    "carts": [ { type: mongoose.Schema.Types.ObjectId, ref: "products" }, ],
     "isAdmin": Boolean
 })
 
