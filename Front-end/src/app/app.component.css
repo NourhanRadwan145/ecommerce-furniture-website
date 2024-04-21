@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-panel {
+  flex: 1;
+}
+
+.app-footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

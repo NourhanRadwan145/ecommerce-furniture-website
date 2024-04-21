@@ -8,11 +8,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SingleProductDetailsComponent } from './components/single-product-details/single-product-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'item/:id', component: ItemComponent }, 
+  { path: 'product/:id', component: SingleProductDetailsComponent }, 
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
