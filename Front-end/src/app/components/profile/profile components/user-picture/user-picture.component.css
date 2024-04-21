@@ -1,10 +1,4 @@
-.main-body{
-  margin-top:20px;
-  color: #1a202c;
-  text-align: left;
-  background-color: #91a3bc;
-  margin-bottom: 20px;
-}
+
 .main-body {
   padding: 15px;
 }
@@ -18,10 +12,10 @@
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #ffffff;
   background-clip: border-box;
   border: 0 solid rgba(0,0,0,.125);
-  border-radius: .25rem;
+
 }
 
 .card-body {
@@ -44,7 +38,7 @@
 }
 
 .bg-gray-300 {
-  background-color: #e2e8f0;
+  background-color: #989ba0;
 }
 .h-100 {
   height: 100%!important;
