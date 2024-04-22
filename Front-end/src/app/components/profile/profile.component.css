@@ -1,8 +1,11 @@
+body{
+  background-image: url('https://png.pngtree.com/back_origin_pic/04/55/09/a389b1610823d7e06cb5594c70a184d2.jpg');
+  background-size: cover;
+}
 .main-body{
   margin-top:20px;
   color: #1a202c;
   text-align: left;
-  background-color: #91a3bc;
   margin-bottom: 20px;
 }
 .main-body {

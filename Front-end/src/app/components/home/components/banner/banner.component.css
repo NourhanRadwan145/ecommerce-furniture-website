@@ -1,0 +1,142 @@
+.image-background {
+  background-image: url('https://images2.alphacoders.com/647/thumb-1920-647567.jpg');
+  background-size: cover;
+  background-position:center;
+  height: 100%;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  margin: auto;
+}
+
+.heading{
+  margin-left: 80px;
+  margin-top: 150px;
+  font-size: 2em; /* Default font size */
+  line-height: 1.2; /* Default line height */
+}
+
+
+.button {
+  position: relative; /* Position relative to nearest positioned ancestor (here .image-background) */
+  left: 14%; /* Center horizontally */
+  margin-top: 30px;
+  transform: translate(-50%, -50%); /* Centering adjustment */
+  padding: 10px 20px; /* Example padding */
+  font-size: 1em; /* Adjust font size */
+}
+
+/* Very small devices (small phones, less than 400px) */
+@media (max-width: 400px) {
+  .image-background {
+    height: 25vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 1.2em;
+    margin-left: 20px;
+    margin-top: 15px;
+  }
+  .button {
+    position: relative;
+    left: 25%;
+    margin-top: 15px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Extra small devices (phones, 400px and up but less than 600px) */
+@media (min-width: 400px) and (max-width: 599px) {
+  .image-background {
+    height: 30vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 1.4em;
+    margin-left: 30px;
+    margin-top: 25px;
+  }
+  .button {
+    position: relative;
+    left: 23%;
+    margin-top: 15px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) and (max-width: 768px) {
+  .image-background {
+    height: 45vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 1.6em;
+    margin-left: 40px;
+    margin-top: 35px;
+  }
+  .button {
+    position:relative;
+    left: 26%;
+    margin-top: 23px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .image-background {
+    height: 50vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 2em;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  .button {
+      position:relative;
+      left: 22%;
+      margin-top: 23px;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .image-background {
+    height: 90vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 3em;
+    margin-left: 60px;
+    margin-top: 130px;
+  }
+  .button {
+    position:relative;
+    left: 23%;
+    margin-top: 33px;
+    font-size: 1.5em;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .image-background {
+    height: 100vh;
+    background-position: center;
+  }
+  .heading {
+    font-size: 4em;
+    margin-left: 15%;
+    margin-top: 10%;
+  }
+  .button{
+    position:relative;
+    left: 29%;
+    margin-top: 60px;
+    font-size: 1.7em;
+
+  }
+}
