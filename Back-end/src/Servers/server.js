@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors({
     credentials:true,
-    origin:["*"]
+    origin:["http://localhost:4200"]
 }))
 app.use(cookieParser())
 

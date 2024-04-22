@@ -1,1 +1,29 @@
-<p>register works!</p>
+<div class="container">
+<form [formGroup]="form" class="bg-light p-4 rounded">
+    <h2 class="text-center mb-4 register">Register</h2>
+    <div class="mb-3">
+        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+    </div>
+    <div class="mb-3">
+        <input type="email" formControlName="email" class="form-control" placeholder="Email">
+    </div>
+    <div class="mb-3">
+        <input type="password" formControlName="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="mb-3">
+        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+    </div>
+    <div class="mb-3">
+        <select formControlName="gender" class="form-select">
+            <option class="" value="" disabled selected>Gender</option>
+            <option class="form-control" value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input">
+        <label class="form-check-label">Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-outline-secondary btn-block submit" (click)="submit()">Register</button>
+</form>
+</div>
