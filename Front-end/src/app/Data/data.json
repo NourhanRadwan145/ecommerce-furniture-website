@@ -1,0 +1,120 @@
+{
+  "Products": [
+    {
+      "id": "1",
+      "title": "Product 1",
+      "image": "https://i.pinimg.com/564x/2e/f7/44/2ef744f7022ab9e4f1dfb51e8695dd7f.jpg",
+      "price": 10.99,
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "id": "2",
+      "title": "Product 2",
+      "image": "https://i.pinimg.com/564x/d5/35/ad/d535ad7b04a761b2e58ea14b7aca16f6.jpg",
+      "price": 19.99,
+      "details": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "id": "3",
+      "title": "Product 3",
+      "image": "https://i.pinimg.com/564x/02/94/a4/0294a4627c8410c843e821ff64db5a1b.jpg",
+      "price": 14.50,
+      "details": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      "id": "4",
+      "title": "Product 3",
+      "image": "https://i.pinimg.com/564x/93/0d/0d/930d0d9c770ba19ba3caa83b983e98a5.jpg",
+      "price": 14.50,
+      "details": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      "id": "5",
+      "title": "Product 3",
+      "image": "https://i.pinimg.com/736x/75/56/6a/75566a0f8109b08a17b88908171a5d4a.jpg",
+      "price": 14.50,
+      "details": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    }
+  ],
+  "Users": [
+    {
+      "id": "1",
+      "username": "john_doe",
+      "password": "password123",
+      "email": "john.doe@example.com",
+      "gender": "Male",
+      "image": "profile_image1.jpg",
+      "orders": [
+        "order1_id",
+        "order2_id"
+      ],
+      "carts": [
+        {
+          "productId": "1",
+          "quantity": 2
+        },
+        {
+          "productId": "2",
+          "quantity": 1
+        }
+      ],
+      "isAdmin": false
+    },
+    {
+      "id": "2",
+      "username": "jane_smith",
+      "password": "password456",
+      "email": "jane.smith@example.com",
+      "gender": "Female",
+      "image": "profile_image2.jpg",
+      "orders": [
+        "order3_id",
+        "order4_id"
+      ],
+      "carts": [
+        {
+          "productId": "3",
+          "quantity": 3
+        }
+      ],
+      "isAdmin": false
+    }
+  ],
+  "Orders": [
+    {
+      "id": "1",
+      "userId": "user1_id",
+      "username": "john_doe",
+      "date": "2022-04-01T10:30:00Z",
+      "totalPrice": 50.25,
+      "products": [
+        "product1_id",
+        "product2_id"
+      ],
+      "status": "Pending"
+    },
+    {
+      "id": 2,
+      "userId": "user2_id",
+      "username": "jane_smith",
+      "date": "2022-04-02T15:45:00Z",
+      "totalPrice": 75.60,
+      "products": [
+        "product3_id",
+        "product4_id"
+      ],
+      "status": "Accepted"
+    },
+    {
+      "id": "3",
+      "userId": "user1_id",
+      "username": "john_doe",
+      "date": "2022-04-03T11:20:00Z",
+      "totalPrice": 30.00,
+      "products": [
+        "product5_id"
+      ],
+      "status": "Rejected"
+    }
+  ]
+}
