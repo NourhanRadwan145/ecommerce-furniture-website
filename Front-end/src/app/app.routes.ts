@@ -13,13 +13,13 @@ import { SingleProductDetailsComponent } from './components/single-product-detai
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product/:id', component: SingleProductDetailsComponent }, 
+  { path: 'product/:id', component: SingleProductDetailsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'products', component: ProductsComponent }, 
+  { path: 'products', component: ProductsComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '**', redirectTo: '/home' } 
+  { path: '**', redirectTo: '/home' },
 ];

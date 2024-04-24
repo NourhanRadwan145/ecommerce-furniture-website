@@ -23,6 +23,9 @@
     "bootstrap": "^5.3.3",
     "primeicons": "^7.0.0",
     "primeng": "^17.14.1",
+    "bootstrap-icons": "^1.11.3",
+    "json-server": "^1.0.0-alpha.23",
+    "ng-apexcharts": "^1.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

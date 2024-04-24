@@ -1,0 +1,73 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <!-- title -->
+    <h3 class="card-title">Orders Dashboard</h3>
+    <!-- <h5 class="card-subtitle">Overview of the Orders</h5> -->
+
+    <!-- title -->
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr class="">
+            <th class="text-dark font-medium fs-4" style="text-align: left">
+              User
+            </th>
+            <th class="text-dark font-medium fs-4">Order</th>
+            <th class="text-dark font-medium fs-4">Actions</th>
+            <th class="text-dark font-medium fs-4">Status</th>
+            <th class="text-dark font-medium fs-4">Since</th>
+            <th class="text-dark font-medium fs-4">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                  [src]="image"
+                  alt="user"
+                  width="45"
+                  class="rounded-circle"
+                />
+                <div class="ms-3 d-flex flex-column align-items-start">
+                  <h5 class="mb-0 font-medium">{{ order.user_name }}</h5>
+                  <span class="text-muted">{{ order.id }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="fs-4">{{ order.order_name }}</td>
+            <td>
+              <button class="btn btn-success me-1" (click)="accepted(order.id)">
+                Accept
+              </button>
+              <button class="btn btn-danger" (click)="rejected(order.id)">
+                Reject
+              </button>
+            </td>
+            <td class="">
+              <span
+                class="p-2 rounded-circle d-inline-block ms-3"
+                [ngClass]="{
+                  'bg-success': order.state === 'accepted',
+                  'bg-warning': order.state === 'pending',
+                  'bg-danger': order.state === 'rejected'
+                }"
+              ></span
+              ><span>
+                {{ order.state }}
+              </span>
+            </td>
+
+            <td>
+              <!-- <h5 class="mb-0 fw-normal">{{ new Date()-order.date }}</h5> -->
+              <h5 class="mb-0 fw-normal">{{ order.date }}</h5>
+            </td>
+            <td>
+              <h5 class="mb-0 fw-normal">{{ order.total_price.toFixed() }}</h5>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
