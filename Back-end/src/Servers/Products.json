@@ -1,0 +1,98 @@
+[
+    {
+        "title": "Darvi Sofa",
+        "image": "https://finez.lk/cdn/shop/products/Darvi_800x800.jpg?v=1676024052",
+        "category": "Sofa",
+        "price": 175000,
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 30 inches",
+        "rating": 4.3
+    },
+    {
+        "title": "Leyard Sofa",
+        "category": "Sofa",
+        "price": 160000,
+        "image": "https://finez.lk/cdn/shop/products/Leyard_800x800.jpg?v=1676024095",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 36 inches",
+        "rating": 4.8
+    },
+    {
+        "title": "Tiana Sofa",
+        "category": "Sofa",
+        "price": 175000,
+        "image": "https://finez.lk/cdn/shop/products/Tiana_800x800.jpg?v=1676024403",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 36 inches",
+        "rating": 4.7
+    },
+    {
+        "title": "Ashby Sofa",
+        "category": "Sofa",
+        "price": 250000,
+        "image": "https://finez.lk/cdn/shop/files/Ashby-Sofa_800x800.jpg?v=1683524335",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 36 inches",
+        "rating": 4.9
+    },
+    {
+        "title": "Vivian Sofa",
+        "category": "Sofa",
+        "price": 165000,
+        "image": "https://finez.lk/cdn/shop/products/Vivian_800x800.jpg?v=1676024536",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\n\nDepth: 36 inches",
+        "rating": 4.7
+    },
+    {
+        "title": "Beverly Sofa",
+        "category": "Sofa",
+        "price": 89500,
+        "image": "https://finez.lk/cdn/shop/products/Beverly_800x800.jpg?v=1676024031",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 36 inches",
+        "rating": 4.9
+    },
+    {
+        "title": "Willow Sofa",
+        "category": "Sofa",
+        "price": 165000,
+        "image": "https://finez.lk/cdn/shop/products/Willow_800x800.jpg?v=1676024573",
+        "details": "Dimensions\nWidth: Custom\nHeight: 30 inches\nDepth: 30 inches",
+        "rating": 4.5
+    },
+    {
+        "title": "Rily Sofa",
+        "category": "Sofa",
+        "price": 175000,
+        "image": "https://finez.lk/cdn/shop/products/Rily_7f196cba-8bc0-453c-838c-d1a33141fa76_800x800.jpg?v=1676024377",
+        "details": "Dimensions\nWidth: Custom\nHeight: 30 inches\nDepth: 30 inches",
+        "rating": 5
+    },
+    {
+        "title": "Grace Sofa",
+        "category": "Sofa",
+        "price": 89000,
+        "image": "https://finez.lk/cdn/shop/products/Grace_d07c9bb2-eb7a-4d38-823d-b5786456336e_800x800.jpg?v=1676024068",
+        "details": "Dimensions\nWidth: Custom\nHeight: 35 inches\nDepth: 35 inches",
+        "rating": 4.8
+    },
+    {
+        "title": "Chesterfield Sofa",
+        "category": "Sofa",
+        "price": 187500,
+        "image": "https://finez.lk/cdn/shop/files/Chesterfield-Sofa_800x800.jpg?v=1683524624",
+        "details": "Dimensions\nWidth: Custom\nHeight: 34 inches\nDepth: 36 inches",
+        "rating": 4.8
+    },
+    {
+        "title": "Ovya Sofa",
+        "category": "Sofa",
+        "price": 182500,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGl7eD5aAwE0AKGSnMb_mocnK5_e3e8fB_-TEhzDmzwMbBR4IrgmSEA8rSLeo1FMkjao&usqp=CAU",
+        "details": "Dimensions\nWidth: Custom\nHeight: 30 inches\nDepth: 34 inches",
+        "rating": 3.9
+    },
+    {
+        "title": "Gunnared Sofa",
+        "category": "Sofa",
+        "price": 150000,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROR5CWdm48Xh9QQ-_1K1hU3YJVbhzbzQyax_KyehgFOw&s",
+        "details": "Dimensions\nWidth: Custom\nHeight: 30 inches\nDepth: 30 inches",
+        "rating": 4.2
+    }
+]

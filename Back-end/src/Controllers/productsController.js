@@ -1,13 +1,31 @@
 const productModel = require("../Models/productsModel");
-const productValidate = require("../Utils/productsValidate");
 
 /**
- * Get all Products
+ * Get all Products with filtering and searching
  */
 async function getAllProducts(req, res) {
-    // ==> for testing routes
-    let Products = await productModel.find({});
-    return res.json({"All Products":Products});
+    try {
+        let query = {};
+
+        // Filtering logic
+        if (req.query.minPrice) {
+            query.price = { $gte: parseInt(req.query.minPrice) };
+        }
+        if (req.query.maxPrice) {
+            query.price = { ...query.price, $lte: parseInt(req.query.maxPrice) };
+        }
+
+        // Search logic
+        if (req.query.searchTerm) {
+            query.title = { $regex: new RegExp(req.query.searchTerm, 'i') };
+        }
+
+        const products = await productModel.find(query);
+        res.json({ "All Products": products });
+    } catch (err) {
+        console.error('Error loading products:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 /**
