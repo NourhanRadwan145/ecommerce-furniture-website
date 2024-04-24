@@ -14,7 +14,7 @@
       "order_name": "Laptop",
       "date": "2024-04-22",
       "total_price": 1299.99,
-      "state": "accepted"
+      "state": "rejected"
     },
     {
       "id": "3",
@@ -86,7 +86,7 @@
       "order_name": "Keyboard",
       "date": "2024-04-13",
       "total_price": 49.99,
-      "state": "pending"
+      "state": "accepted"
     },
     {
       "id": "12",
@@ -150,7 +150,7 @@
       "order_name": "Webcam",
       "date": "2024-04-05",
       "total_price": 69.99,
-      "state": "pending"
+      "state": "rejected"
     },
     {
       "id": "20",
