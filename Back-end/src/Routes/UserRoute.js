@@ -7,5 +7,7 @@ Router.get("/:id", UserController.GetUserById)
 Router.post("/", UserController.AddNewUser)
 Router.put("/:id", UserController.UpdateUser)
 Router.delete("/:id", UserController.DeleteUser)
+Router.post("/login", UserController.LoginUser)
+Router.post("/register", UserController.RegisterUser)
 
 module.exports = Router

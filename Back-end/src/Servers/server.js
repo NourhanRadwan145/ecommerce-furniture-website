@@ -15,6 +15,11 @@ const cors = require('cors');
 mongoose.connect("mongodb://127.0.0.1:27017/E-Commerce");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(cors({
+    credentials:true,
+    origin:["http://localhost:4200"]
+}))
+app.use(cookieParser())
 
 //#region Routes
 app.use(cors({ origin: 'http://localhost:4200' }));

@@ -20,6 +20,7 @@ input[type="text"], input[type="email"], input[type="password"], select{
 }
 label{
     margin-left: 10px;
+    color: #607d8b;
 }
 h2{
     transition: all;
