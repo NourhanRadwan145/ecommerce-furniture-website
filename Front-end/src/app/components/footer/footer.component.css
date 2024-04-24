@@ -1,0 +1,44 @@
+.contact-us-btn{
+    background-color: #f8f9fa;
+    color: #416990;
+    border: 2px solid #416990;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    transition: all 0.3s;
+    width: 160px;
+    height: 50px;
+}
+
+.contact-us-btn:hover{
+    background-color: #416990;
+    color: #f8f9fa;
+    border: 2px solid #416990;
+}
+
+
+.copy-right{
+    background-color: rgb(65, 61, 61);
+}
+
+.nav-link{
+    color: rgb(116, 116, 116);
+}
+
+.nav-link:hover{
+    color: black;
+}
+
+
+.bg-furniture {
+    background-image: url('/assets/images/Header/footer-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.footer-social-item svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff; 
+}

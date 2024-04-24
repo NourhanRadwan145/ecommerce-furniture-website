@@ -1,0 +1,90 @@
+.number-input input {
+  width: 40px;
+  text-align: center;
+  height: 100%;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.number-input button {
+  padding: 3px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  margin: 0;
+  border: 1px solid rgb(204, 204, 204);
+  height: 100%;
+}
+
+.number-input input:focus {
+  outline: none;
+  border: .1px dashed rgb(72, 72, 72);
+}
+
+.number-input input::-webkit-outer-spin-button,
+.number-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.add-to-cart-btn {
+  background-color: #f8f9fa;
+  color: #416990;
+  border: 2px solid #416990;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  width: 100%;
+  height: 40px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #416990;
+  color: #f8f9fa;
+  border: 2px solid #416990;
+}
+
+.nav-link {
+  color: #416990;
+  outline: none;
+  border: none;
+}
+
+.nav-link:focus{
+    outline: none;
+    border: none;
+}
+
+.nav-link:hover {
+  color: black;
+}
+
+
+.close-button {
+  border-radius: 50%;
+  background-color: white;
+  /* padding: 5px 10px; */
+  color: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 0px 0px 10px rgb(170, 170, 170);
+  display: flex;
+  z-index: auto;
+  
+}
+  
+.ahfb-svg-iconset svg {
+    width: 50px;
+    height: auto;
+    fill: #ff0000;
+}
+
+.ast-custom-payment .ahfb-svg-iconset.svg1 {
+    fill: #00ff00;
+}
+
+.ast-custom-payment .ahfb-svg-iconset.svg2 {
+    width: 70px;
+}
