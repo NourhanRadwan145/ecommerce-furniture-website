@@ -2,6 +2,7 @@
 
 //#region Imports
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 7000;
 const UserRoutes = require("../Routes/UserRoute")
@@ -10,10 +11,11 @@ const orderRoute = require('../Routes/OrderRoute');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 //#endregion
-
+app.use(cors());
 mongoose.connect("mongodb://127.0.0.1:27017/E-Commerce");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
 
 //#region Routes
 app.use("/api/users", UserRoutes)

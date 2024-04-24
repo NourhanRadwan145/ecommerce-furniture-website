@@ -5,8 +5,8 @@ const UserValidate = require("../Utils/UserValidate")
 // ---------------------------------- Get All Users  ------------------------------------
 let GetAllUsers = async (req, res)=>{
     // => for testing routes
-    // let users = await UserModel.find({})
-    // return res.json(users)
+    let users = await UserModel.find({})
+    return res.json(users)
 }
 // ---------------------------------- Get User By ID  -----------------------------------
 let GetUserById = async (req, res)=>{}

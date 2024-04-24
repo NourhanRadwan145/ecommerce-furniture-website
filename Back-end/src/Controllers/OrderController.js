@@ -7,8 +7,8 @@ const orderValidate = require("../Utils/OrderValidate");
  */
 let getAllOrders = async (req, res) => {
     // ==> for testing routes
-    // let orders = await orderModel.find({});
-    // return res.json(orders);
+    let orders = await orderModel.find({});
+    return res.json(orders);
 }
 
 
