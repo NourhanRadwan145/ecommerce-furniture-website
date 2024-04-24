@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  userid = 1;
+  userid = "662904f2d0e3a39fc2a29adb";
   user: any;
   cart: any;
   showAddressForm: boolean = false;
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
   }
 
 
-  constructor(private userService: UsersService, private productsService: ProductsService) { }
+  constructor(private userService: UsersService) { }
   toggleAddressForm() {
     this.showAddressForm = !this.showAddressForm;
   }
@@ -48,21 +48,15 @@ export class CartComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.userService
     this.userService.getUserById(this.userid).subscribe(
       {
-        next: (data) => {
-          this.user = data;
-          this.cart = this.user.carts;
-          this.cart.forEach((element: any) => {
-            this.productsService.getProductById(element.productId).subscribe(
-              {
-                next: (data) => {
-                  element.product = data;
-                }
-              }
-            );
-          });
-          console.log(this.cart);
+        next: (data: any) => {
+          // this.cart = data.carts;
+          console.log(data);
+        },
+        error: (error: any) => {
+          console.log(error);
         }
       }
     );

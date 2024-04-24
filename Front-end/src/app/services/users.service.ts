@@ -8,7 +8,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  URL_DB = 'http://localhost:3000/Users';
+  URL_DB = 'http://localhost:7000/api/users';
 
   getUsers() {
     return this.http.get(this.URL_DB);
