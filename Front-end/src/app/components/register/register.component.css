@@ -11,8 +11,22 @@ input[type="text"], input[type="email"], input[type="password"], select{
     height: 50px;
     width: 100%;
     font-weight: bold;
+    transition: all;
+    transition-duration: 500ms;
 }
 .register{
     color: #607d8b;
+    font-weight: bold;
+}
+label{
+    margin-left: 10px;
+    color: #607d8b;
+}
+h2{
+    transition: all;
+    transition-duration: 500ms;
+}
+h2:hover{
+    letter-spacing: 5px;
     font-weight: bold;
 }

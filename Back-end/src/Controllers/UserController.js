@@ -23,7 +23,22 @@ let UpdateUser = async (req, res)=>{}
 let DeleteUser = async (req, res)=>{}
 // ---------------------------------- Login User  ---------------------------------------
 let LoginUser = async (req, res)=>{
-    res.send("Login User")
+    const user = await UserModel.findOne({email:req.body.email})
+    if(!user) {
+        return res.status(400).send({message:"Invalid Email or Password"})
+    }
+    const validPassword = await bcrypt.compare(req.body.password, user.password)
+    if(!validPassword) {
+        return res.status(400).send({message:"Invalid Email or Password"})
+    }
+    const {_id} = user.toJSON()
+    const token = jwt.sign({_id: _id }, "secret")
+    res.cookie("jwt", token, {
+        httpOnly:true,
+        maxAge: 24*30*60*60*1000
+    })
+    return res.status(200).json({message:"User Logged In Successfully", user:user})
+    
 }
 // ---------------------------------- Register User  ------------------------------------
 let RegisterUser = async (req, res)=>{
@@ -52,13 +67,13 @@ let RegisterUser = async (req, res)=>{
             })
             let savedUser = await newUser.save()  
             const {_id} = savedUser.toJSON() 
-            const secretKey = crypto.randomBytes(32).toString("hex") 
-            const token = jwt.sign({_id: _id}, secretKey) 
+            // const secretKey = crypto.randomBytes(32).toString("hex") 
+            const token = jwt.sign({_id: _id}, "secret") 
             res.cookie("jwt", token, { 
                 httpOnly:true,
                 maxAge: 24*30*60*60*1000 
             })  
-            console.log(token)
+            // console.log(token)
             return res.status(201).json({message:"User Created Successfully", user:savedUser})  
         }
     } 

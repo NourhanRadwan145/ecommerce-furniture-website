@@ -1,2 +1,28 @@
-<h1>Login / Register</h1>
-<p>form goes here.</p>
+<div class="container">
+    <form [formGroup]="form" class="bg-light p-4 rounded">
+        <h2 class="text-center mb-4 register row-cols-1">Login</h2>
+        <div class=" mb-3 row">
+            <div class="col form-floating">
+                <input type="email" formControlName="email" class="form-control" placeholder=" ">
+                <label for="" class="form-label">Email</label>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col form-floating">
+                <input type="password" formControlName="password" class="form-control" placeholder="">
+                <label for="" class="form-label">Password</label>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col">
+                <button type="submit" class="btn btn-outline-secondary btn-block submit" (click)="login()">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    label{
+        margin-left: 10px;
+    }
+</style>

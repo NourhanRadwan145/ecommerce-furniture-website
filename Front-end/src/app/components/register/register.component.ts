@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-  form!: FormGroup;
+  form: FormGroup;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -77,8 +77,8 @@ export class RegisterComponent implements OnInit {
     {
         withCredentials: true,
       })
-      .subscribe( () => this.router.navigate(['/products']), (err) => {
-        Swal.fire("Error", err.error.message, "error")
+      .subscribe({complete: () => this.router.navigate(['/products']), error: (err) => {
+        Swal.fire("Error", err.error.message, "error")}
 
       });
   }
