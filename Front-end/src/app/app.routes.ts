@@ -12,13 +12,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'item/:id', component: ItemComponent }, 
+  { path: 'item/:id', component: ItemComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'products', component: ProductsComponent }, 
+  { path: 'products', component: ProductsComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '**', redirectTo: '/home' } 
+  { path: '**', redirectTo: '/home' },
 ];
