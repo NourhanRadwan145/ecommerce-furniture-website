@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/admin']);
           }
           else if(loggedInUser && loggedInUser.isAdmin == false){
-            this.router.navigate(['/products']);
+            this.router.navigate(['/home']);
           }
 
         },

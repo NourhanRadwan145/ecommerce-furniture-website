@@ -83,6 +83,36 @@ let RegisterUser = async (req, res)=>{
 }
 
 
+const GetUserByToken = async (req, res) => {
+    try {
+        const cookie = req.cookies["jwt"];
+        if (!cookie) {
+            console.log("JWT cookie not found")
+            return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
+        }
+
+        const claims = jwt.verify(cookie, "secret"); // Remove extra space from the secret
+        if (!claims) {
+            return res.status(401).json({ message: "Unauthorized: Invalid token" });
+        }
+
+        const user = await UserModel.findOne({ _id: claims._id });
+        if (!user) {
+            return res.status(401).json({ message: "Unauthorized: User not found" });
+        }
+
+        const { password, ...data } = user.toJSON();
+        return res.json({ data: data });
+    } catch (error) {
+        console.error("Error in GetUserByToken:", error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+
+
+
+
 // ---------------------------------- Export All Functions  ------------------------------
-module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser}
+module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser, GetUserByToken}
 // ---------------------------------- End Of Controller ----------------------------------

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container w-50 h-100 mb-5">
     <form [formGroup]="form" class="bg-light p-4 rounded">
         <h2 class="text-center mb-4 register row-cols-1">Login</h2>
         <div class=" mb-3 row">
@@ -16,6 +16,11 @@
         <div class="mb-3 row">
             <div class="col">
                 <button type="submit" class="btn btn-outline-secondary btn-block submit" (click)="login()">Login</button>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col">
+                <p class="text-center mt-3"><a [routerLink]="['/register']">Don't have an account?</a></p>            
             </div>
         </div>
     </form>
