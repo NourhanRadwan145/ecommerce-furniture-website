@@ -10,7 +10,7 @@ import { ProductComponent } from './components/product/product.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
+  imports:[
     BannerComponent,
     ChairComponent,
     ModernComponent,
