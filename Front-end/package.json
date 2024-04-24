@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "bootstrap": "^5.3.3",
+    "ngx-cookie-service": "^17.1.0",
     "rxjs": "~7.8.0",
     "swal": "^0.1.0",
     "sweetalert2": "^11.10.8",

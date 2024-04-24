@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   login() {
     let user = this.form.getRawValue();
     const emailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
+  
     if (!emailRegex.test(user.email)) {
       Swal.fire({
         icon: 'error',
@@ -45,14 +45,24 @@ export class LoginComponent implements OnInit {
       });
       return;
     } 
-    this.http.post('http://localhost:7000/api/users/login', user, 
-    {
-        withCredentials: true,
-      })
-      .subscribe( {complete: () => this.router.navigate(['/products']), error: (err) => {
-        Swal.fire("Error", err.error.message, "error")}
+  
+    this.http.post<any>('http://localhost:7000/api/users/login', user, { withCredentials: true })
+      .subscribe({ next:(response) => {
+          // console.log('User Logged In Successfully', response.user);
+          let loggedInUser = response.user;
+          if(loggedInUser && loggedInUser.isAdmin == true){
+            this.router.navigate(['/admin']);
+          }
+          else if(loggedInUser && loggedInUser.isAdmin == false){
+            this.router.navigate(['/products']);
+          }
 
-      });
+        },
+        error:(error) => {
+          Swal.fire("Error", error.error.message, "error");
+        }
+  });
   }
+  
 
 }

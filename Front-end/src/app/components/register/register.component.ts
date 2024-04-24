@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
     {
         withCredentials: true,
       })
-      .subscribe({complete: () => this.router.navigate(['/products']), error: (err) => {
+      .subscribe({complete: () => this.router.navigate(['/login']), error: (err) => {
         Swal.fire("Error", err.error.message, "error")}
 
       });
