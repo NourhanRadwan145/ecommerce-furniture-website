@@ -10,6 +10,7 @@ const orderRoute = require('../Routes/OrderRoute');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 //#endregion
 
 mongoose.connect("mongodb://127.0.0.1:27017/E-Commerce");
