@@ -10,8 +10,8 @@ let GetAllUsers = async (req, res) => {
 }
 // ---------------------------------- Get User By ID  -----------------------------------
 let GetUserById = async (req, res) => {
-    let userId = req.params.id
-    let user = await UserModel.findById(userId)
+    let userid = req.params.id
+    let user = await UserModel.findById(userid)
     return res.json(user)
 
 }
@@ -27,12 +27,12 @@ let DeleteUser = async (req, res) => { }
 // ---------------------------------- Add Product To Cart ------------------------
 
 const AddProductToCart = async (req, res) => {
-    const { userId, productId, quantity } = req.body;
+    const { userid, productid, quantity } = req.body;
 
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userId },
-            { $push: { carts: { product: productId, quantity } } },
+            { _id: userid },
+            { $push: { carts: { product: productid, quantity } } },
             { new: true }
         );
 
@@ -50,17 +50,17 @@ const AddProductToCart = async (req, res) => {
 
 // ---------------------------------- Remove Product From Cart ------------------------
 let RemoveProductFromCart = async (req, res) => {
-    const { userId, productId } = req.body;
+    const { userid, productid } = req.body;
 
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { carts: { product: productId } } },
+            { _id: userid },
+            { $pull: { carts: { product: productid } } },
             { new: true }
         );
 
         if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "User not found" + userid });
         }
         res.status(200).json({ message: "Product removed from cart successfully" });
 
@@ -72,11 +72,11 @@ let RemoveProductFromCart = async (req, res) => {
 }
 // ---------------------------------- Update Product Quantity ------------------------
 let IncreaseProductQuantity = async (req, res) => {
-    const { userId, productId } = req.body;
+    const { userid, productid } = req.body;
 
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userId, "carts.product": productId },
+            { _id: userid, "carts.product": productid },
             { $inc: { "carts.$.quantity": 1 } },
             { new: true }
         );
@@ -93,11 +93,11 @@ let IncreaseProductQuantity = async (req, res) => {
 
 }
 let DecreaseProductQuantity = async (req, res) => {
-    const { userId, productId } = req.body;
+    const { userid, productid } = req.body;
 
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userId, "carts.product": productId },
+            { _id: userid, "carts.product": productid },
             { $inc: { "carts.$.quantity": -1 } },
             { new: true }
         );
@@ -112,25 +112,6 @@ let DecreaseProductQuantity = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 }
-// ---------------------------------- Get Cart By User ID ------------------------
-// let GetCartByUserId = async (req, res) => {
-//     const { } = req.body;
-
-//     try {
-//         const user = await UserModel.findById(userId);
-
-//         if (!user) {
-//             return res.send(404).json({ message: "User not found" });
-//         }
-
-//         res.send(200).json({ cart: user.carts });
-//         // res.status(200).json({ cart: user.carts });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: "Server error" });
-//     }
-// }
 // ---------------------------------- End Of Cart Operations ------------------------
 
 // ---------------------------------- Export All Functions  ------------------------------

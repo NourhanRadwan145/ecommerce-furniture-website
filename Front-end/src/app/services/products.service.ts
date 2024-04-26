@@ -8,12 +8,12 @@ export class ProductsService {
 
   constructor(public http: HttpClient) { }
 
-  URL_DB = 'http://localhost:3000/Products';
+  URL_DB = 'http://localhost:7000/api/products';
 
   getProducts() {
     return this.http.get(this.URL_DB);
   }
-  getProductById(id:any) {
+  getProductById(id: any) {
     return this.http.get(`${this.URL_DB}/${id}`);
   }
 

@@ -1,5 +1,5 @@
 import { ProductsService } from './../../services/products.service';
-import { UsersService } from './../../services/users.service';
+import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    UsersService,
+    CartService,
     ProductsService
   ],
   templateUrl: './cart.component.html',
@@ -22,45 +22,115 @@ import { FormsModule } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  userid = "662904f2d0e3a39fc2a29adb";
-  user: any;
-  cart: any;
+  userid = "662b8775a566fe5003f222ee";
+  cart: { _id: string, details: string, image: string, quantity: number, price: number }[] = [];
+  total: number = 0;
   showAddressForm: boolean = false;
-
+  showCouponForm: boolean = false;
   selectedCountry: string = 'Egypt';
-  selectedState: any;
-  countries: string[] = ['Egypt', 'USA'];
-  states: { [key: string]: string[] } = {
-    'Egypt': ['Cairo', 'Alexandria', 'Luxor'],
-    'USA': ['New York', 'California', 'Texas']
-  };
+  countries: string[] = ["Algeria", "Bahrain", "Djibouti", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Libya", "Mauritania", "Morocco", "Oman", "Palestine", "Qatar", "Saudi Arabia", "Somalia", "Sudan", "Syria", "Tunisia"];
 
-  onCountryChange() {
-    this.selectedState = null;
+  deletedProduct: { _id: string, details: string, image: string, quantity: number, price: number } | null = null;
+
+  constructor(private userService: CartService, private productsService: ProductsService) { }
+
+
+  updateTotal() {
+    this.total = 0;
+    this.cart.forEach(item => {
+      this.total += item.price * item.quantity;
+    });
   }
 
-
-  constructor(private userService: UsersService) { }
   toggleAddressForm() {
     this.showAddressForm = !this.showAddressForm;
   }
-  updateShippingAddress() {
-
+  toggleCouponForm() {
+    this.showCouponForm = !this.showCouponForm;
   }
-  ngOnInit(): void {
-    this.userService
-    this.userService.getUserById(this.userid).subscribe(
-      {
-        next: (data: any) => {
-          // this.cart = data.carts;
-          console.log(data);
-        },
-        error: (error: any) => {
-          console.log(error);
+
+
+  onUpdateCountry() {
+    const selectedElement = document.getElementById('country') as HTMLSelectElement;
+    this.selectedCountry = selectedElement.value;
+    localStorage.setItem('selectedCountry', this.selectedCountry);
+  }
+
+
+  deleteProduct(productid: string) {
+    this.userService.removeProductFromCart(this.userid, productid).subscribe({
+      next: (data: any) => {
+        const index = this.cart.findIndex(item => item._id === productid);
+        if (index !== -1) {
+          this.deletedProduct = this.cart[index];
+          this.cart.splice(index, 1);
+          this.updateTotal();
         }
+      },
+      error: (error: any) => {
+        console.error("Failed to delete product", error);
       }
-    );
+    });
   }
 
 
+  increaseProductQuantity(productid: string) {
+    this.userService.increaseProductQuantity(this.userid, productid).subscribe({
+      next: (data: any) => {
+        const productIndex = this.cart.findIndex(item => item._id === productid);
+        if (productIndex !== -1) {
+          this.cart[productIndex].quantity++;
+          this.updateTotal();
+        }
+      },
+      error: (error: any) => {
+        console.error("Failed to increase product quantity", error);
+      }
+    });
+  }
+
+  decreaseProductQuantity(productid: string) {
+    this.userService.decreaseProductQuantity(this.userid, productid).subscribe({
+      next: (data: any) => {
+        const productIndex = this.cart.findIndex(item => item._id === productid);
+        if (productIndex !== -1) {
+          if (this.cart[productIndex].quantity > 1) {
+            this.cart[productIndex].quantity--;
+          } else {
+            this.deleteProduct(productid);
+            return;
+          }
+          this.updateTotal();
+        }
+      },
+      error: (error: any) => {
+        console.error("Failed to decrease product quantity", error);
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.selectedCountry = localStorage.getItem('selectedCountry') || 'Egypt';
+    this.userService.getUserById(this.userid).subscribe({
+      next: (data: any) => {
+        data.carts.forEach((item: { product: string; quantity: number }) => {
+          const productid = item.product;
+          const quantity = item.quantity;
+          this.productsService.getProductById(productid).subscribe({
+            next: (productData: any) => {
+              productData["quantity"] = quantity
+              this.cart.push(productData);
+              this.updateTotal();
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          });
+        });
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+  }
 }

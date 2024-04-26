@@ -13,26 +13,29 @@
           </tr>
         </thead>
         <tbody>
-          @for (product of cart; track $index) {
-          <tr>
-            <td data-label=" " class="align-middle "><button class="btn-delete">
+          <tr *ngFor="let product of cart; let i = index">
+            <td data-label=" " class="align-middle "><button (click)="deleteProduct(product._id)" class="btn-delete">
                 <i class="fas fa-times"></i>
-              </button></td>
-            <td class="align-middle "><img src="{{product.product.image}}" alt="Product Image"
+              </button>
+            </td>
+            <td class="align-middle "><img [src]="product.image" alt="Product Image"
                 style="height: 70px; width: 100px;">
             </td>
-            <td data-label="Product" class="align-middle ">{{ product.product.details }}</td>
-            <td data-label="Price" class="align-middle ">{{product.product.price}}$</td>
+            <td data-label="Product" class="align-middle ">{{ product.details }}</td>
+            <td data-label="Price" class="align-middle ">{{ product.price }}$</td>
             <td data-label="Quantity" class="align-middle ">
               <div class="quantity-group">
-                <div class="border-end col">-</div>
-                <div class="border-end col">{{product.quantity}}</div>
-                <div class="col">+</div>
+                <button (click)="decreaseProductQuantity(product._id)" class="btn">
+                  <div class="col">-</div>
+                </button>
+                <div class="col">{{ product.quantity }}</div>
+                <button (click)="increaseProductQuantity(product._id)" class="btn">
+                  <div class="col">+</div>
+                </button>
               </div>
             </td>
-            <td data-label="Subtotal" class="align-middle">{{ product.product.price * product.quantity }}$</td>
+            <td data-label="Subtotal" class="align-middle">{{ product.price * product.quantity }}$</td>
           </tr>
-          }
         </tbody>
       </table>
     </div>
@@ -43,38 +46,26 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <diV class="col-6">Subtotal</diV>
+            <diV class="col-6">Subtotal : {{this.total}}</diV>
             <diV class="col-6"></diV>
           </div>
           <div class="row">
             <diV class="col-6">Shipping</diV>
             <div class="col-6">
               <diV class="col-12">Flat rate: 8.00$</diV>
-              <diV class="col-12">Shipping to:</diV>
+              <diV class="col-12">Shipping to: {{this.selectedCountry}}</diV>
               <div class="col-12">
                 <a href="javascript:void(0);" (click)="toggleAddressForm()" class="a-custom">Change address</a>
               </div>
               <div class="address-form" *ngIf="showAddressForm">
                 <div class="row">
                   <div class="col-12">
-                    <select id="country" class="form-select input-custom" [(ngModel)]="selectedCountry"
-                      (change)="onCountryChange()">
+                    <select id="country" class="form-select input-custom">
                       <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
                     </select>
                   </div>
                   <div class="col-12">
-                    <select id="state" class="form-select input-custom" [(ngModel)]="selectedState">
-                      <option *ngFor="let state of states[selectedCountry]" [value]="state">{{ state }}</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <input type="text" id="city" class="form-control input-custom">
-                  </div>
-                  <div class="col-12">
-                    <input type="text" id="postalCode" class="form-control input-custom" placeholder="PostalCode / Zip">
-                  </div>
-                  <div class="col-12">
-                    <button class="btn btn-custom" (click)="updateShippingAddress()">Update</button>
+                    <button class="btn btn-custom" (click)="onUpdateCountry()">Update</button>
                   </div>
                 </div>
               </div>
@@ -82,11 +73,21 @@
           </div>
           <div class="row">
             <diV class="col-6">Total</diV>
-            <diV class="col-6">12E</diV>
+            <diV class="col-6">{{this.total+8}}$</diV>
           </div>
           <div class="row">
             <div class="col-12">
-              have a coupon?
+              <a href="javascript:void(0);" (click)="toggleCouponForm()" class="a-custom">Have a coupon?</a>
+            </div>
+            <div class="address-form" *ngIf="showCouponForm">
+              <div class="row">
+                <div class="col-9">
+                  <input type="text" class="form-control input-custom" placeholder="Coupon code">
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-custom">Apply</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
