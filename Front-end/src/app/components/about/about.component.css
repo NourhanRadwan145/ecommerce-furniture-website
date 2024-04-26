@@ -1,0 +1,96 @@
+.parent{
+    font-size: 50px;
+    font-weight: bold;
+    background-color: #a1c3c5;
+    color: white;
+    height: 450px;
+}
+.explore{
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    color: white;
+    border-radius: 0px;
+
+}
+.explore:hover{
+    color: #a1c3c5;
+}
+h1{
+    font-weight: bold;
+}
+.pic{
+    width: 10%;
+    margin: auto;
+    font-size: 10px;
+}
+h6{
+    font-size: 13px;
+    color: #b4bad2;
+}
+.main{
+    height:450px;
+}
+.middle{
+    height: 600px;
+}
+.test{
+    height: 600px;
+    width: 100%;
+}
+.card{
+    background-color:#e6ebed ;
+    border: none;
+    margin-left: 15px;
+    width: 100%;
+    margin-top: 20px;
+}
+.card img{
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.right{
+    background-color:#e6ebed ;
+
+}
+.middle-header{
+    margin-top: 30px;
+    text-align: center;
+    color: #6c7d8b;
+}
+.card h5{
+    color: #6c7d8b;
+}
+.second{
+    background-color:#e6ebed ;
+}
+.second h4{
+    color: #6c7d8b;
+}
+.team{
+    background-color:#e6ebed ;
+
+}
+h5{
+    text-align: center;
+}
+.team h2{
+    color: #6c7d8b;
+    transition: all;
+    transition-duration: 500ms;
+    margin-bottom: 15px;
+}
+.team h2:hover{
+    letter-spacing: 5px;
+}
+blockquote{
+    text-align: center;
+}
+blockquote:hover{
+    color: #6c7d8b;
+}
+.us{
+    width: 110px;
+    height: 100px;
+    border-radius: 50%;
+}

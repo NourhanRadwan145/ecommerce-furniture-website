@@ -10,5 +10,6 @@ Router.delete("/:id", UserController.DeleteUser)
 Router.post("/login", UserController.LoginUser)
 Router.post("/register", UserController.RegisterUser)
 Router.get("/user/user", UserController.GetUserByToken)
+Router.post("/user/logout", UserController.userLogout)
 
 module.exports = Router

@@ -14,33 +14,44 @@ export class ProfileComponent implements OnInit{
   message: string = "";
   constructor(private http: HttpClient, private router: Router) { }
   ngOnInit() {
-    this.http.get<any>("http://localhost:7000/api/users/user/user", { withCredentials: true })
-      .subscribe({
-        next: (response) => {
-          if(response.data.isAdmin == true){
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'You Must Login As A User Not Admin!',
-            });
-            this.router.navigate(['/login']);
-          }
-          else if(response.data.isAdmin == false){
-            this.message = `User Logged In Successfully ${JSON.stringify(response.data)}`;
-          }
-          // console.log("User Logged In Successfully", response);
-        },
-        error: (error) => {
+    this.authProfile()
+  }
 
-          this.message = "User Not Logged In";
+
+  // ------------------------------------- Authentication function ---------------------------------
+  authProfile(){
+    this.http.get<any>("http://localhost:7000/api/users/user/user", { withCredentials: true })
+    .subscribe({
+      next: (response) => {
+        if(response.data.isAdmin == true){
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'You Need To Login First!',
+            text: 'You Must Login As A User Not Admin!',
           });
           this.router.navigate(['/login']);
         }
-      });
+        else if(response.data.isAdmin == false){
+          this.message = `User Logged In Successfully ${JSON.stringify(response.data)}`;
+        }
+      },
+      error: (error) => {
+        this.message = "User Not Logged In";
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'You Need To Login First!',
+        });
+        this.router.navigate(['/login']);
+      }
+    });
   }
+  // -------------------------------------- logout function --------------------------------------------
+  logout() : void{
+    this.http.post("http://localhost:7000/api/users/user/logout", {},{ withCredentials: true }).subscribe({
+      complete:()=> this.router.navigate(["/login"])
+    })
+  }
+  // ---------------------------------------------------------------------------------------------------
 
 }

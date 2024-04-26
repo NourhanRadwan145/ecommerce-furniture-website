@@ -87,11 +87,10 @@ const GetUserByToken = async (req, res) => {
     try {
         const cookie = req.cookies["jwt"];
         if (!cookie) {
-            console.log("JWT cookie not found")
+            // console.log("JWT cookie not found")
             return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
         }
-
-        const claims = jwt.verify(cookie, "secret"); // Remove extra space from the secret
+        const claims = jwt.verify(cookie, "secret"); 
         if (!claims) {
             return res.status(401).json({ message: "Unauthorized: Invalid token" });
         }
@@ -107,12 +106,26 @@ const GetUserByToken = async (req, res) => {
         console.error("Error in GetUserByToken:", error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
+
+};
+const userLogout = async (req, res) => {
+    try {
+        const cookie = req.cookies["jwt"];
+        if (cookie) {
+            res.clearCookie("jwt").send("Logout successful");
+        } else {
+            res.send("No JWT cookie found");
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 };
 
 
 
 
 
+
 // ---------------------------------- Export All Functions  ------------------------------
-module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser, GetUserByToken}
+module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser, GetUserByToken, userLogout}
 // ---------------------------------- End Of Controller ----------------------------------
