@@ -1,12 +1,10 @@
-
+<!-- <mat-spinner></mat-spinner> -->
 <div class="container-fluid pt-5">
     @if(product){
-
     <!--------------------------------------- Product Div ---------------------------------------->
     <div class="row">
-        <div class="col-6 col-lg-6 col-md-12 col-sm-12 p-0">
-            <!-- <img src="/assets/images/single_product/chair.jpg" alt="chair" class="img-fluid" width="600px" height="600px"> -->
-            <img src="{{ product.image }}" alt="chair" width="100%" height="500px">
+        <div class="col-6 col-lg-6 col-md-12 col-sm-12 p-0 img-div">
+            <img src="{{ product.image }}" alt="chair" class="product-img" width="100%" height="500px" (mousemove)="moveImage($event)">
         </div>
         <div class="col-6 col-lg-6 col-md-12 col-sm-12 p-lg-0 pt-md-3 pt-sm-3">
             <div class="containner px-4 pe-4 pt-0">
@@ -15,8 +13,8 @@
                         <p class="m-0">Home / {{ product.category }} / {{ product.title }}</p>
                     </div>
                     <div class="col-2 d-flex">
-                        <a href="#" type="button" class="next-btn mx-2 text-decoration-none">&gt;</a>
-                        <a href="#" type="button" class="prev-btn text-decoration-none">&lt;</a>
+                        <a (click)="navigateToPreviousProduct()" type="button" class="prev-btn text-decoration-none" [class.disabled]="isFirstProduct">&lt;</a>
+                        <a (click)="navigateToNextProduct()" type="button" class="next-btn mx-2 text-decoration-none" [class.disabled]="isLastProduct">&gt;</a>
                     </div>
                 </div>
 
@@ -43,7 +41,7 @@
                             <button (click)="incrementQuantity()">+</button>
                         </div>
                         <div class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex">
-                            <button class="add-to-cart-btn">
+                            <button class="add-to-cart-btn" (click)="addProductToCart()">
                                 Add To Cart
                             </button>
                         </div>
@@ -77,14 +75,14 @@
 
     <!-------------------------------- Review and descriptiion Div -------------------------->
     <div class="row mt-5 d-flex justify-content-start">
-        <div class="col-2 p-0">
+        <div class="col-2 col-lg-2 col-md-3 col-sm-12 p-0">
             <div class="d-flex flex-column">
                 <button (click)="showDescription()" class="tabs-btn desc m-0" [ngClass]="{'active': selectedTab === 'description'}">Description</button>
                 <button (click)="showReviews()" class="tabs-btn review m-0" [ngClass]="{'active': selectedTab === 'reviews'}">Reviews({{ product.reviews.length }})</button>
             </div>
         </div>
     
-        <div class="col-10 tabs">
+        <div class="col-10 col-lg-10 col-md-9 col-sm-12 tabs">
             <div [ngSwitch]="selectedTab">
                 <div *ngSwitchCase="'description'" class="col-12">
                     {{ product.details }}
@@ -98,7 +96,7 @@
                             } @else {
 
                                 <div *ngFor="let review of product.reviews">
-                                    <div class="d-flex">
+                                    <div class="d-flex mt-3">
                                       <img src="/assets/images/single_product/img_avatar.png" alt="Avatar" class="avatar">
                                       <div class="d-flex flex-column p-0 mx-3">
                                         <p class="m-0"><b>{{ review.name }}</b></p>
@@ -125,12 +123,14 @@
                     </div>
                     <div class="container review-table p-0">
                         <div class="row">
-                            <div class="col-12 p-5 pt-3">
+                            <div class="col-12 p-5 col-lg-12 col-md-12 col-sm-12 pt-3">
                                 <h4><b>Be the first to review “Desktop Table with Drawers”</b></h4>
                                 <h6>Your email address will not be published. Required fields are marked *</h6>
-                                <div class="d-flex mt-4">
-                                    <p><b>Your rating *</b></p>
-                                    <div class="mx-2 me-0 d-flex align-items-center">
+                                <div class="d-flex flex-sm-column flex-lg-row mt-4">
+                                    <div class="col-2 col-lg-2 col-md-12 col-sm-12 m-0">
+                                        <p><b>Your rating *</b></p>
+                                    </div>
+                                    <div class="col-10 col-lg-10 col-md-12 col-sm-12 me-0 d-flex align-items-center">
                                         <a type="button" (click)="toggleStar(1)">
                                             <mat-icon [ngClass]="{'star-filled': isStarFilled(1), 'star-unfilled': !isStarFilled(1)}" class="star-icon">star</mat-icon>
                                         </a>
@@ -147,7 +147,6 @@
                                             <mat-icon [ngClass]="{'star-filled': isStarFilled(5), 'star-unfilled': !isStarFilled(5)}" class="star-icon">star</mat-icon>
                                         </a>
                                     </div>
-                                    {{ newReview.rating }}
                                 </div>
 
                                 <div class="d-flex flex-column">
@@ -156,12 +155,12 @@
                                 </div>
 
                                 <div class="d-flex row mt-3">
-                                    <div class="col-6">
+                                    <div class="col-6 col-lg-6 col-md-12 col-sm-12">
                                         <p class="m-0 text-secondary"><b>Name *</b></p>
                                         <input class="review-input" [(ngModel)]="name">
                                     </div>
 
-                                    <div class="col-6">
+                                    <div class="col-6 col-lg-6 col-md-12 col-sm-12">
                                         <p class="m-0 text-secondary"><b>Email *</b></p>
                                         <input class="review-input" [(ngModel)]="email">
                                     </div>
@@ -186,7 +185,7 @@
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-3" *ngFor="let product of relatedProducts">
+                <div class="col-3 col-lg-3 col-md-4 col-sm-6" *ngFor="let product of relatedProducts">
                     <app-one-product [product]="product"></app-one-product>
                 </div>
             </div>

@@ -14,25 +14,13 @@
 }
 
 .cart-icon {
-    padding: 1px;
     cursor: grab;
-    background-color: rgb(233, 233, 233);
     display: flex;
-    margin: 5px;
-    border-radius: 50%;
+    align-items: end;
     color: grey;
-    box-shadow: 0px 0px 10px rgb(170, 170, 170);
 }
 
 .cart-icon:hover{
-    opacity: 0.8;
-    /* background-color: inherit; */
-    border: 1px dashed grey;
-    /* color: white; */
-}
-
-.product-image:hover .cart-icon {
-    display: block !important;
-    background-color: inherit;
+    color: black;
 }
 
