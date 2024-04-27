@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewUserComponent } from './view-user/view-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @Component({
   selector: 'app-users',
@@ -36,10 +38,21 @@ export class UsersComponent {
     this.myuserService.getUserById(id).subscribe((data) => {
       const user = data;
       console.log(user);
+
+      this.dialog.open(EditUserComponent, {
+        width: '500px',
+        data: {
+          userFromParent: user,
+        },
+      });
     });
   }
 
-  createUser() {}
+  createUser() {
+    this.dialog.open(CreateUserComponent, {
+      width: '500px',
+    });
+  }
 
   viewUser(id: any) {
     this.myuserService.getUserById(id).subscribe((data) => {

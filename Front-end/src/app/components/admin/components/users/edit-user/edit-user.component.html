@@ -1,1 +1,43 @@
-<p>edit-user works!</p>
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Edit Product Details</h5>
+          <form [formGroup]="editForm">
+            <div class="mb-3">
+              <label for="productName" class="form-label">User Name</label>
+              <input
+                formControlName="username"
+                type="text"
+                class="form-control"
+                id="productName"
+                placeholder="Enter product name"
+                value="{{ user.username }}"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productDescription" class="form-label">Email</label>
+              <textarea
+                formControlName="email"
+                class="form-control"
+                id="productDescription"
+                rows="3"
+                placeholder="Enter product description"
+                value="{{ user.email }}"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="editFormSubmit()"
+            >
+              Update User
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

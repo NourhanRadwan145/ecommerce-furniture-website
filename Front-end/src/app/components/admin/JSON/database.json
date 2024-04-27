@@ -400,5 +400,296 @@
       "total_price": 29.99,
       "state": "accepted"
     }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "White Chair",
+      "price": 300,
+      "details": "lanything asdasdad",
+      "image": "lol"
+    },
+    {
+      "id": "2",
+      "title": "Men's Leather Wallet",
+      "image": "https://example.com/wallet.jpg",
+      "price": 29.99,
+      "details": "Genuine leather wallet with multiple compartments for cards and cash."
+    },
+    {
+      "id": "3",
+      "title": "Women's Running Shoes",
+      "image": "https://example.com/runningshoes.jpg",
+      "price": 59.99,
+      "details": "Lightweight and breathable running shoes designed for maximum comfort and performance."
+    },
+    {
+      "id": "4",
+      "title": "Bluetooth Wireless Headphones",
+      "image": "https://example.com/headphones.jpg",
+      "price": 79.99,
+      "details": "Over-ear wireless headphones with noise-canceling technology and long battery life."
+    },
+    {
+      "id": "5",
+      "title": "Stainless Steel Kitchen Knife Set",
+      "image": "https://example.com/knifeset.jpg",
+      "price": 49.99,
+      "details": "High-quality stainless steel knife set with ergonomic handles and sharp blades."
+    },
+    {
+      "id": "6",
+      "title": "Smartwatch with Fitness Tracker",
+      "image": "https://example.com/smartwatch.jpg",
+      "price": 99.99,
+      "details": "Multi-functional smartwatch with fitness tracking, heart rate monitoring, and smartphone notifications."
+    },
+    {
+      "id": "7",
+      "title": "Wireless Charging Pad",
+      "image": "https://example.com/chargingpad.jpg",
+      "price": 24.99,
+      "details": "Qi-compatible wireless charging pad for convenient charging of smartphones and other devices."
+    },
+    {
+      "id": "8",
+      "title": "Digital Camera with 4K Video",
+      "image": "https://example.com/camera.jpg",
+      "price": 399.99,
+      "details": "High-resolution digital camera with 4K video recording capabilities and image stabilization."
+    },
+    {
+      "id": "9",
+      "title": "Classic Aviator Sunglasses",
+      "image": "https://example.com/sunglasses.jpg",
+      "price": 39.99,
+      "details": "Timeless aviator sunglasses with polarized lenses for enhanced clarity and UV protection."
+    },
+    {
+      "id": "10",
+      "title": "Portable Bluetooth Speaker",
+      "image": "https://example.com/speaker.jpg",
+      "price": 49.99,
+      "details": "Compact and portable Bluetooth speaker with rich, immersive sound quality."
+    },
+    {
+      "id": "11",
+      "title": "Electric Kettle",
+      "image": "https://example.com/kettle.jpg",
+      "price": 29.99,
+      "details": "Fast-boiling electric kettle with a sleek design and automatic shut-off feature."
+    },
+    {
+      "id": "12",
+      "title": "Yoga Mat",
+      "image": "https://example.com/yogamat.jpg",
+      "price": 19.99,
+      "details": "Durable and non-slip yoga mat suitable for all types of yoga and exercise routines."
+    },
+    {
+      "id": "13",
+      "title": "Wireless Mouse",
+      "image": "https://example.com/mouse.jpg",
+      "price": 14.99,
+      "details": "Ergonomic wireless mouse with precise tracking and long battery life."
+    },
+    {
+      "id": "14",
+      "title": "Travel Backpack",
+      "image": "https://example.com/backpack.jpg",
+      "price": 69.99,
+      "details": "Spacious and durable travel backpack with multiple compartments and padded shoulder straps."
+    },
+    {
+      "id": "15",
+      "title": "Digital Alarm Clock",
+      "image": "https://example.com/alarmclock.jpg",
+      "price": 9.99,
+      "details": "Compact digital alarm clock with a large display and snooze function."
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "Ahmed sdfds",
+      "email": "asdasdas1@example.com",
+      "password": "password1"
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "email": "user2@example.com",
+      "password": "password2",
+      "image": "https://example.com/user2.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "3",
+      "username": "user3",
+      "email": "user3@example.com",
+      "password": "password3",
+      "image": "https://example.com/user3.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "4",
+      "username": "user4",
+      "email": "user4@example.com",
+      "password": "password4",
+      "image": "https://example.com/user4.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "5",
+      "username": "user5",
+      "email": "user5@example.com",
+      "password": "password5",
+      "image": "https://example.com/user5.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "6",
+      "username": "user6",
+      "email": "user6@example.com",
+      "password": "password6",
+      "image": "https://example.com/user6.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "7",
+      "username": "user7",
+      "email": "user7@example.com",
+      "password": "password7",
+      "image": "https://example.com/user7.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "8",
+      "username": "user8",
+      "email": "user8@example.com",
+      "password": "password8",
+      "image": "https://example.com/user8.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "9",
+      "username": "user9",
+      "email": "user9@example.com",
+      "password": "password9",
+      "image": "https://example.com/user9.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "10",
+      "username": "user10",
+      "email": "user10@example.com",
+      "password": "password10",
+      "image": "https://example.com/user10.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "11",
+      "username": "user11",
+      "email": "user11@example.com",
+      "password": "password11",
+      "image": "https://example.com/user11.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "12",
+      "username": "user12",
+      "email": "user12@example.com",
+      "password": "password12",
+      "image": "https://example.com/user12.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "13",
+      "username": "user13",
+      "email": "user13@example.com",
+      "password": "password13",
+      "image": "https://example.com/user13.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "14",
+      "username": "user14",
+      "email": "user14@example.com",
+      "password": "password14",
+      "image": "https://example.com/user14.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "15",
+      "username": "user15",
+      "email": "user15@example.com",
+      "password": "password15",
+      "image": "https://example.com/user15.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "16",
+      "username": "user16",
+      "email": "user16@example.com",
+      "password": "password16",
+      "image": "https://example.com/user16.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "17",
+      "username": "user17",
+      "email": "user17@example.com",
+      "password": "password17",
+      "image": "https://example.com/user17.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "18",
+      "username": "user18",
+      "email": "user18@example.com",
+      "password": "password18",
+      "image": "https://example.com/user18.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "19",
+      "username": "user19",
+      "email": "user19@example.com",
+      "password": "password19",
+      "image": "https://example.com/user19.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "20",
+      "username": "user20",
+      "email": "user20@example.com",
+      "password": "password20",
+      "image": "https://example.com/user20.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "21",
+      "username": "user21",
+      "email": "user21@example.com",
+      "password": "password21",
+      "image": "https://example.com/user21.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "22",
+      "username": "user22",
+      "email": "user22@example.com",
+      "password": "password22",
+      "image": "https://example.com/user22.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "23",
+      "username": "user23",
+      "email": "user23@example.com",
+      "password": "password23",
+      "image": "https://example.com/user23.jpg",
+      "gender": "male"
+    }
   ]
 }
