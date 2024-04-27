@@ -8,13 +8,13 @@
     @for (u of FourProducts; track u.title ){
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 product-item ">
         <br>
-        <img class="img-fluid" src="{{u.image}}">
+        <a href="item/{{u._id}}"><img class="img-fluid" src="{{u.image}}"></a>
         <div style="margin-left: 8%; margin-top: 6%;" class="justify-content-center">
-          <a>Lamp</a>
+          <a>{{u.category}}</a>
           <br>
-          <a style="color: gray;" href="#"><b>{{u.title}}</b></a>
+          <a style="color: gray;" href="item/{{u._id}}"><b>{{u.title}}</b></a>
           <br>
-          <span><b>{{u.price}}</b></span>
+          <span><b>$ {{u.price}}</b></span>
         </div>
       </div>
     }

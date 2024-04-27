@@ -9,7 +9,7 @@
 }
 
 .heading{
-  margin-left: 80px;
+  margin-left: 100px;
   margin-top: 150px;
   font-size: 2em; /* Default font size */
   line-height: 1.2; /* Default line height */
@@ -18,7 +18,7 @@
 
 .button {
   position: relative; /* Position relative to nearest positioned ancestor (here .image-background) */
-  left: 14%; /* Center horizontally */
+  left: 10%; /* Center horizontally */
   margin-top: 30px;
   transform: translate(-50%, -50%); /* Centering adjustment */
   padding: 10px 20px; /* Example padding */
@@ -129,7 +129,7 @@
   }
   .heading {
     font-size: 4em;
-    margin-left: 15%;
+    margin-left: 17%;
     margin-top: 10%;
   }
   .button{

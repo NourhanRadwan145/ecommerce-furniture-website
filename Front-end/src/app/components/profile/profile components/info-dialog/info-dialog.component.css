@@ -1,0 +1,80 @@
+/* Style for the overall form container */
+body{
+  /* background-image: url("https://png.pngtree.com/back_origin_pic/04/06/24/d864a4a5b43d0296da0847d9d0a97313.jpg"); */
+  background-color: beige;
+}
+
+.col-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  margin: 20px;
+}
+
+form {
+  width: 500px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  justify-content: center;
+  align-items: center;
+
+}
+
+.image{
+  width: 750px;
+  height: 520px;
+  padding: 10px;
+  margin-left: 250px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  justify-content: center;
+}
+
+/* Style for each form field div */
+div {
+  margin-bottom: 12px;
+}
+
+/* Style for labels */
+label {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Style for inputs */
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  justify-content: center;
+  box-sizing: border-box; /* Include padding and border in the element's width and height */
+}
+
+/* Style for the button */
+button {
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+
+
+/* Disables the button style */
+button:disabled {
+  background-color: #cccccc;
+  cursor: default;
+}

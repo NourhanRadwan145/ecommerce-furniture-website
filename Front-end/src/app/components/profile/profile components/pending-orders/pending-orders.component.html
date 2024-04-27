@@ -2,37 +2,33 @@
   <div class="card-body">
     <div class="row mb-3">
       <div class="col-6 col-sm-6">
-        <h6 class="d-flex align-items-center">Pending Orders</h6>
+        <h6 class="d-flex align-items-center mt-3" style="font-size: larger;">Pending Orders</h6>
       </div>
       <div class="col-6 col-sm-6 d-flex justify-content-end">
-        <img class="img-fluid" style="width:40px; height:30px;" src="../../../../../assets/box.png">
+        <img class="img-fluid" style="width:40px; height:30px; margin-top: 12px;" src="../../../../../assets/box.png">
       </div>
     </div>
     <hr>
-    <div class="row mb-3">
-      <div class="col-6 col-sm-6">
-          <p>Order Id</p>
+    @for (o of pendingOrders; track o._id ){
+      <div class="row mb-3">
+        <div class="col-lg-4 col-sm-6">
+            <span>Order Id:</span>
+        </div>
+        <div class="col-lg-7">
+          <span>{{o._id}}</span>
+        </div>
       </div>
-      <div class="col-6 col-sm-6 d-flex justify-content-end">
-        <a href="#" style="margin-right: 11px;">102</a>
-        <button class="btn btn-danger">cancel</button>
+      <div class="row">
+        <div class="col-12 col-sm-12 d-flex justify-content-end">
+          <mat-dialog-actions class="d-flex justify-content-center">
+            <button (click)="openDialog(o._id)" style="margin-right: 5px;" mat-raised-button color="primary">
+              <a style="margin-right: 2px; color: white;">view</a>
+            </button>
+          </mat-dialog-actions>
+          <button class="btn btn-danger" (click)="deleteOrder(o._id)">cancel</button>
+        </div>
       </div>
-  </div>
-    <div class="row mb-3">
-      <div class="col-6 col-sm-6">
-          <p>Order Id</p>
-      </div>
-      <div class="col-6 col-sm-6 d-flex justify-content-end">
-        <a href="#" style="margin-right: 11px;">102</a>
-        <button class="btn btn-danger">cancel</button>
-      </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-6 col-sm-6">
-        <p>Order Id</p>
-    </div>
-    <div class="col-6 col-sm-6 d-flex justify-content-end">
-      <a href="#" style="margin-right: 11px;">102</a>
-      <button class="btn btn-danger">cancel</button>
-    </div>
-</div>
+      <hr>
+    }
+
+

@@ -68,6 +68,10 @@
     transform: translate(-50%, -50%);
   }
 
+  a :hover{
+    color: white;
+  }
+
   .font{
     font-size: small;
   }

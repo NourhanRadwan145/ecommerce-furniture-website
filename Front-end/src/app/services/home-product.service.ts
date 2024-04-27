@@ -14,6 +14,11 @@ export class HomeProductService {
     return this.myClient.get(this.URL_API);
   }
 
+  getProductById(id: string){
+    const url = `${this.URL_API}/${id}`;
+    return this.myClient.get<any>(url);
+  }
+
   getFourProducts() {
     return this.myClient.get<{ "All Products": any[] }>(this.URL_API).pipe(
       map(response => response["All Products"].slice(0, 4))
