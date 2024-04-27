@@ -8,6 +8,7 @@ route.get("/", productsController.getAllProducts);
 route.post("/", productsController.createNewProduct);
 route.put("/:id", productsController.updateProductByID);
 route.delete("/:id", productsController.deleteProductByID);
+route.post("/:id/reviews", productsController.addReview);
 
 
 module.exports = route;

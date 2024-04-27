@@ -1,0 +1,23 @@
+.product-item {
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+
+@media  (min-width: 400px) and (max-width: 700px) {
+  .product-item {
+    margin-bottom: 20%;
+    margin-left: 15%;
+    width: 360px;
+    height: 360px;
+  }
+}
+
+@media  (min-width: 700px) and (max-width: 768px) {
+  .product-item {
+    margin-bottom: 20%;
+    margin-left: 15%;
+    width: 360px;
+    height: 360px;
+  }
+}

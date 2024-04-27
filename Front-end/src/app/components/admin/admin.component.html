@@ -1,2 +1,28 @@
-<h1>Admin Dashboard</h1>
-<p>Manage your store as an administrator.</p>
+<div class="text-center"><h1>Admin Dashboard</h1></div>
+<div class="cont p-5">
+  <div class="top-cards"><app-top-cards></app-top-cards></div>
+  <!-- ============================================================== -->
+  <!-- Sales chart -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <div class="col-lg-7">
+      <app-sales-summary></app-sales-summary>
+    </div>
+    <div class="col-lg-5">
+      <app-feeds></app-feeds>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- Table -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <!-- column -->
+    <div class="col-12">
+      <app-orders></app-orders>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- Table -->
+  <!-- ============================================================== -->
+</div>

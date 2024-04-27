@@ -1,0 +1,32 @@
+.container{
+    margin-top: 50px;
+    width: 40%;
+}
+input[type="text"], input[type="email"], input[type="password"], select{
+    border-radius: 0px;
+    height: 50px;
+}
+.submit{
+    border-radius: 0px;
+    height: 50px;
+    width: 100%;
+    font-weight: bold;
+    transition: all;
+    transition-duration: 500ms;
+}
+.register{
+    color: #607d8b;
+    font-weight: bold;
+}
+label{
+    margin-left: 10px;
+    color: #607d8b;
+}
+h2{
+    transition: all;
+    transition-duration: 500ms;
+}
+h2:hover{
+    letter-spacing: 5px;
+    font-weight: bold;
+}

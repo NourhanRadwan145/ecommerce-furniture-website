@@ -7,6 +7,8 @@ Router.get("/", UserController.GetAllUsers)
 Router.post("/", UserController.AddNewUser)
 Router.put("/:id", UserController.UpdateUser)
 Router.delete("/:id", UserController.DeleteUser)
+Router.post("/login", UserController.LoginUser)
+Router.post("/register", UserController.RegisterUser)
 
 // Cart Routes
 // Router.get("/cart", UserController.GetCartByUserId)

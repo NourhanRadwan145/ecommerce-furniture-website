@@ -1,0 +1,228 @@
+
+.number-input input {
+  width: 40px;
+  text-align: center;
+  height: 100%;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.number-input button {
+  padding: 3px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  margin: 0;
+  border: 1px solid rgb(204, 204, 204);
+  height: 100%;
+}
+
+
+.number-input input:focus{
+    outline: none;
+    border: .1px dashed rgb(72, 72, 72);
+}
+
+
+.number-input input::-webkit-outer-spin-button,
+.number-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.add-to-cart-btn{
+    background-color: #f8f9fa;
+    color: #416990;
+    border: 2px solid #416990;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    width: 100%;
+    height: 40px;
+}
+
+.add-to-cart-btn:hover{
+    background-color: #416990;
+    color: #f8f9fa;
+    border: 2px solid #416990;
+}
+
+.nav-link{
+    color: #416990;
+}
+
+.nav-link:hover{
+    color: black;
+}
+
+.ahfb-svg-iconset svg {
+    width: 50px;
+    height: auto;
+    fill: #ff0000;
+}
+
+.ast-custom-payment .ahfb-svg-iconset.svg1 {
+    fill: #00ff00;
+}
+
+.ast-custom-payment .ahfb-svg-iconset.svg2 {
+    width: 70px;
+}
+
+
+.next-btn, .prev-btn{
+    background-color: #f8f9fa;
+    color: #416990;
+    border: 1px solid #416990;
+    padding: 0px 8px;
+    font-size: 1 rem;
+    transition: all 0.3s;
+    height: 25px;
+}
+
+/************************ Review Section ************************/
+.next-btn:hover, .prev-btn:hover{
+    background-color: #416990;
+    color: #f8f9fa;
+    border: 1px solid #416990;
+}
+
+.tabs-btn {
+    background-color: inherit;
+    color: black;
+    font-weight: bolder;
+    text-align: start;
+    border-right: none;
+    border-left: none;
+    border-top: 1px solid #bababa;
+    padding: 5px;
+}
+
+.tabs-btn.active {
+    border-right: 3px solid #416990;
+}
+
+.tabs-btn:hover {
+    border-right: 3px solid #416990;
+}
+
+.desc {
+    border-bottom: .5px dashed #b5b5b5;
+}
+
+.desc:hover {
+    border-bottom: .5px dashed #000000;
+}
+
+.review {
+    border-top: none;
+    border-bottom: none;
+}
+
+.review:focus {
+    border-bottom: 1px solid #bababa;
+}
+
+.tabs {
+    border-left: 1px solid #bababa;
+    height: 100%;
+    padding: 35px;
+    padding-top: 0px;
+}
+
+/************************ Review Table ************************/
+
+.review-table{
+    border: 1px solid #bababa;
+}
+
+
+.star-filled {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+
+.star-unfilled {
+  color: rgb(197, 197, 197);
+  font-size: 20px;
+}
+  
+.mat-icon.star-unfilled:hover{
+    color: rgb(0, 0, 0);
+}
+
+
+.review-text-area{
+    width: 100%;
+    height: 100px;
+    border: 1px solid #bababa;
+}
+
+.review-text-area:focus{
+    width: 100%;
+    height: 100px;
+    outline: 1px dashed black;
+    border: none;
+}
+
+.review-btn{
+    background-color: inherit;
+    color: #416990;
+    border: 2px solid #416990;
+    padding: 10px 40px;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.review-btn:hover{
+    background-color: #416990;
+    color: #f8f9fa;
+    border: 2px solid #416990;
+}
+
+.review-input{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #bababa;
+}
+
+.review-input:focus{
+    outline: 1px dashed rgb(180, 180, 180);
+    border: none;
+}
+
+
+/************************ Review Comment ************************/
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.filled{
+    color: black;
+    font-size: 15px;
+}
+
+.unfilled{
+    color: #c5c5c5;
+    font-size: 15px;
+}
+
+
+.star-filled-review{
+    color: black;
+    font-size: 20px;
+}
+
+/************************ Related Products ************************/
+
+.related-products{
+    color: #416990;
+    font-weight: bolder;
+}
+

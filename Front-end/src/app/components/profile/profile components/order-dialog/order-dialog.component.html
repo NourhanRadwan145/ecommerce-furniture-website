@@ -1,0 +1,32 @@
+<body>
+  <div class="container centered-container" style="margin-bottom: 30px; margin-top: 20px;">
+    <div class="row mt-3">
+      <div class="col-12">
+        <h1 style="font-size: xx-large;">Order Details</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <div class="row" style="margin-left: 10px;" *ngIf="products.length > 0">
+          <div *ngFor="let product of products" class="col-12 col-sm-12 col-md-6 col-lg-4 " style="justify-content: center;">
+            <img class="img-fluid d-flex justify-content-center" style="width:250px; height: 250px;" [src]="product.image" alt="{{ product.title }}">
+            <br>
+            <span style=" margin-bottom: 10px;">{{product.title}}</span>
+            <br>
+            <span style="margin-left: 15px; margin-top: 5px;">${{product.price}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 " style="margin-left: 10px; margin-top: 10px;">
+        <div class="row justify-content-center">
+          <h2 class="d-flex justify-content-center">Date: {{ dialogData.order.date }}</h2>
+          <h2 class="d-flex justify-content-center">Total Price: ${{ dialogData.order.totalPrice }}</h2>
+          <h2 class="d-flex justify-content-center">Status: {{ dialogData.order.status }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

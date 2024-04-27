@@ -1,0 +1,39 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6 col-sm-6">
+        <h5 class="d-flex align-items-center mt-3 " style="font-size: larger;">Personal Info</h5>
+      </div>
+      <div class="col-6 col-sm-6 d-flex justify-content-end">
+        <img class="img-fluid" style="width:50px; height:50px;" src="../../../../../assets/resume.png">
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <h6 class="mb-0" style="font-size: medium;">User Name</h6>
+      </div>
+      <div class="col-sm-9 text-secondary">
+        {{userInfo.username}}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <h6 class="mb-0"style="font-size: medium;">Email</h6>
+      </div>
+      <div class="col-sm-9 text-secondary">
+        {{userInfo.email}}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-dialog-actions>
+          <button mat-raisen-button (click)="openDialog()" class="btn btn-warning ">Edit</button>
+        </mat-dialog-actions>
+      </div>
+    </div>
+  </div>
+</div>
+
