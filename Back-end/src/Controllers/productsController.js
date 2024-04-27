@@ -128,37 +128,38 @@ const getUserByToken = async (req, res) => {
  */
 
 let addToCart = async (req, res) => {
-    const { user_id, product_id, quantity } = req.body;
+    const { user_id, product, quantity } = req.body;
 
     try {
       const user = await userModel.findById(user_id);
-      const product = await productModel.findById(product_id);
+      const productt = await productModel.findById(product);
   
-      if (!user || !product) 
+      if (!user || !productt) 
       {
         return res.status(404).json({ message: "User or product not found" });
       }
 
-      const existingItem = user.carts.find(item => item.product_id.toString() === product_id);
+      const existingItem = user.carts.find(item => item.product.toString() === product);
   
       if (existingItem) 
       {
         const newQuantity = existingItem.quantity + quantity;
-        if (newQuantity > product.quantity) {
+        if (newQuantity > productt.quantity) {
           return res.status(400).json({ message: "Quantity exceeds stock" });
         } else {
           existingItem.quantity = newQuantity;
-          product.quantity -= quantity;
+          productt.quantity -= quantity;
         }
+        await productt.save();
       } else {
-        if (quantity > product.quantity) {
+        if (quantity > productt.quantity) {
           return res.status(400).json({ message: "Quantity exceeds stock" });
         } else {
-          user.carts.push({ "product_id": product_id, "quantity": quantity });
+          user.carts.push({ "product": product, "quantity": quantity });
         }
+        await productt.save();
       }
-  
-      await Promise.all([user.save(), product.save()]);
+      await user.save();
       return res.status(201).json({ message: "Item added to cart successfully", user });
     } catch (error) {
       console.error('Error adding item to cart:', error);

@@ -41,10 +41,10 @@ export class SingleProductService {
     return this.http.get(this.DB_Config+"user/product/token", { withCredentials: true });
   }
 
-  addProductToCart(user_id: number, product_id: number, quantity: number)
+  addProductToCart(user_id: number, product: number, quantity: number)
   {
     // console.log("Request:", { user_id, product_id, quantity });
-    return this.http.post(`${this.DB_Config}product/addtocart`, { user_id, product_id, quantity })
+    return this.http.post(`${this.DB_Config}product/addtocart`, { user_id, product, quantity })
   }
 
 }
