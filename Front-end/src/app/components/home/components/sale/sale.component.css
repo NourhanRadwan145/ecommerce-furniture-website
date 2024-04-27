@@ -1,0 +1,189 @@
+.image-background2 {
+  background-image: url('../../../../../assets/minimal-zoom-virtual-backgrounds-office-wall-plain-white-room-with-plants-background.jpg');
+  background-size: cover;
+  background-position:center;
+  color: rgb(0, 0, 0);
+  margin: auto;
+}
+
+.heading2{
+  margin-left: 80px;
+  margin-top: 100px;
+  line-height: 1.2; /* Default line height */
+}
+
+
+.button2 {
+  position: relative;
+  left: 10%;
+  margin-top: 20px;
+  transform: translate(-50%, -50%);
+}
+
+.font{
+  font-size: larger;
+}
+
+/* Very small devices (small phones, less than 400px) */
+@media (max-width: 400px) {
+  .image-background2 {
+    height: 25vh;
+    background-position: center;
+  }
+  .heading2{
+    margin-left: 20px;
+    margin-top: 30px;
+    line-height: 1.2; /* Default line height */
+  }
+
+
+  .button2 {
+    position: relative;
+    left: 20%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+/* Extra small devices (phones, 400px and up but less than 600px) */
+@media (min-width: 400px) and (max-width: 599px) {
+  .image-background {
+    height: 30vh;
+    background-position: center;
+
+  }
+
+  .heading2{
+    margin-left: 50px;
+    margin-top: 30px;
+    line-height: 1.2; /* Default line height */
+  }
+
+
+  .button2 {
+    position: relative;
+    left: 15%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+  a :hover{
+    color: white;
+  }
+
+  .font{
+    font-size: small;
+  }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) and (max-width: 768px) {
+  .image-background {
+    height: 45vh;
+    background-position: center;
+  }
+  .heading2{
+    margin-left: 50px;
+    margin-top: 30px;
+    line-height: 1.2; /* Default line height */
+  }
+
+
+  .button2 {
+    position: relative;
+    left: 15%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .image-background {
+    height: 350px;
+    background-position: center;
+  }
+
+  .heading2{
+    margin-left: 50px;
+    margin-top: 30px;
+    line-height: 1.2; /* Default line height */
+  }
+
+
+  .button2 {
+    position: relative;
+    left: 10%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .image-background {
+    background-position: center;
+    height: 350px;
+  }
+  .heading2{
+    margin-left: 80px;
+    margin-top: 30px;
+    line-height: 1.2; /* Default line height */
+    font-size: medium;
+  }
+
+
+  .button2 {
+    position: relative;
+    left: 10%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .image-background2{
+    background-position: center;
+    height: 380px;
+  }
+  .heading2{
+    margin-left: 50px;
+    margin-top: 80px;
+    line-height: 1.2; /* Default line height */
+  }
+  .button2 {
+    position: relative;
+    left: 8%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .image-background2{
+    background-position: center;
+    height: 380px;
+  }
+  .heading2{
+    margin-left: 50px;
+    margin-top: 80px;
+    line-height: 1.2; /* Default line height */
+  }
+  .button2 {
+    position: relative;
+    left: 6%;
+    margin-top: 20px;
+    transform: translate(-50%, -50%);
+  }
+
+}
+

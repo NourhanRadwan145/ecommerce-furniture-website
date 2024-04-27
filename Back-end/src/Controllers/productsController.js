@@ -4,7 +4,7 @@ const productValidate = require("../Utils/productsValidate");
 /**
  * Get all Products
  */
-async function getAllProducts(req, res) {
+let getAllProducts = async (req, res) => {
     // ==> for testing routes
     let Products = await productModel.find({});
     return res.json(Products);
