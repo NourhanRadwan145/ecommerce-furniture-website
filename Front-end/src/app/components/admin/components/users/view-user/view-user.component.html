@@ -1,0 +1,33 @@
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <img
+          src="../../../../../assets/images/users/user1.jpg"
+          class="card-img-top"
+          alt="Product Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ data.userFromParent.username }}</h5>
+          <p class="card-text">
+            {{ user.email }}
+          </p>
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Email:
+              <span class="badge bg-primary">{{ user.email }}</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Gender:
+              <span class="badge bg-primary">{{ user.gender }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

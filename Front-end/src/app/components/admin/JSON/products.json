@@ -1,0 +1,123 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "White Chair",
+      "price": 100,
+      "details": "lalalaaedthsrhnsrn",
+      "image": "lol"
+    },
+    {
+      "id": "2",
+      "title": "Men's Leather Wallet",
+      "image": "https://example.com/wallet.jpg",
+      "price": 29.99,
+      "details": "Genuine leather wallet with multiple compartments for cards and cash."
+    },
+    {
+      "id": "3",
+      "title": "Women's Running Shoes",
+      "image": "https://example.com/runningshoes.jpg",
+      "price": 59.99,
+      "details": "Lightweight and breathable running shoes designed for maximum comfort and performance."
+    },
+    {
+      "id": "4",
+      "title": "Bluetooth Wireless Headphones",
+      "image": "https://example.com/headphones.jpg",
+      "price": 79.99,
+      "details": "Over-ear wireless headphones with noise-canceling technology and long battery life."
+    },
+    {
+      "id": "5",
+      "title": "Stainless Steel Kitchen Knife Set",
+      "image": "https://example.com/knifeset.jpg",
+      "price": 49.99,
+      "details": "High-quality stainless steel knife set with ergonomic handles and sharp blades."
+    },
+    {
+      "id": "6",
+      "title": "Smartwatch with Fitness Tracker",
+      "image": "https://example.com/smartwatch.jpg",
+      "price": 99.99,
+      "details": "Multi-functional smartwatch with fitness tracking, heart rate monitoring, and smartphone notifications."
+    },
+    {
+      "id": "7",
+      "title": "Wireless Charging Pad",
+      "image": "https://example.com/chargingpad.jpg",
+      "price": 24.99,
+      "details": "Qi-compatible wireless charging pad for convenient charging of smartphones and other devices."
+    },
+    {
+      "id": "8",
+      "title": "Digital Camera with 4K Video",
+      "image": "https://example.com/camera.jpg",
+      "price": 399.99,
+      "details": "High-resolution digital camera with 4K video recording capabilities and image stabilization."
+    },
+    {
+      "id": "9",
+      "title": "Classic Aviator Sunglasses",
+      "image": "https://example.com/sunglasses.jpg",
+      "price": 39.99,
+      "details": "Timeless aviator sunglasses with polarized lenses for enhanced clarity and UV protection."
+    },
+    {
+      "id": "10",
+      "title": "Portable Bluetooth Speaker",
+      "image": "https://example.com/speaker.jpg",
+      "price": 49.99,
+      "details": "Compact and portable Bluetooth speaker with rich, immersive sound quality."
+    },
+    {
+      "id": "11",
+      "title": "Electric Kettle",
+      "image": "https://example.com/kettle.jpg",
+      "price": 29.99,
+      "details": "Fast-boiling electric kettle with a sleek design and automatic shut-off feature."
+    },
+    {
+      "id": "12",
+      "title": "Yoga Mat",
+      "image": "https://example.com/yogamat.jpg",
+      "price": 19.99,
+      "details": "Durable and non-slip yoga mat suitable for all types of yoga and exercise routines."
+    },
+    {
+      "id": "13",
+      "title": "Wireless Mouse",
+      "image": "https://example.com/mouse.jpg",
+      "price": 14.99,
+      "details": "Ergonomic wireless mouse with precise tracking and long battery life."
+    },
+    {
+      "id": "14",
+      "title": "Travel Backpack",
+      "image": "https://example.com/backpack.jpg",
+      "price": 69.99,
+      "details": "Spacious and durable travel backpack with multiple compartments and padded shoulder straps."
+    },
+    {
+      "id": "15",
+      "title": "Digital Alarm Clock",
+      "image": "https://example.com/alarmclock.jpg",
+      "price": 9.99,
+      "details": "Compact digital alarm clock with a large display and snooze function."
+    },
+    {
+      "id": "16",
+      "title": "Resistance Bands Set",
+      "image": "https://example.com/resistancebands.jpg",
+      "price": 24.99,
+      "details": "Set of resistance bands for strength training and rehabilitation exercises."
+    },
+    {
+      "id": "17",
+      "title": "Test",
+      "price": 444,
+      "details": "asdafdrwbn",
+      "image": "saf"
+    }
+  ]
+}

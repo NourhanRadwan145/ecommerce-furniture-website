@@ -37,10 +37,18 @@
             </td>
             <td class="fs-4">{{ order.order_name }}</td>
             <td>
-              <button class="btn btn-success me-1" (click)="accepted(order.id)">
+              <button
+                class="btn btn-success me-1"
+                [disabled]="order.state == 'accepted'"
+                (click)="accepted(order.id)"
+              >
                 Accept
               </button>
-              <button class="btn btn-danger" (click)="rejected(order.id)">
+              <button
+                class="btn btn-danger"
+                [disabled]="order.state == 'rejected'"
+                (click)="rejected(order.id)"
+              >
                 Reject
               </button>
             </td>

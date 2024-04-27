@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { OrderService } from '../../Services/order.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -30,10 +30,10 @@ export class OrdersComponent implements OnInit {
     let order = this.orders.find((order: { id: any }) => order.id === orderID);
     order.state = 'accepted';
     this.myorderService.acceptOrder(order).subscribe(
-      (data) => {
+      (data: any) => {
         console.log(data);
       },
-      (error) => {
+      (error: any) => {
         console.log(error);
       }
     );

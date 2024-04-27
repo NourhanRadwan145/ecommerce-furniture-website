@@ -9,6 +9,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SingleProductDetailsComponent } from './components/single-product-details/single-product-details.component';
+import { UsersComponent } from './components/admin/components/users/users.component';
+import { ProductlistComponent } from './components/admin/components/productlist/productlist.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +21,14 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'products', component: ProductsComponent },
+  {
+    path: 'admin',
+    children: [
+      { path: 'users', component: UsersComponent },
+      { path: 'product', component: ProductlistComponent },
+    ],
+  },
+  // { path: 'products', component: ProductsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: '/home' },
 ];

@@ -6,7 +6,7 @@
       "order_name": "Smartphone",
       "date": "2024-04-23",
       "total_price": 599.99,
-      "state": "rejected"
+      "state": "accepted"
     },
     {
       "id": "2",
@@ -22,7 +22,7 @@
       "order_name": "Headphones",
       "date": "2024-04-21",
       "total_price": 99.99,
-      "state": "rejected"
+      "state": "accepted"
     },
     {
       "id": "4",
@@ -46,7 +46,7 @@
       "order_name": "Camera",
       "date": "2024-04-18",
       "total_price": 799.99,
-      "state": "pending"
+      "state": "rejected"
     },
     {
       "id": "7",
@@ -62,7 +62,7 @@
       "order_name": "Smart Speaker",
       "date": "2024-04-16",
       "total_price": 129.99,
-      "state": "rejected"
+      "state": "accepted"
     },
     {
       "id": "9",
@@ -102,7 +102,7 @@
       "order_name": "Router",
       "date": "2024-04-11",
       "total_price": 99.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "14",
@@ -110,7 +110,7 @@
       "order_name": "Speaker",
       "date": "2024-04-10",
       "total_price": 79.99,
-      "state": "pending"
+      "state": "accepted"
     },
     {
       "id": "15",
@@ -142,7 +142,7 @@
       "order_name": "Wireless Earbuds",
       "date": "2024-04-06",
       "total_price": 149.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "19",
@@ -150,7 +150,7 @@
       "order_name": "Webcam",
       "date": "2024-04-05",
       "total_price": 69.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "20",
@@ -182,7 +182,7 @@
       "order_name": "Microphone",
       "date": "2024-04-01",
       "total_price": 199.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "24",
@@ -222,7 +222,7 @@
       "order_name": "Game Controller",
       "date": "2024-03-27",
       "total_price": 59.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "29",
@@ -262,7 +262,7 @@
       "order_name": "GPS Tracker",
       "date": "2024-03-22",
       "total_price": 99.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "34",
@@ -302,7 +302,7 @@
       "order_name": "Smartwatch Stand",
       "date": "2024-03-17",
       "total_price": 14.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "39",
@@ -342,7 +342,7 @@
       "order_name": "USB Hub",
       "date": "2024-03-12",
       "total_price": 19.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "44",
@@ -382,7 +382,7 @@
       "order_name": "Wireless Car Charger",
       "date": "2024-03-07",
       "total_price": 49.99,
-      "state": "rejected"
+      "state": "pending"
     },
     {
       "id": "49",

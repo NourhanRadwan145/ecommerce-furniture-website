@@ -32,4 +32,14 @@ export class OrderService {
   acceptOrder(order: any) {
     return this.http.put(this.API_URL + `/${order.id}`, order);
   }
+
+  pendingCounter(orders: any) {
+    let pending = 0;
+    for (let order of orders) {
+      if (order.state == 'pending') {
+        pending += 1;
+      }
+    }
+    return pending;
+  }
 }

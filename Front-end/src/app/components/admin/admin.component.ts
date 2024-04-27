@@ -4,6 +4,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { SalesSummaryComponent } from './components/sales-summary/sales-summary.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderService } from './Services/order.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,7 @@ import { OrderService } from './Services/order.service';
     FeedsComponent,
     SalesSummaryComponent,
     OrdersComponent,
+    RouterModule,
   ],
   providers: [OrderService],
   templateUrl: './admin.component.html',
