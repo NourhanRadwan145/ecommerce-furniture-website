@@ -1,5 +1,5 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { Component, OnInit } from '@angular/core';
+import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -24,8 +24,8 @@ import { SingleProductService } from '../../Services/single-product.service';
 export class HeaderComponent implements OnInit{
 matMenu: any;
   data: number = 0;
-  
-  constructor(private productService: SingleProductService, private injector: Injector) { }
+
+  constructor(private productService: SingleProductService) { }
 
   ngOnInit() {
     this.productService.getUserToken().subscribe({

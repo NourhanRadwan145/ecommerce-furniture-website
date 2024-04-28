@@ -11,15 +11,15 @@ export class SingleProductService {
 
   DB_Config = "http://localhost:7000/api/products/";
   
-  private data = new BehaviorSubject<number>(10);
-  data$ = this.data.asObservable();
+  // private data = new BehaviorSubject<number>(10);
+  // data$ = this.data.asObservable();
 
-  updateData(data: number) {
-    this.data = new BehaviorSubject<number>(data);
-    this.data$ = this.data.asObservable();
-    this.data.next(data);
-    console.log("Data updated:", data);
-  }
+  // updateData(data: number) {
+  //   this.data = new BehaviorSubject<number>(data);
+  //   this.data$ = this.data.asObservable();
+  //   this.data.next(data);
+  //   console.log("Data updated:", data);
+  // }
 
 
   getProductById(id:number)

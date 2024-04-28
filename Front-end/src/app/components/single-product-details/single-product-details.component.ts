@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SingleProductService } from '../../Services/single-product.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +29,8 @@ import { HeaderComponent } from '../header/header.component';
     RouterModule,
     OneProductComponent,
     MatProgressSpinnerModule,
-    HeaderComponent
+    HeaderComponent,
+    ReactiveFormsModule
   ],
   providers: [SingleProductService],
   templateUrl: './single-product-details.component.html',
@@ -55,12 +56,16 @@ export class SingleProductDetailsComponent implements OnInit
   user_id: any;
 
   product_number: number = 0;
-  @Output() productNumberChange: EventEmitter<number> = new EventEmitter<number>();
+  
+  reviewForm: FormGroup;
+  submitted: boolean = false;
+  ratingSelected: boolean = false;
 
   constructor( 
     private route: ActivatedRoute, 
     private router:Router, 
     private productService:SingleProductService,
+    private formBuilder: FormBuilder,
   ) 
   {
     this.ID = route.snapshot.params["id"];
@@ -131,6 +136,15 @@ export class SingleProductDetailsComponent implements OnInit
         console.log('cannot get user token !!', err);
       }
     });
+
+    /********** validate reviews form ************/
+    this.reviewForm = this.formBuilder.group({
+      rating: [null],
+      comment: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+    
   }
 
   /**************** Quantity input ****************/
@@ -197,16 +211,25 @@ export class SingleProductDetailsComponent implements OnInit
     rating: 0
   };
 
+  get f() 
+  {
+    return this.reviewForm.controls;
+  }
+
   /************************* Add review to database *****************/
   addReview() 
   {
 
-    const newReview = {
-      user_id: this.user_id,
-      name: this.name,
-      comment: this.review,
-      rating: this.newReview.rating
-    };
+    this.submitted = true;
+    // console.log(this.reviewForm.invalid);
+    if (!this.reviewForm.invalid) {
+    
+      const newReview = {
+        user_id: this.user_id,
+        name: this.reviewForm.value.name,
+        comment: this.reviewForm.value.comment,
+        rating: this.newReview.rating
+      };
 
       // console.log('You already reviewed this product');
       this.productService.addReview(this.ID, newReview).subscribe({
@@ -219,12 +242,20 @@ export class SingleProductDetailsComponent implements OnInit
           if (existingReviewIndex !== -1) 
           {
             this.product.reviews[existingReviewIndex] = (data as { review: any }).review;
+            Swal.fire({
+              icon: 'success',
+              title: 'Your review added successfully',
+            })
           } else {
             this.product.reviews.push((data as { review: any }).review);
+            Swal.fire({
+              icon: 'success',
+              title: 'Your review added successfully',
+            });
           }
 
-          this.name = '';
-          this.review = '';
+          this.reviewForm.reset();
+          this.submitted = false;
           this.newReview.rating = 0;
           this.resetStarStates();
         },
@@ -232,6 +263,7 @@ export class SingleProductDetailsComponent implements OnInit
           console.log('cannot add review !!', err);
         }
       });
+    }
   }
 
 
@@ -250,6 +282,9 @@ export class SingleProductDetailsComponent implements OnInit
   navigateToRelatedProduct(productId: string) {
     this.router.navigate(['/product', productId]);
   }
+
+  /***************************** Validate add review form **************************/
+  
 
 
   /****************** paginate to next and prev product ****************/
