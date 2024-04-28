@@ -1,2 +1,76 @@
-<h1>Checkout</h1>
-<p>Complete your purchase.</p>
+<html>
+<div class='container'>
+  <div class='window'>
+    <div class='order-info'>
+      <div class='order-info-content'>
+        <div class='order-items'  *ngIf="cart && cart.cart">
+          <h2>Cart Items</h2>
+          <div class='line'></div>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center;">
+              <tr *ngFor="let item of cart.cart">
+                <td><img [src]="getProductById(item.product)?.image" alt="Product Image" class="full-width" style="height: 85px;"></td>
+                <td>{{ getProductById(item.product)?.title }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                  <div class='product-info'>
+                    <span class='thin small'>${{ getProductById(item.product)?.price }}</span><br>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>        
+        <h2>Order Summary</h2>
+        <div class='line'></div>
+          <div class='total'>
+          <span style='float:left;'>
+            <div class='thin dense'>total Items</div>
+            <div class='thin dense'>Delivery</div>
+            TOTAL
+          </span>
+          <span style='float:right; text-align:right;'>
+            <div class='thin dense'></div>
+            <div class='thin dense'></div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class='user-info'>
+      <div class='user-info-content' *ngIf="user">
+        <h2>User Information</h2>
+<div class='line'></div>
+<form *ngIf="userForm" [formGroup]="userForm" class='user-info-content'>
+  <table>
+    <tr><td>Full Name: </td><td><input class='input-field' value="{{ user.username }}" formControlName="fullName"></td></tr>
+    <tr><td>First Name: </td><td><input class='input-field' formControlName="firstName"></td></tr>
+    <tr><td>Last Name: </td><td><input class='input-field' formControlName="lastName"></td></tr>
+    <tr><td>Email: </td><td><input class='input-field' value="{{ user.email }}" formControlName="email" ></td></tr>
+    <tr><td>Phone: </td><td><input class='input-field' formControlName="phone"></td></tr>
+    <tr><td>Address: </td><td><input class='input-field' formControlName="address"></td></tr>
+  </table>
+  <div *ngIf="formSubmitted && userForm.invalid" class="error-message">
+    Please fill in all required fields before proceeding.
+  </div>
+  <p>Select Payment Method</p>
+  <div class='line'></div>
+  <label for='cash' class='radio'><input type='radio' id='cash' name='paymentMethod' value='cash' formControlName="paymentMethod"> <span class='radio-btn'></span> Cash</label><br>
+  <label for='credit' class='radio'>
+    <input type='radio' id='credit' name='paymentMethod' value='credit' (click)="navigateToPayment()">
+    <span class='radio-btn'></span> Credit
+  </label><br>
+  <button type="button" class="pay-btn" (click)="placeOrder()">Place Order</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>  
+</html>

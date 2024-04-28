@@ -1,0 +1,39 @@
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.payment-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 15px 50px 10px #ddd;
+    padding: 20px;
+    text-align: center;
+    max-width: 400px; 
+    width: 100%; 
+}
+
+.payment-success {
+    text-align: center;
+    margin-top: 20px; 
+    font-size: 30px;
+    color: green; 
+}
+
+button{
+    margin-top: 30px;
+    border:none;
+    background:#fff;
+    line-height:2em;
+    font-size:19px;
+    color:#78909c;
+    border: 2px solid #78909c;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#78909c;
+    color:#eee;
+}

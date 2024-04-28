@@ -4,11 +4,33 @@ const productValidate = require("../Utils/productsValidate");
 /**
  * Get all Products
  */
-let getAllProducts = async (req, res) => {
-    // ==> for testing routes
-    let Products = await productModel.find({});
-    return res.json(Products);
-}
+const getAllProducts = async (req, res) => {
+    try {
+        let query = {};
+
+        // Filtering logic by (Price and Category)
+        if (req.query.minPrice) {
+            query.price = { $gte: parseInt(req.query.minPrice) };
+        }
+        if (req.query.maxPrice) {
+            query.price = { ...query.price, $lte: parseInt(req.query.maxPrice) };
+        }
+        if (req.query.category) {
+            query.category = req.query.category;
+        }
+
+        // Search logic
+        if (req.query.searchTerm) {
+            query.title = { $regex: new RegExp(req.query.searchTerm, 'i') };
+        }
+
+        const products = await productModel.find(query);
+        res.json({ "All Products": products });
+    } catch (err) {
+        console.error('Error loading products:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 
 /**
  * Get Product by name
@@ -49,10 +71,7 @@ let updateProductByID = async (req, res) => {
 /**
  * Delete Product by ID
  */
-let deleteProductByID = async (req, res) => {
-    //
-};
-
+let deleteProductByID = async (req, res) => {};
 let addReview = async (req, res) => {
     const { user_id, name, comment, rating } = req.body;
     // console.log('User:', user_id);
@@ -83,7 +102,7 @@ let addReview = async (req, res) => {
       return res.status(500).json({ message: "Internal server error" });
     }
 };
-  
+
 
 module.exports = {
     getAllProducts,

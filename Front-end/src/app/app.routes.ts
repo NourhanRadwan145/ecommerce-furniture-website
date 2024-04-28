@@ -10,6 +10,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SingleProductDetailsComponent } from './components/single-product-details/single-product-details.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +25,9 @@ export const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'confirm', component: ConfirmOrderComponent },  
   { path: '**', redirectTo: '/home' },
 ];

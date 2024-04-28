@@ -1,14 +1,14 @@
 // ---------------------------------- All Requires -------------------------------------
 const UserModel = require("../Models/UserModel")
+const OrderModel = require("../Models/OrderModel")
+const ProductModel = require('../Models/productsModel'); 
 const UserValidate = require("../Utils/UserValidate")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const crypto = require("crypto")
 
-
-
 // ---------------------------------- Get All Users  ------------------------------------
-let GetAllUsers = async (req, res)=>{
+let GetAllUsers = async (req, res) => {
     // => for testing routes
     let users = await UserModel.find({})
     return res.json(users)
@@ -20,7 +20,7 @@ let GetUserById = async (req, res) => {
     return res.json(user)
 }
 // ---------------------------------- Add New User  -------------------------------------
-let AddNewUser = async (req, res)=>{}
+let AddNewUser = async (req, res) => { }
 // ---------------------------------- Update User By ID  --------------------------------
 let UpdateUser = async (req, res)=>{
     const id= req.params.id;  
@@ -103,8 +103,197 @@ let RegisterUser = async (req, res)=>{
         return res.status(500).json({message:error.message})
     }
 }
+// ---------------------------------- Add Product To Cart ------------------------
+
+const AddProductToCart = async (req, res) => {
+    const { userId, productId, quantity } = req.body;
+
+    try {
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId },
+            { $push: { carts: { product: productId, quantity } } },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "Product added to cart successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+let AddProductToOrder = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await UserModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Fetch products from the database
+        const productIds = user.carts.map(item => item.product);
+        const products = await ProductModel.find({ _id: { $in: productIds } });
+
+        // Calculate total price of the order
+        let totalPrice = 0;
+        user.carts.forEach(item => {
+            const product = products.find(p => p._id.toString() === item.product.toString());
+            if (product) {
+                totalPrice += product.price * item.quantity;
+            }
+        });
+        // Add delivery fee
+        totalPrice += 300;
+
+        // Move products from carts to orders
+        const orderProducts = user.carts.map(item => item.product);
+        user.orders.push(...orderProducts);
+
+        // Clear the carts
+        user.carts = [];
+
+        // Save the updated user
+        await user.save();
+
+        // Create a new order
+        const order = new OrderModel({
+            userId: user._id,
+            username: user.username,
+            date: new Date(),
+            totalPrice: totalPrice,
+            products: orderProducts,
+            status: "Pending"
+        });
+
+        // Save the order
+        await order.save();
+
+        res.status(200).json({ message: "Products added to order successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+// ---------------------------------- Remove Product From Cart ------------------------
+let RemoveProductFromCart = async (req, res) => {
+    const { userId, productId } = req.body;
+
+    try {
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { carts: { product: productId } } },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "Product removed from cart successfully" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+
+}
+// ---------------------------------- Update Product Quantity ------------------------
+let IncreaseProductQuantity = async (req, res) => {
+    const { userId, productId } = req.body;
+
+    try {
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId, "carts.product": productId },
+            { $inc: { "carts.$.quantity": 1 } },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "Product quantity increased successfully" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+
+}
+let DecreaseProductQuantity = async (req, res) => {
+    const { userId, productId } = req.body;
+
+    try {
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId, "carts.product": productId },
+            { $inc: { "carts.$.quantity": -1 } },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "Product quantity decreased successfully" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+}
+// ---------------------------------- Get Cart By User ID ------------------------
+let GetCartByUserId = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await UserModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ cart: user.carts });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+}
+
+let GetOrdersByUserId = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await UserModel.findById(userId).populate("orders");
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ orders: user.orders });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
 
 
 // ---------------------------------- Export All Functions  ------------------------------
-module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser}
+module.exports = {GetAllUsers, 
+    GetUserById, 
+    AddNewUser, 
+    UpdateUser, 
+    DeleteUser, 
+    LoginUser, 
+    RegisterUser,
+    AddProductToCart,
+    RemoveProductFromCart,
+    IncreaseProductQuantity,
+    DecreaseProductQuantity,
+    GetCartByUserId, 
+    GetOrdersByUserId,
+    AddProductToOrder}
 // ---------------------------------- End Of Controller ----------------------------------
