@@ -7,5 +7,8 @@ Router.get("/:id", UserController.GetUserById)
 Router.post("/", UserController.AddNewUser)
 Router.put("/:id", UserController.UpdateUser)
 Router.delete("/:id", UserController.DeleteUser)
+Router.get("/:id/cart", UserController.GetCartByUserId);
+Router.get("/:id/orders", UserController.GetOrdersByUserId);
+Router.post("/:id/order", UserController.AddProductToOrder);
 
 module.exports = Router

@@ -1,0 +1,234 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body, html {
+  height: 100%;
+}
+body {
+  display: flex;
+  background: linear-gradient(#f0f0f0,#f3f3f3);
+  flex-direction: column;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  height: 900px;
+}
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #78909c;
+  position: relative;
+  font-family:'Courier New', Courier, monospace;
+}
+.center {
+  margin: auto;
+}
+.wrapper {
+  width: 1100px;
+  flex-shrink: 0;
+  background: white;
+  overflow: hidden;
+  height: 600px;
+  border-radius:30px;
+  border: 1px solid #78909c;
+  box-shadow: 0px 15px 50px 10px #ddd;
+}
+.card-wrap {
+  width: 260px;
+  float: right;
+  background: #f1f0f0;
+  padding: 50px;
+  transform: scale(1.5) rotate(20deg);
+  border: 1px solid #78909c;
+}
+.card {
+  transform: scale(0.75) rotate(-20deg);
+}
+svg {
+  width: 160%;
+  position: relative;
+  right: 130px;
+  top: 60px;
+  overflow: visible;
+}
+svg:not(:root) {
+  overflow: visible;
+}
+#sunglasses {
+  transition: transform 0.15s;
+}
+.checkout:hover ~ .card-wrap #sunglasses {
+  transform: translateY(-40px);
+}
+#right_eye_wink {
+  display: none;
+}
+.checkout:active ~ .card-wrap #right_eye {
+  display: none;
+}
+.checkout:active ~ .card-wrap #right_eye_wink {
+  display: block;
+}
+#mouth {
+  transition: transform 0.15s;
+}
+.checkout:hover ~ .card-wrap #mouth {
+  transform: translateY(-10px);
+}
+#front_hand, #back_hand {
+  transition: transform 0.03s;
+}
+.checkout:active ~ .card-wrap #front_hand, .checkout:active ~ .card-wrap #back_hand {
+  transform: translateX(10px);
+}
+.checkout {
+  outline: none;
+  background: rgb(249, 196, 65);
+  border: 0;
+  position: relative;
+  z-index: 1; 
+  top: 8%;
+  left: 92%;
+  padding: 5px 7px;
+  font-size: 24px;
+  border-radius: 4px;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+.checkout:hover:not(:active) {
+  background: rgb(237, 145, 47);
+}
+.dropdown-select.visible {
+  display:block;
+}
+.dropdown {
+  position:relative;
+  color: #78909c;
+  border: 1px solid #78909c;
+  border-radius: 5px;
+}
+ul {
+  margin:0;
+  padding:0;
+}
+ul li {
+  list-style:none;
+  padding-left:10px;
+  cursor:pointer;
+}
+ul li:hover {
+  background:rgba(255,255,255,0.1);
+}
+.dropdown-select {
+  position:absolute;
+  background:#fcfcfc;
+  text-align:left;
+  box-shadow:0px 3px 5px 0px rgba(0,0,0,0.1);
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+  width:90%;
+  left:2px;
+  line-height:2em;
+  margin-top:2px;
+  box-sizing:border-box;
+}
+.pay-btn {
+  border:none;
+  background:#fff;
+  line-height:2em;
+  font-size:19px;
+  font-size:1.2rem;
+  color:#78909c;
+  border: 2px solid #78909c;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 15px;
+  transition: all .2s ease;
+}
+.pay-btn:hover {
+  background:#78909c;
+  color:#eee;
+}
+.input-field {
+  background:rgba(255,255,255,0.1);
+  margin-bottom:10px;
+  margin-top:3px;
+  line-height:1.5em;
+  font-size:20px;
+  font-size:1.3rem;
+  border:1px solid #78909c;
+  padding:5px 10px 5px 10px;
+  box-sizing:border-box;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.order-info {
+  color:#78909c;
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid #78909c;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: absolute;
+  top: 5px;
+  left: -725px;
+  background: #fff;
+  height: 470px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  box-shadow: 0px 15px 50px 10px #ddd;
+  z-index: 1;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 100;
+  font-family:monospace;
+  line-height: 1rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); 
+}
+.dropdown-btn {
+  background:rgba(255,255,255,0.1);
+  width:180px;
+  border-radius:5px;
+  text-align:center;
+  line-height:1.5em;
+  cursor:pointer;
+  position:relative;
+}
+.dropdown-btn:after {
+  content: '\25BE';
+  right:8px;
+  position:absolute;
+}
+.dropdown-btn:hover {
+  background:rgba(255,255,255,0.2);
+}
+.dropdown-select {
+  display:none;
+}
+.order-card-image {
+  display:block;
+  width: 150px;
+  height: 100px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 10px;
+}
+.order-info-content {
+  margin-top:25px;
+  -webkit-flex-flow:column;
+      -ms-flex-flow:column;
+          flex-flow:column;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+  width:100%;
+}
+.order-info-content table tr td:first-child {
+  margin-top: 0;
+}

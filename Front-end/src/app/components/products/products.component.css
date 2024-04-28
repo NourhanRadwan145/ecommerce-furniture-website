@@ -447,7 +447,7 @@ body {
 }
 .gridView .products-row {
   margin: 8px auto;
-  width: 295px;
+  width: 320px;
   background-color: var(--app-content-secondary-color);
   padding: 8px;
   border-radius: 4px;

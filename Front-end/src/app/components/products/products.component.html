@@ -17,7 +17,7 @@
           </button>
           <div class="filter-menu">
             <label for="category">Category</label>
-            <select id="category">
+            <select id="category" [(ngModel)]="selectedCategory" (change)="applyCategoryFilter()">
               <option>All Categories</option>
               <option>Chair</option>
               <option>Table</option>
@@ -26,28 +26,17 @@
               <option>Lamp</option>
               <option>Bed</option>
             </select>
-            <div class="filter-menu-buttons">
-              <button class="filter-button reset">
-                Reset
-              </button>
-              <button class="filter-button apply">
-                Apply
-              </button>
-            </div>
           </div>          
         </div>
         <div class="filter-by-price">
           <label>Price Range</label>
-  <div class="price-filter">
-    <input type="number" placeholder="Min Price" [(ngModel)]="minPrice" (keyup)="applyPriceFilter()">
-    <span></span>
-    <input type="number" placeholder="Max Price" [(ngModel)]="maxPrice" (keyup)="applyPriceFilter()">
-  </div>
-  <div class="filter-menu-buttons">
-    <button class="filter-button reset" (click)="resetPriceFilter()">
-      Reset
-    </button>
-  </div>  
+          <div class="price-filter">
+            <input type="number" placeholder="Min Price" [(ngModel)]="minPrice" (keyup)="applyPriceFilter()">
+            <input type="number" placeholder="Max Price" [(ngModel)]="maxPrice" (keyup)="applyPriceFilter()">
+          </div>
+          <div class="filter-menu-buttons">
+            <button class="filter-button reset" (click)="resetPriceFilter()">Reset</button>
+          </div>  
         </div>        
       </li>
     </ul>
@@ -68,8 +57,9 @@
           <path d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z"></path>
         </svg>
       </button>     
-<input class="search-bar" placeholder="Search..." type="text" (keyup)="applyNameFilter($event.target.value)">
-      <div class="app-content-actions-wrapper">
+      <input class="search-bar" placeholder="Search..." type="text" (input)="applyNameFilter($event)">
+      <div class="app-con
+      tent-actions-wrapper">
         <button class="action-button list active" title="List View">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         </button>
