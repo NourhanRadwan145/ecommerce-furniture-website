@@ -83,6 +83,55 @@
     height: 25px;
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+.product-img {
+    position: absolute;
+    width: 100%;
+    /* height: auto; */
+    transition: transform 0.3s ease;
+  }
+  
+  .product-img:hover {
+    transform: scale(1.2);
+    z-index: 1; /* Ensure the hovered image is on top */
+  }
+  
+
+
+.img-div {
+    position: relative;
+    overflow: scroll;
+    scrollbar-width: none;
+    display: flex;
+    height: 500px;
+}
+
+.product-img {
+    position: absolute; 
+    top: 0;
+    left: 0; 
+    transition: transform 0.2s ease;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    max-width: none; 
+    max-height: none;
+}
+
+
+img {
+    display: block;
+    box-shadow: none;
+    vertical-align: middle;
+    border: 0;
+}
+
+
 /************************ Review Section ************************/
 .next-btn:hover, .prev-btn:hover{
     background-color: #416990;

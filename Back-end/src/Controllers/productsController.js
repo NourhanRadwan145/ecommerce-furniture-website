@@ -1,5 +1,7 @@
 const productModel = require("../Models/productsModel");
 const productValidate = require("../Utils/productsValidate");
+const userModel = require("../Models/UserModel");
+const jwt = require("jsonwebtoken");
 
 /**
  * Get all Products
@@ -25,7 +27,7 @@ const getAllProducts = async (req, res) => {
         }
 
         const products = await productModel.find(query);
-        res.json({ "All Products": products });
+        res.json(products);
     } catch (err) {
         console.error('Error loading products:', err);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -82,7 +84,11 @@ let addReview = async (req, res) => {
       {
         return res.status(404).json({ message: "Product not found" });
       }
-      const existingReview = product.reviews.find(review => review.user_id.equals(user_id));
+      const existingReview = product.reviews.find(review => {
+        if (review.user_id){
+            return review.user_id.toString() === user_id;
+        }
+    });
       if (existingReview) 
       {
         product.reviews.splice(product.reviews.indexOf(existingReview), 1);
@@ -103,6 +109,80 @@ let addReview = async (req, res) => {
     }
 };
 
+/**
+ * Get User by Token
+ */
+const getUserByToken = async (req, res) => {
+  try {
+      const cookie = req.cookies["jwt"];
+      if (!cookie) {
+          console.log("JWT cookie not found")
+          return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
+      }
+      const claims = jwt.verify(cookie, "secret"); 
+      if (!claims) {
+          return res.status(401).json({ message: "Unauthorized: Invalid token" });
+      }
+
+      let user = await userModel.findOne({ _id: claims._id });
+      if (!user) {
+          return res.status(401).json({ message: "Unauthorized: User not found" });
+      }
+
+      const { password, ...data } = user.toJSON();
+      return res.json({ data: data });
+  } catch (error) {
+      console.error("Error in GetUserByToken:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+/**
+* add to cart
+*/
+
+let addToCart = async (req, res) => {
+  const { user_id, product, quantity } = req.body;
+
+  try {
+    const user = await userModel.findById(user_id);
+    const productt = await productModel.findById(product);
+
+    if (!user || !productt) 
+    {
+      return res.status(404).json({ message: "User or product not found" });
+    }
+
+    const existingItem = user.carts.find(item => item.product.toString() === product);
+
+    if (existingItem) 
+    {
+      const newQuantity = existingItem.quantity + quantity;
+      if (newQuantity > productt.quantity) {
+        return res.status(400).json({ message: "Quantity exceeds stock" });
+      } else {
+        existingItem.quantity = newQuantity;
+        productt.quantity -= quantity;
+      }
+      await productt.save();
+    } else {
+      if (quantity > productt.quantity) {
+        return res.status(400).json({ message: "Quantity exceeds stock" });
+      } else {
+        user.carts.push({ "product": product, "quantity": quantity });
+      }
+      await productt.save();
+    }
+    await user.save();
+    return res.status(201).json({ message: "Item added to cart successfully", user });
+  } catch (error) {
+    console.error('Error adding item to cart:', error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
 
 module.exports = {
     getAllProducts,
@@ -112,4 +192,6 @@ module.exports = {
     updateProductByID,
     deleteProductByID,
     addReview,
+    getUserByToken,
+    addToCart
 }

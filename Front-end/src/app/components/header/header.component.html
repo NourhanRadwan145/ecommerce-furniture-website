@@ -73,7 +73,7 @@
         <b>$300.00</b>
       </a>
       <a mat-raised-button class="text-secondary me-3" [routerLink]="['/cart']"
-          matBadge="2" matBadgePosition="after" matBadgeColor="warn">
+          [matBadge]="data" matBadgePosition="after" matBadgeColor="warn">
           <mat-icon>shopping_cart</mat-icon>
       </a>
   </div>

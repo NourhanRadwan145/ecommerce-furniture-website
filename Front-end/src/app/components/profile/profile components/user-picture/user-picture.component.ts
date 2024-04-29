@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../../../../Services/user-service.service';
+import { UserServiceService } from '../../../../services/user-service.service';
 
 @Component({
   selector: 'app-user-picture',

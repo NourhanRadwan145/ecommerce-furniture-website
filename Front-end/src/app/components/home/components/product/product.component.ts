@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HomeProductService } from '../../../../Services/home-product.service';
+import { HomeProductService } from '../../../../services/home-product.service';
+
 
 @Component({
   selector: 'app-product',
@@ -19,9 +20,11 @@ export class ProductComponent implements OnInit{
       this.productService.getFourProducts().subscribe(
         {
           next:(data: any)=>{
-            for(let i =0;i<4;i++){
+            console.log(data);
+            
+            for(let i = 0;i<4;i++){
             this.FourProducts.push(data[i]);
-            console.log(data[i]);
+              console.log(data[i]);
             }
             // data.forEach((element: any) => {
             //   this.FourProducts.push(element);
