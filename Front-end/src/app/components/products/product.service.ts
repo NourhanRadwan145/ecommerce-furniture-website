@@ -40,4 +40,7 @@ export class ProductsService {
     return this.http.get<any>(`${this.baseUrl}/${userId}/cart`);
   }  
   
+  addProductToCart(userId: string, productId: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${userId}/cart`, { productId });
+  }
 }

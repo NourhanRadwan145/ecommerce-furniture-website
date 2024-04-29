@@ -13,17 +13,18 @@
           <li class="nav-item">
               <a class="nav-link" [routerLink]="['/products']">All Products</a>
           </li>
+         
           <li class="nav-item">
-              <a class="nav-link" href="#">Chair</a>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Chair' }">Chair</a>
           </li>
-
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Table</a>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Table' }">Table</a>
           </li>
-
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Sofa</a>
-          </li>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Sofa' }">Sofa</a>
+          </li>          
       </ul>
 
       <ul class="navbar-nav">

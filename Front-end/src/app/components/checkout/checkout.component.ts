@@ -66,7 +66,6 @@ export class CheckoutComponent implements OnInit {
         this.productService.getProductById(item.product).subscribe( {
           next: (product : Product) =>{
           this.products.push(product);
-          console.log(product);
           totalPrice += product.price * item.quantity; 
           totalQuantity += item.quantity; 
         },
@@ -123,7 +122,6 @@ placeOrder() {
         const userId = '662b8775a566fe5003f222ee'; 
         this.userService.addProductToOrder(userId).subscribe(
             (response) => {
-                console.log('Order placed successfully', response);
                 this.router.navigate(['/confirm']);
             },
             (error) => {

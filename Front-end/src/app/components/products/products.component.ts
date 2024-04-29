@@ -3,6 +3,7 @@ import { ProductsService } from './product.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -20,20 +21,25 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string = 'All Categories';
   minPrice: number | undefined;
   maxPrice: number | undefined;
+  userId: string = '62b8775a566fe5003f222ee'; 
 
-  constructor(private productService: ProductsService) {}
+  constructor(
+    private productService: ProductsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.route.queryParams.subscribe(params => {
+      this.selectedCategory = params['category'] || 'All Categories';
+      this.loadProducts();
+    });
   }
-  
-  // Load products from service
+
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
         this.products = response['All Products'];
-        this.selectedCategory = 'All Categories';
-        this.applyCategoryFilter(); 
+        this.applyCategoryFilter();
       },
       (error) => {
         console.error('Error loading products:', error);
@@ -41,7 +47,21 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  // Apply category filter
+  addToCart(productId: string): void {
+    const userId = '62b8775a566fe5003f222ee'; // Replace with actual user Id
+    this.productService.addProductToCart(userId, productId).subscribe(
+      () => {
+        // Handle success
+        console.log('Product added to cart successfully');
+      },
+      (error) => {
+        // Handle error
+        console.error('Error adding product to cart:', error);
+      }
+    );
+  }
+
+  //Apply The Filter by Category 
   applyCategoryFilter(): void {
     if (this.selectedCategory === 'All Categories') {
       this.filteredProducts = this.products;
@@ -70,6 +90,7 @@ export class ProductsComponent implements OnInit {
     this.filteredProducts = this.products;
   }
 
+  //Apply Name Filter
   applyNameFilter(event: Event): void {
     const searchTerm = (event.target as HTMLInputElement).value;
     this.filteredProducts = this.products.filter((product) =>
@@ -78,15 +99,18 @@ export class ProductsComponent implements OnInit {
   }  
 
   ngAfterViewInit(): void {
-    // After view initialization
 
-    // Set default view mode
+    // Set default view mode to grid
     document.addEventListener('DOMContentLoaded', () => {
       const gridElement = document.querySelector('.grid') as HTMLElement;
       if (gridElement) {
         gridElement.click();
       }
     });
+    
+    // Set default mode to light
+    document.documentElement.classList.add('light');
+    document.querySelector('.mode-switch')?.classList.add('active');
 
     // Event listener for list view
     document.querySelector('.list')?.addEventListener('click', () => {
@@ -124,12 +148,6 @@ export class ProductsComponent implements OnInit {
     // Event listener for filter menu
     document.querySelector('.jsFilter')?.addEventListener('click', () => {
       document.querySelector('.filter-menu')?.classList.toggle('active');
-    });
-
-    // Set default mode to light
-    document.addEventListener('DOMContentLoaded', () => {
-      document.documentElement.classList.add('light');
-      document.querySelector('.mode-switch')?.classList.add('active');
     });
 
     // Event listener for mode switch

@@ -106,24 +106,25 @@ let RegisterUser = async (req, res)=>{
 // ---------------------------------- Add Product To Cart ------------------------
 
 const AddProductToCart = async (req, res) => {
-    const { userId, productId, quantity } = req.body;
-
+    const { userId, productId } = req.body;
+  
     try {
-        const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userId },
-            { $push: { carts: { product: productId, quantity } } },
-            { new: true }
-        );
-
-        if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.status(200).json({ message: "Product added to cart successfully" });
+      const updatedUser = await UserModel.findOneAndUpdate(
+        { _id: userId },
+        { $push: { carts: { product: productId } } },
+        { new: true }
+      );
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json({ message: "Product added to cart successfully" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
     }
-};
+  };
+  
 let AddProductToOrder = async (req, res) => {
     const userId = req.params.id;
 
