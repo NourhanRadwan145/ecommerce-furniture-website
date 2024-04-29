@@ -1,0 +1,114 @@
+@media (max-width: 1220px) {
+  .table-responsive table,
+  .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive td,
+  .table-responsive tr {
+    display: block;
+  }
+
+  .table-responsive thead tr {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  .table-responsive tbody tr {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid #d9dcdf;
+  }
+
+  .table-responsive tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .table-responsive tbody td:before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+  .table-responsive tbody td:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.table {
+  border: 1px solid #d9dcdf;
+}
+
+table thead th {
+  background-color: #d9dcdf;
+}
+
+.quantity-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9dcdf;
+}
+
+.quantity-group div {
+  padding: 0.2em .5em;
+}
+
+.btn-delete {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #a89090;
+  color: #a89090;
+  border-radius: 100%;
+}
+
+.btn-delete:hover {
+  color: #302a2a;
+}
+
+.card-header {
+  background-color: #d9dcdf;
+  color: #01363fa2;
+  font-size: 1.2em;
+}
+
+.card-body .row {
+  justify-content: center;
+  padding: .5em;
+}
+
+.btn-custom {
+  border-radius: 0%;
+  padding: 1em;
+  border: 1px solid #01363fa2;
+  color: #01363fa2;
+}
+
+.btn-custom:hover {
+  background-color: #01363fa2;
+  color: white;
+}
+.address-form div{
+  margin: .4em 0em;
+}
+.input-custom {
+  border-radius: 0%;
+  padding: 1em;
+  border: 1px solid #01363fa2;
+  color: #01363fa2;
+}
+.input-custom:focus {
+  border: 1px solid #01363fa2;
+  box-shadow: none !important;
+}
+
+.a-custom{
+  text-decoration: none;
+  color: #01363fa9;
+}
+.a-custom:hover{
+  color: #01363fea;
+}
