@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router){}
 
   ngOnInit() {
-    this.checkLogin();
+    // this.checkLogin();
     this.form = this.formBuilder.group({
       username: '',
       email: '',
@@ -50,9 +50,19 @@ export class LoginComponent implements OnInit {
       .subscribe({ next:(response) => {
           let loggedInUser = response.user;
           if(loggedInUser && loggedInUser.isAdmin == true){
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome ${loggedInUser.username}!`,
+              text: 'You are logged in successfully!',
+            })
             this.router.navigate(['/admin']);
           }
           else if(loggedInUser && loggedInUser.isAdmin == false){
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome ${loggedInUser.username}!`,
+              text: 'You are logged in successfully!',
+            })
             this.router.navigate(['/home']);
           }
 

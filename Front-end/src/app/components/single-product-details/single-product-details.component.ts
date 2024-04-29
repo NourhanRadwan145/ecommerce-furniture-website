@@ -53,8 +53,6 @@ export class SingleProductDetailsComponent implements OnInit
   ngOnInit(): void
   {
 
-    /*******  single product auth ********/
-    this.authSingleProducts()
     /******* get single product ********/
     this.productService.getProductById(this.ID).subscribe({
       next:(data)=>{
@@ -204,30 +202,6 @@ export class SingleProductDetailsComponent implements OnInit
 
   navigateToRelatedProduct(productId: string) {
     this.router.navigate(['/product', productId]);
-  }
-
-  authSingleProducts(){
-    this.http.get<any>("http://localhost:7000/api/users/user/user", { withCredentials: true })
-    .subscribe({
-      next: (response) => {
-        if(response.data.isAdmin == true){
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'You Must Login As A User Not Admin!',
-          });
-          this.router.navigate(['/login']);
-        }
-      },
-      error: (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'You Need To Login First!',
-        });
-        this.router.navigate(['/login']);
-      }
-    });
   }
 
 }
