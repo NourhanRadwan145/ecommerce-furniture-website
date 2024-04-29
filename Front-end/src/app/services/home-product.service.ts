@@ -21,9 +21,5 @@ export class HomeProductService {
 
   getFourProducts() {
     return this.myClient.get(this.URL_API);
-
-    // return this.myClient.get<{ "All Products": any[] }>(this.URL_API).pipe(
-    //   map(response => response["All Products"].slice(0, 4))
-    // );
   }
 }

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, forkJoin } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HomeProductService } from '../../../../services/home-product.service';
+import { HomeProductService } from '../../../../Services/home-product.service';
 
 @Component({
   selector: 'app-order-dialog',
@@ -15,6 +15,7 @@ import { HomeProductService } from '../../../../services/home-product.service';
 })
 export class OrderDialogComponent implements OnInit {
   products: any[] = [];  // To store multiple products
+
 
   constructor(
     private productService: HomeProductService,

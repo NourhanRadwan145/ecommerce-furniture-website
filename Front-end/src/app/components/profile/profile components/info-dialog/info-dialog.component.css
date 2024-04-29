@@ -1,7 +1,7 @@
 /* Style for the overall form container */
 body{
   /* background-image: url("https://png.pngtree.com/back_origin_pic/04/06/24/d864a4a5b43d0296da0847d9d0a97313.jpg"); */
-  background-color: beige;
+  background-color:rgb(239, 232, 232);
 }
 
 .col-4 {
@@ -30,7 +30,7 @@ form {
   padding: 10px;
   margin-left: 250px;
   margin-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 40px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   justify-content: center;
 }
@@ -50,12 +50,13 @@ label {
 
 /* Style for inputs */
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="password"] {
   width: 100%;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 1px;
   justify-content: center;
   box-sizing: border-box; /* Include padding and border in the element's width and height */
 }
@@ -77,4 +78,31 @@ button {
 button:disabled {
   background-color: #cccccc;
   cursor: default;
+}
+
+
+
+.password-input {
+  border: none;
+  padding: 10px;
+  flex-grow: 1; /* Ensures input takes all available space except button */
+  border-radius: 4px 0 0 4px; /* Adjust based on your design */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 40px; /* Adjust the width as necessary */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 4px 4px 0; /* Rounded corners on the right side */
+}
+
+.toggle-password:focus {
+  outline: none;
 }

@@ -6,5 +6,11 @@
 }
 
 body{
-  background-color:rgb(249, 234, 215);
+  background-color:rgb(239, 232, 232);
+
 }
+.dialog-content {
+  max-height: 600px;  /* Adjust based on your needs */
+  overflow-y: auto;
+}
+

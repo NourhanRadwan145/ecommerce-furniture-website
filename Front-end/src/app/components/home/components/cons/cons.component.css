@@ -41,10 +41,10 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media (min-width: 769px) and (max-width: 992px) {
   .width{
-    width:50%;
+    width:60%;
   }
   .font{
-    font-size:x-small;
+    font-size:xx-small;
   }
 
 }
@@ -57,6 +57,7 @@
   }
   .font{
     font-size: small;
+    font-variant: normal;
   }
 
 }
@@ -67,7 +68,7 @@
     width:60%;
   }
   .font{
-    font-size: medium;
+    font-size: small;
   }
 
 }

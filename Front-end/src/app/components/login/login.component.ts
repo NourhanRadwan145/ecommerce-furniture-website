@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   login() {
     let user = this.form.getRawValue();
     const emailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  
+
     if (!emailRegex.test(user.email)) {
       Swal.fire({
         icon: 'error',
@@ -44,11 +44,12 @@ export class LoginComponent implements OnInit {
         text: 'Password must be at least 8 characters long!',
       });
       return;
-    } 
-  
+    }
+
     this.http.post<any>('http://localhost:7000/api/users/login', user, { withCredentials: true })
       .subscribe({ next:(response) => {
           // console.log('User Logged In Successfully', response.user);
+          console.log(response);
           let loggedInUser = response.user;
           if(loggedInUser && loggedInUser.isAdmin == true){
             this.router.navigate(['/admin']);
@@ -63,6 +64,6 @@ export class LoginComponent implements OnInit {
         }
   });
   }
-  
+
 
 }
