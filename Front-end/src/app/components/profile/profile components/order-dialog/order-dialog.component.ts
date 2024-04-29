@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HomeProductService } from '../../../../Services/home-product.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, forkJoin } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { HomeProductService } from '../../../../services/home-product.service';
 
 @Component({
   selector: 'app-order-dialog',

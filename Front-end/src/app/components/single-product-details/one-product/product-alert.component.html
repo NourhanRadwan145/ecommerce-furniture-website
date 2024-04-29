@@ -61,15 +61,12 @@
               <div class="container">
                 <div class="row d-flex justify-content-between">
                     <div class="number-input d-flex align-items-center col-2 col-lg-2 col-md-2 col-sm-2 p-0">
-                       <!-- <button (click)="decrementQuantity()">-</button>
+                      <button (click)="decrementQuantity()">-</button>
                         <input type="number" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange()">
-                        <button (click)="incrementQuantity()">+</button> -->
-                        <button>-</button>
-                        <input type="number" [(ngModel)]="quantity">
-                        <button>+</button>
+                      <button (click)="incrementQuantity()">+</button>
                     </div>
                     <div class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex">
-                        <button class="add-to-cart-btn w-100">
+                        <button class="add-to-cart-btn w-100" (click)="addProductToCart()">
                             Add To Cart
                         </button>
                     </div>

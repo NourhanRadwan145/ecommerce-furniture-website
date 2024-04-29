@@ -7,13 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'; // Import MatDialog here
 import { HttpClientModule } from '@angular/common/http';
-import { UserServiceService } from '../../../../Services/user-service.service';
+import { UserServiceService } from '../../../../services/user-service.service';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
   imports: [
-    InfoDialogComponent,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
@@ -38,11 +37,11 @@ export class UserInfoComponent implements OnInit{
   loadUserInfo() {
     const userId ="662c061826005f17952ca8f7"; // Replace with actual logic to obtain user ID
     this.userService.getUserById(userId).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.userInfo = data;
         console.log('User Info:', this.userInfo);
       },
-      error: (error) => console.error('Error fetching pending orders', error)
+      error: (error: any) => console.error('Error fetching pending orders', error)
     });
   }
 

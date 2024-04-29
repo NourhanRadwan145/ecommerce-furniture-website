@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-import { OrderServiceService } from '../../../../Services/order-service.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
+import { OrderServiceService } from '../../../../services/order-service.service';
 
 @Component({
   selector: 'app-accepted-orders',

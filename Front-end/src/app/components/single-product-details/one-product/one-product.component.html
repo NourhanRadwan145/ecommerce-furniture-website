@@ -6,7 +6,12 @@
         </a>
     </div>
     <div class="card-body p-0">
-        <p class="m-0 mt-2 mx-3 p-0 text-secondary">{{ product.category }}</p>
+        <div class="d-flex align-items-center justify-content-between">
+            <p class="m-0 mt-2 mx-3 p-0 text-secondary">{{ product.category }}</p>
+            <a mat-button type="button" class="cart-icon" (click)="openDialog()">
+                <mat-icon>search</mat-icon>
+            </a>
+        </div>
         <h5 class="m-0 mt-1 mx-3">
             <a href="/product/{{ product._id }}" class="w-100 h-100 text-decoration-none product-title-anchor">
                 {{ product.title }}
@@ -16,8 +21,5 @@
             <b>£{{ product.price }}</b>
         </p>
 
-        <a mat-button type="button" class="cart-icon position-absolute top-0 end-0" (click)="openDialog()">
-            <mat-icon>search</mat-icon>
-        </a>
     </div>
 </div>
