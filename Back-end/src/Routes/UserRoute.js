@@ -13,6 +13,10 @@ Router.delete("/:id", UserController.DeleteUser)
 Router.post("/login", UserController.LoginUser)
 Router.post("/register", UserController.RegisterUser)
 Router.get("/user/user", UserController.GetUserByToken)
+Router.put("/cart/decrease", UserController.DecreaseProductQuantity)
+Router.put("/cart/increase", UserController.IncreaseProductQuantity)
+Router.delete("/cart/remove", UserController.RemoveProductFromCart)
+
 
 
 module.exports = Router
