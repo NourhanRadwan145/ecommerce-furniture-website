@@ -2,15 +2,14 @@
   <div class="container">
     <div class="main-body">
       <div class="row mb-3">
-        <div class="col-lg-11 col-md-10 col-sm-10">
+        <div class="col-lg-11 col-md-10 col-sm-10 mt-3">
           <h1 style="font-size:xx-large; font-weight:500;" class="d-flex">My Account</h1>
         </div>
-        <div class="col-lg-1 col-md-2 col-sm-2">
+        <div class="col-lg-1 col-md-2 col-sm-2" style="margin-right: 10px;">
           <button class="btn btn-danger d-flex justify-content-end mb-3">Logout</button>
         </div>
-
       </div>
-      <hr>
+      <!-- <hr style="height: 5px; background-color: black; border: black;"> -->
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <app-user-picture></app-user-picture>
@@ -23,16 +22,13 @@
               <div class="mb-3">
                 <app-user-info></app-user-info>
               </div>
-              <div class="row gutters-sm">
-                <!-- comp 5 -->
-                <div class="col-sm-6 mb-3">
-                  <app-accepted-orders></app-accepted-orders>
-                </div>
-                <!-- comp 6 -->
-                <div class="col-sm-6 mb-3">
-                  <app-rejected-orders></app-rejected-orders>
-                </div>
+              <div class="mb-3">
+                <app-accepted-orders></app-accepted-orders>
               </div>
+              <div class="mb-3">
+                <app-rejected-orders></app-rejected-orders>
+              </div>
+
             </div>
           </div>
         </div>

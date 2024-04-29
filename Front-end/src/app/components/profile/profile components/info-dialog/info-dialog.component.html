@@ -4,8 +4,8 @@
     <img class="img-fluid image" src="https://i.pinimg.com/736x/d7/62/4b/d7624b3cc22ef6a437b0e43fdbf796ef--french-sofa-fine-furniture.jpg">
   </div>
   <div class="col-7 col-sm-11 col-lg-7">
-    <div class="row" style="margin-top: 150px; margin-left: 50px;">
-      <form [formGroup]="personalInfoForm" (ngSubmit)="updateUser()">
+    <div class="row" style="margin-top: 80px; margin-left: 50px;">
+      <form [formGroup]="personalInfoForm" >
         <div>
           <label>User Name:</label>
           <input type="text" formControlName="fullName" value="{{userInfo.username}}">
@@ -15,14 +15,36 @@
           <input type="email" formControlName="email" value="{{userInfo.email}}">
         </div>
         <div>
-          <label>Image:</label>
-          <input type="text" formControlName="image" value="{{userInfo.image}}">
+          <label>Update Password:</label>
+          <div class="input-group">
+            <input [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+              <img src="{{ hidePassword ? hideIcon : showIcon }}" alt="Toggle Password" style="width: 20px; height: 20px;">
+            </button>
+          </div>
+        </div>
+        <div>
+          <label>Confirm Password:</label>
+          <div class="input-group">
+            <input [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword" class="password-input">
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+              <img src="{{ hidePassword ? hideIcon : showIcon }}" alt="Toggle Password" style="width: 20px; height: 20px;">
+            </button>
+          </div>
+        </div>
+        <div *ngIf="personalInfoForm.errors?.['mismatch'] && personalInfoForm.get('confirmPassword')?.touched"  style="color: red;">
+          Passwords must match!
         </div>
         <!-- <div>
-          <label>Personal Image:</label>
-          <input type="file" (change)="onFileSelected($event)" accept="assets/*">
+          <label>Image:</label>
+          <input type="text" formControlName="image" value="{{userInfo.image}}">
         </div> -->
-        <button (click)="updateUser()" style="margin-right: 10px;" class="btn btn-warning" type="submit">Update Info</button>
+
+        <div>
+          <label>Personal Image:</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+        <button (click)="updateUser()" style="margin-right: 10px;"  class="btn btn-warning" type="submit">Update Info</button>
       </form>
     </div>
   </div>

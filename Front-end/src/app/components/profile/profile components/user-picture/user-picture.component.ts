@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../../../Services/user-service.service';
 
@@ -11,22 +11,42 @@ import { UserServiceService } from '../../../../Services/user-service.service';
   styleUrl: './user-picture.component.css'
 })
 export class UserPictureComponent implements OnInit{
-  userInfo: any;;
-  constructor(private userService: UserServiceService){} // Corrected the naming of matDialog
+  userInfo: any;
+  id:any;
+  image:any;
+  constructor(private userService: UserServiceService,private http: HttpClient){} // Corrected the naming of matDialog
 
 
   ngOnInit() {
-    this.loadUserInfo();
+    this.authSingleProducts(); // Now this will call loadUserInfo() after completing.
   }
 
-  loadUserInfo() {
-    const userId ="662c061826005f17952ca8f7"; // Replace with actual logic to obtain user ID
-    this.userService.getUserById(userId).subscribe({
-      next: (data) => {
-        this.userInfo = data;
-        console.log('User Info:', this.userInfo);
+  // loadUserInfo() {
+  //   if (!this.id) {
+  //     console.error('User ID is undefined.');
+  //     return;
+  //   }
+  //   this.userService.getUserById(this.id).subscribe({
+  //     next: (data) => {
+  //       this.userInfo = data;
+  //       console.log('User Info:', this.userInfo);
+  //     },
+  //     error: (error) => console.error('Error fetching user info', error)
+  //   });
+  // }
+
+  authSingleProducts(){
+    this.http.get<any>("http://localhost:7000/api/users/user/user", { withCredentials: true })
+    .subscribe({
+      next: (response) => {
+          this.id = response.data._id;
+          this.image=response.data.image;
+          this.userInfo=response.data;
+          console.log('User Info:', this.userInfo);
       },
-      error: (error) => console.error('Error fetching pending orders', error)
+      error: (error) => {
+          console.error('Error fetching user data', error);
+      }
     });
   }
 

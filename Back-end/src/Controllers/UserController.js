@@ -4,6 +4,7 @@ const UserValidate = require("../Utils/UserValidate")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const crypto = require("crypto")
+const OrderModel = require("../Models/OrderModel");
 
 
 
@@ -22,24 +23,44 @@ let GetUserById = async (req, res) => {
 // ---------------------------------- Add New User  -------------------------------------
 let AddNewUser = async (req, res)=>{}
 // ---------------------------------- Update User By ID  --------------------------------
-let UpdateUser = async (req, res)=>{
-    const id= req.params.id;  
-    const updateData = req.body;  
+const UpdateUser = async (req, res) => {
+    const id = req.params.id;
+    const updateData = req.body;
+
+    if (updateData.password) {
+        try {
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(updateData.password, saltRounds);
+            updateData.password = hashedPassword;
+        } catch (error) {
+            console.log("Error hashing password:", error.message);
+            return res.status(500).json({ message: "Error hashing password", error: error.message });
+        }
+    }
 
     try {
-        // Find the user by ID and update
-        const updatedUser = await UserModel.findByIdAndUpdate(id, { $set: updateData }, { new: true });
-        if (!updatedUser) {
+        const user = await UserModel.findById(id);
+        if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
 
-        // Send the updated user data back
+        const originalUsername = user.username;
+        const updatedUser = await UserModel.findByIdAndUpdate(id, { $set: updateData }, { new: true });
+
+        if (updatedUser.username !== originalUsername) {
+            const updateResult = await OrderModel.updateMany(
+                { userId: id },
+                { $set: { username: updatedUser.username } }
+            );
+            console.log('OrderModel Update Result:', updateResult);
+        }
+
         return res.json(updatedUser);
     } catch (error) {
+        console.log("Error updating user:", error.message);
         return res.status(500).json({ message: "Error updating user", error: error.message });
     }
 };
-
 
 // ---------------------------------- Delete User By ID  ---------------------------------
 let DeleteUser = async (req, res)=>{}
@@ -104,7 +125,33 @@ let RegisterUser = async (req, res)=>{
     }
 }
 
+const GetUserByToken = async (req, res) => {
+  try {
+      const cookie = req.cookies["jwt"];
+      if (!cookie) {
+          // console.log("JWT cookie not found")
+          return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
+      }
+      const claims = jwt.verify(cookie, "secret"); 
+      if (!claims) {
+          return res.status(401).json({ message: "Unauthorized: Invalid token" });
+      }
+
+      const user = await UserModel.findOne({ _id: claims._id });
+      if (!user) {
+          return res.status(401).json({ message: "Unauthorized: User not found" });
+      }
+
+      const { password, ...data } = user.toJSON();
+      return res.json({ data: data });
+  } catch (error) {
+      console.error("Error in GetUserByToken:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+  }
+
+};
+
 
 // ---------------------------------- Export All Functions  ------------------------------
-module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser}
+module.exports = {GetAllUsers, GetUserById, AddNewUser, UpdateUser, DeleteUser, LoginUser, RegisterUser, GetUserByToken}
 // ---------------------------------- End Of Controller ----------------------------------

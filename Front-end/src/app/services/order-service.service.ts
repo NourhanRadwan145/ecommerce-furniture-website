@@ -39,4 +39,23 @@ export class OrderServiceService {
     const url = `${this.URL_API}/${id}`;
     return this.myClient.delete<any>(url);
   }
+
+  updateOrder(id: string, OrderData: any){
+    const url = `${this.URL_API}/${id}`;
+    console.log(OrderData);
+    return this.myClient.put(url, OrderData);
+  }
+
+  // updateOrdersByUserId(userId: string, updateData: any) {
+  //   const url = `${this.URL_API}/user/${userId}`;
+  //   return this.myClient.put(url, updateData);
+  // }
+
+  updateOrdersByUserId(userId: string, orderId: string, orderData: any) {
+    const url = `${this.URL_API}/users/${userId}/orders/${orderId}`;
+    console.log(orderData);
+    return this.myClient.put(url, orderData);
+  }
 }
+
+

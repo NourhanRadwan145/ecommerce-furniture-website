@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class OrderDialogComponent implements OnInit {
   products: any[] = [];  // To store multiple products
+  
 
   constructor(
     private productService: HomeProductService,
