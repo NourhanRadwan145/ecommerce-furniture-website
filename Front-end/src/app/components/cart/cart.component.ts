@@ -57,22 +57,6 @@ export class CartComponent implements OnInit {
   }
 
 
-  deleteProduct(productid: string) {
-    this.userService.removeProductFromCart(this.userid, productid).subscribe({
-      next: (data: any) => {
-        const index = this.cart.findIndex(item => item._id === productid);
-        if (index !== -1) {
-          this.deletedProduct = this.cart[index];
-          this.cart.splice(index, 1);
-          this.updateTotal();
-        }
-      },
-      error: (error: any) => {
-        console.error("Failed to delete product", error);
-      }
-    });
-  }
-
 
   increaseProductQuantity(productid: string) {
     this.userService.increaseProductQuantity(this.userid, productid).subscribe({
@@ -101,6 +85,7 @@ export class CartComponent implements OnInit {
             return;
           }
           this.updateTotal();
+
         }
       },
       error: (error: any) => {
@@ -109,7 +94,25 @@ export class CartComponent implements OnInit {
     });
   }
 
+  deleteProduct(productid: string) {
+    this.userService.removeProductFromCart(this.userid, productid).subscribe({
+      next: (data: any) => {
+        const index = this.cart.findIndex(item => item._id === productid);
+        if (index !== -1) {
+          this.deletedProduct = this.cart[index];
+          this.cart.splice(index, 1);
+          this.updateTotal();
+        }
+        this.ngOnInit();
+      },
+      error: (error: any) => {
+        console.error("Failed to delete product", error);
+      }
+    });
+  }
+
   ngOnInit() {
+    this.cart = [];
     this.selectedCountry = localStorage.getItem('selectedCountry') || 'Egypt';
     this.userService.getUserById(this.userid).subscribe({
       next: (data: any) => {

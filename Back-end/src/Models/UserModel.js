@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     "gender": String,
     "image": String,
     "orders": [{ type: mongoose.Schema.Types.ObjectId, ref: "orders" },],
-    "carts": [],
+    "carts": [CartItemSchema],
     "isAdmin": Boolean
 })
 

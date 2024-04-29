@@ -17,13 +17,13 @@ export class CartService {
   getUserById(id: any) {
     return this.http.get(`${this.URL_DB}/${id}`);
   }
-  removeProductFromCart(userid: string, productid: string) {
-    return this.http.delete(`${this.URL_DB}/cart/remove`, { body: { userid, productid } });
-  }
   increaseProductQuantity(userid: any, productid: any) {
     return this.http.put(`${this.URL_DB}/cart/increase`, { userid, productid });
   }
   decreaseProductQuantity(userid: any, productid: any) {
     return this.http.put(`${this.URL_DB}/cart/decrease`, { userid, productid });
+  }
+  removeProductFromCart(userid: string, productid: string) {
+    return this.http.delete(`${this.URL_DB}/cart/remove`, { body: { userid, productid } });
   }
 }

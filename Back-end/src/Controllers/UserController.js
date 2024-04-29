@@ -95,29 +95,28 @@ let RemoveProductFromCart = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
-
-
-
-
-
 // ---------------------------------- Update Product Quantity ------------------------
 let IncreaseProductQuantity = async (req, res) => {
     const { userid, productid } = req.body;
 
     try {
-        const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userid, "carts.product": productid },
-            { $inc: { "carts.$.quantity": 1 } },
-            { new: true }
-        );
 
-        if (!updatedUser) {
+        const user = await UserModel.findById(userid);
+        if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
+        const cartItem = user.carts.find(item => item.product.toString() === productid);
+        if (!cartItem) {
+            return res.status(404).json({ message: "Product not found in user's cart" });
+        }
+
+        cartItem.quantity += 1;
+        await user.save();
+
         const product = await ProductModel.findById(productid);
         if (!product || product.quantity == 0) {
-            return res.status(404).json({ message: "Product not found or out of stoke" });
+            return res.status(404).json({ message: "Product not found or out of stock" });
         }
         product.quantity -= 1;
         await product.save();
@@ -131,19 +130,25 @@ let IncreaseProductQuantity = async (req, res) => {
 };
 
 
+
 let DecreaseProductQuantity = async (req, res) => {
     const { userid, productid } = req.body;
 
     try {
-        const updatedUser = await UserModel.findOneAndUpdate(
-            { _id: userid, "carts.product": productid },
-            { $inc: { "carts.$.quantity": -1 } },
-            { new: true }
-        );
-
-        if (!updatedUser) {
+        const user = await UserModel.findById(userid);
+        if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
+
+        const cartItem = user.carts.find(item => item.product.toString() === productid);
+        if (!cartItem) {
+            return res.status(404).json({ message: "Product not found in user's cart" });
+        }
+
+        if (cartItem.quantity !== 1) {
+            cartItem.quantity -= 1;
+        }
+        await user.save();
 
         const product = await ProductModel.findById(productid);
         if (!product) {
@@ -158,7 +163,8 @@ let DecreaseProductQuantity = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
-}
+};
+
 
 // ---------------------------------- End Of Cart Operations ------------------------
 

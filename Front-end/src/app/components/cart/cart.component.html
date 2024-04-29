@@ -1,100 +1,97 @@
-<div class="m-4">
-  <div class="row container">
-    <div class="col-md-8 col-12 table-container">
-      <table class="table text-center table-responsive">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of cart; let i = index">
-            <td data-label=" " class="align-middle "><button (click)="deleteProduct(product._id)" class="btn-delete">
-                <i class="fas fa-times"></i>
+<div class="row col-12">
+  <div class="col-lg-8 col-md-12 col-sm-12 table-container">
+    <table class="table text-center table-responsive">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of cart; let i = index">
+          <td data-label=" " class="align-middle "><button (click)="deleteProduct(product._id)" class="btn-delete">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+          <td class="align-middle "><img [src]="product.image" alt="Product Image" style="height: 70px; width: 100px;">
+          </td>
+          <td data-label="Product" class="align-middle ">{{ product.details }}</td>
+          <td data-label="Price" class="align-middle ">{{ product.price }}$</td>
+          <td data-label="Quantity" class="align-middle ">
+            <div class="quantity-group">
+              <button (click)="decreaseProductQuantity(product._id)" class="btn">
+                <div class="col">-</div>
               </button>
-            </td>
-            <td class="align-middle "><img [src]="product.image" alt="Product Image"
-                style="height: 70px; width: 100px;">
-            </td>
-            <td data-label="Product" class="align-middle ">{{ product.details }}</td>
-            <td data-label="Price" class="align-middle ">{{ product.price }}$</td>
-            <td data-label="Quantity" class="align-middle ">
-              <div class="quantity-group">
-                <button (click)="decreaseProductQuantity(product._id)" class="btn">
-                  <div class="col">-</div>
-                </button>
-                <div class="col">{{ product.quantity }}</div>
-                <button (click)="increaseProductQuantity(product._id)" class="btn">
-                  <div class="col">+</div>
-                </button>
-              </div>
-            </td>
-            <td data-label="Subtotal" class="align-middle">{{ product.price * product.quantity }}$</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-4 col-12">
-      <div class="card sticky-top">
-        <div class="card-header">
-          <b>Cart totals</b>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <diV class="col-6">Subtotal : {{this.total}}</diV>
-            <diV class="col-6"></diV>
-          </div>
-          <div class="row">
-            <diV class="col-6">Shipping</diV>
-            <div class="col-6">
-              <diV class="col-12">Flat rate: 8.00$</diV>
-              <diV class="col-12">Shipping to: {{this.selectedCountry}}</diV>
-              <div class="col-12">
-                <a href="javascript:void(0);" (click)="toggleAddressForm()" class="a-custom">Change address</a>
-              </div>
-              <div class="address-form" *ngIf="showAddressForm">
-                <div class="row">
-                  <div class="col-12">
-                    <select id="country" class="form-select input-custom">
-                      <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <button class="btn btn-custom" (click)="onUpdateCountry()">Update</button>
-                  </div>
-                </div>
-              </div>
+              <div class="col">{{ product.quantity }}</div>
+              <button (click)="increaseProductQuantity(product._id)" class="btn">
+                <div class="col">+</div>
+              </button>
             </div>
-          </div>
-          <div class="row">
-            <diV class="col-6">Total</diV>
-            <diV class="col-6">{{this.total+8}}$</diV>
-          </div>
-          <div class="row">
+          </td>
+          <td data-label="Subtotal" class="align-middle">{{ product.price * product.quantity }}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-4 col-md-12 col-12 col-12">
+    <div class="card sticky-top">
+      <div class="card-header">
+        <b>Cart totals</b>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <diV class="col-6">Subtotal : {{this.total}}</diV>
+          <diV class="col-6"></diV>
+        </div>
+        <div class="row">
+          <diV class="col-6">Shipping</diV>
+          <div class="col-6">
+            <diV class="col-12">Flat rate: 8.00$</diV>
+            <diV class="col-12">Shipping to: {{this.selectedCountry}}</diV>
             <div class="col-12">
-              <a href="javascript:void(0);" (click)="toggleCouponForm()" class="a-custom">Have a coupon?</a>
+              <a href="javascript:void(0);" (click)="toggleAddressForm()" class="a-custom">Change address</a>
             </div>
-            <div class="address-form" *ngIf="showCouponForm">
+            <div class="address-form" *ngIf="showAddressForm">
               <div class="row">
-                <div class="col-9">
-                  <input type="text" class="form-control input-custom" placeholder="Coupon code">
+                <div class="col-12">
+                  <select id="country" class="form-select input-custom">
+                    <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                  </select>
                 </div>
-                <div class="col-3">
-                  <button class="btn btn-custom">Apply</button>
+                <div class="col-12">
+                  <button class="btn btn-custom" (click)="onUpdateCountry()">Update</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <a href="/checkout" class="btn btn-custom col-10"><b>Proceed to checkout</b></a>
-          </div>
-
         </div>
+        <div class="row">
+          <diV class="col-6">Total</diV>
+          <diV class="col-6">{{this.total+8}}$</diV>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a href="javascript:void(0);" (click)="toggleCouponForm()" class="a-custom">Have a coupon?</a>
+          </div>
+          <div class="address-form" *ngIf="showCouponForm">
+            <div class="row">
+              <div class="col-9">
+                <input type="text" class="form-control input-custom" placeholder="Coupon code">
+              </div>
+              <div class="col-3">
+                <button class="btn btn-custom">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <a href="/checkout" class="btn btn-custom col-10"><b>Proceed to checkout</b></a>
+        </div>
+
       </div>
     </div>
   </div>
