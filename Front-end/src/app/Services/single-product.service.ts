@@ -10,6 +10,7 @@ export class SingleProductService {
   constructor(private http:HttpClient) { }
 
   DB_Config = "http://localhost:7000/api/products/";
+  DB_Config_order = "http://localhost:7000/api/orders";
   
   // private data = new BehaviorSubject<number>(10);
   // data$ = this.data.asObservable();
@@ -45,6 +46,10 @@ export class SingleProductService {
   {
     // console.log("Request:", { user_id, product_id, quantity });
     return this.http.post(`${this.DB_Config}product/addtocart`, { user_id, product, quantity })
+  }
+
+  getOrderById(id:any){
+    return this.http.get(this.DB_Config_order+"/"+id);
   }
 
 }

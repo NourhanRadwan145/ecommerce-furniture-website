@@ -14,15 +14,15 @@
               <a class="nav-link" [routerLink]="['/products']">All Products</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#">Chair</a>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Chair' }">Chair</a>
           </li>
-
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Table</a>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Table' }">Table</a>
           </li>
-
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Sofa</a>
+            <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Sofa' }">Sofa</a>
           </li>
       </ul>
 
@@ -45,15 +45,15 @@
                   <a class="nav-link" [routerLink]="['/products']">All Products</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#">Chair</a>
+                <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Chair' }">Chair</a>
               </li>
-    
+              
               <li class="nav-item">
-                <a class="nav-link" href="#">Table</a>
+                <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Table' }">Table</a>
               </li>
-      
+              
               <li class="nav-item">
-                <a class="nav-link" href="#">Sofa</a>
+                <a class="nav-link" [routerLink]="['/products']" [queryParams]="{ category: 'Sofa' }">Sofa</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" [routerLink]="['/about']">About Us</a>
@@ -68,9 +68,9 @@
   </mat-menu>
 
   <div class="d-flex align-items-center">
-      <a mat-raised-button class="text-secondary text-decoration-none me-3" [routerLink]="['/cart']">
-        <b>$300.00</b>
-      </a>
+    <a mat-raised-button class="text-secondary text-decoration-none me-3" [routerLink]="['/checkout']">
+      <b>${{ oredersTotalPrice }}</b>
+    </a>
       <a mat-raised-button class="text-secondary me-3" [routerLink]="['/cart']"
           [matBadge]="data" matBadgePosition="after" matBadgeColor="warn">
           <mat-icon>shopping_cart</mat-icon>
