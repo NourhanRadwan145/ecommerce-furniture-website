@@ -28,8 +28,6 @@ export class CheckoutComponent implements OnInit {
   constructor(private userService: UserService, private productService: ProductsService, private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    const userId = '662b8775a566fe5003f222ee'; // User ID to fetch
-
     this.userForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -39,8 +37,11 @@ export class CheckoutComponent implements OnInit {
       address: ['', Validators.required],
       paymentMethod: ['cash', Validators.required]
     });
+// Fetch the logged-in user's details
+this.productService.getUserByToken().subscribe((response: any) => {
+  const userId = response.data._id;
 
-    this.userService.getUserById(userId).subscribe(user => {
+  this.userService.getUserById(userId).subscribe(user => {
     this.user = user;
     this.userForm.patchValue({
       fullName: user.username,
@@ -48,12 +49,13 @@ export class CheckoutComponent implements OnInit {
     });
   });
 
-    this.userService.getCartByUserId(userId).subscribe((cart: any) => {
-      console.log(cart); 
-      this.cart = cart;
-      this.loadProducts(); 
-    });
-  }
+  this.userService.getCartByUserId(userId).subscribe((cart: any) => {
+    console.log(cart); 
+    this.cart = cart;
+    this.loadProducts(); 
+  });
+}); 
+}
 
   loadProducts() {
     let totalPrice = 0; 
@@ -114,20 +116,20 @@ navigateToPayment() {
   }
 }
 
-
-
 placeOrder() {
-    this.formSubmitted = true;
-    if (this.userForm.valid) {
-        const userId = '662b8775a566fe5003f222ee'; 
-        this.userService.addProductToOrder(userId).subscribe(
-            (response) => {
-                this.router.navigate(['/confirm']);
-            },
-            (error) => {
-                console.error('Failed to place order:', error);
-            }
-        );
-    }
+  this.formSubmitted = true;
+  if (this.userForm.valid) {
+      this.productService.getUserByToken().subscribe((response: any) => {
+          const userId = response.data._id;
+          this.userService.addProductToOrder(userId).subscribe(
+              (response) => {
+                  this.router.navigate(['/confirm']);
+              },
+              (error) => {
+                  console.error('Failed to place order:', error);
+              }
+          );
+      });
+  }
 }
 }

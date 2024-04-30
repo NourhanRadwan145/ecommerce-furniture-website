@@ -11,7 +11,7 @@ export class UserService {
   private apiUrl = 'http://localhost:7000/api/users/';
 
   constructor(private http: HttpClient) { }
-
+  
   getUserById(userId: string): Observable<User> {
     return this.http.get<User>(this.apiUrl + userId);
   }
@@ -22,5 +22,14 @@ export class UserService {
 
   addProductToOrder(userId: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + userId + '/order', {});
+  }
+
+  addProductToCart(userId: string, productId: string, quantity: number): Observable<any> {
+    const body = {
+      user_id: userId,
+      product: productId,
+      quantity: quantity
+    };
+    return this.http.post<any>(`${this.apiUrl}${userId}/cart`, body);
   }
 }

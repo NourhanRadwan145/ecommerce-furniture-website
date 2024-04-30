@@ -3,13 +3,14 @@ import { ProductsService } from './product.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../checkout/user.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [CommonModule,HttpClientModule,FormsModule],
-  providers: [ProductsService], 
+  providers: [UserService,ProductsService], 
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
   encapsulation: ViewEncapsulation.None
@@ -21,11 +22,12 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string = 'All Categories';
   minPrice: number | undefined;
   maxPrice: number | undefined;
-  userId: string = '62b8775a566fe5003f222ee'; 
 
   constructor(
+    private userService: UserService,
     private productService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,28 +40,14 @@ export class ProductsComponent implements OnInit {
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
-        this.products = response['All Products'];
+        this.products = response['All Products'].filter((product: any) => product.quantity > 0);
         this.applyCategoryFilter();
       },
       (error) => {
         console.error('Error loading products:', error);
       }
     );
-  }
-
-  addToCart(productId: string): void {
-    const userId = '62b8775a566fe5003f222ee'; // Replace with actual user Id
-    this.productService.addProductToCart(userId, productId).subscribe(
-      () => {
-        // Handle success
-        console.log('Product added to cart successfully');
-      },
-      (error) => {
-        // Handle error
-        console.error('Error adding product to cart:', error);
-      }
-    );
-  }
+  }  
 
   //Apply The Filter by Category 
   applyCategoryFilter(): void {
@@ -82,7 +70,7 @@ export class ProductsComponent implements OnInit {
       );
     });
   }
-
+  
   // Reset price filter
   resetPriceFilter(): void {
     this.minPrice = undefined;
@@ -96,8 +84,45 @@ export class ProductsComponent implements OnInit {
     this.filteredProducts = this.products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }  
+  }
 
+  navigateToProductDetails(productId: string): void {
+    this.router.navigate(['product', productId]);
+  }
+
+  addToCart(product: any): void {
+    this.productService.getUserByToken().subscribe(
+      (response: any) => {
+        const userId = response.data._id;
+        const quantity = 1;
+
+        console.log('userId:', userId);
+        console.log('product._id:', product._id);
+        console.log('quantity:', quantity);
+
+        this.userService.addProductToCart(userId, product._id, quantity).subscribe(
+          (response: any) => {
+            console.log('Item added to cart successfully:', response);
+          },
+          (error: any) => {
+            if (error.error && error.error.message) {
+              console.error('Error adding item to cart:', error.error.message);
+            } else {
+              console.error('Error adding item to cart:', error);
+            }
+          }
+        );
+      },
+      (error: any) => {
+        if (error.error && error.error.message) {
+          console.error('Error getting user details:', error.error.message);
+        } else {
+          console.error('Error getting user details:', error);
+        }
+      }
+    );
+  }  
+  
   ngAfterViewInit(): void {
 
     // Set default view mode to grid

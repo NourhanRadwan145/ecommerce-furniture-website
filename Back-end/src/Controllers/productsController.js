@@ -4,36 +4,35 @@ const userModel = require("../Models/UserModel");
 const jwt = require("jsonwebtoken");
 
 /**
- * Get all Products
+ * Get all Products with optional category filter
  */
 const getAllProducts = async (req, res) => {
-    try {
-        let query = {};
+  try {
+      let query = {};
 
-        // Filtering logic by (Price and Category)
-        if (req.query.minPrice) {
-            query.price = { $gte: parseInt(req.query.minPrice) };
-        }
-        if (req.query.maxPrice) {
-            query.price = { ...query.price, $lte: parseInt(req.query.maxPrice) };
-        }
-        if (req.query.category) {
-            query.category = req.query.category;
-        }
+      // Filtering logic by (Price and Category)
+      if (req.query.minPrice) {
+          query.price = { $gte: parseInt(req.query.minPrice) };
+      }
+      if (req.query.maxPrice) {
+          query.price = { ...query.price, $lte: parseInt(req.query.maxPrice) };
+      }
+      if (req.query.category) {
+          query.category = req.query.category;
+      }
 
-        // Search logic
-        if (req.query.searchTerm) {
-            query.title = { $regex: new RegExp(req.query.searchTerm, 'i') };
-        }
+      // Search logic
+      if (req.query.searchTerm) {
+          query.title = { $regex: new RegExp(req.query.searchTerm, 'i') };
+      }
 
-        const products = await productModel.find(query);
-        res.json(products);
-    } catch (err) {
-        console.error('Error loading products:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+      const products = await productModel.find(query);
+      res.json({ "All Products": products });
+  } catch (err) {
+      console.error('Error loading products:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
-
 /**
  * Get Product by name
  */

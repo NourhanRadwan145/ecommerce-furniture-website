@@ -104,27 +104,47 @@ let RegisterUser = async (req, res)=>{
     }
 }
 // ---------------------------------- Add Product To Cart ------------------------
+let AddProductToCart = async (req, res) => {
+    const { user_id, product, quantity } = req.body;
 
-const AddProductToCart = async (req, res) => {
-    const { userId, productId } = req.body;
-  
     try {
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { _id: userId },
-        { $push: { carts: { product: productId } } },
-        { new: true }
-      );
-  
-      if (!updatedUser) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      res.status(200).json({ message: "Product added to cart successfully" });
+        const user = await UserModel.findById(user_id);
+        const productt = await ProductModel.findById(product);
+
+        if (!user || !productt) {
+            return res.status(404).json({ message: "User or product not found" });
+        }
+
+        const existingItemIndex = user.carts.findIndex(item => item.product.toString() === product.toString());
+
+        if (existingItemIndex !== -1) {
+            const newQuantity = user.carts[existingItemIndex].quantity + quantity;
+            if (newQuantity > productt.quantity) {
+                return res.status(400).json({ message: "Quantity exceeds stock" });
+            } else {
+                user.carts[existingItemIndex].quantity = newQuantity;
+                productt.quantity -= quantity;
+                await productt.save();
+            }
+        } else {
+            if (quantity > productt.quantity) {
+                return res.status(400).json({ message: "Quantity exceeds stock" });
+            } else {
+                user.carts.push({ "product": product, "quantity": quantity });
+                productt.quantity -= quantity;
+                await productt.save();
+            }
+        }
+
+        await user.save();
+        const { password, ...userData } = user.toObject();
+        return res.status(201).json({ message: "Item added to cart successfully", user: userData });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server error" });
+        console.error('Error adding item to cart:', error);
+        return res.status(500).json({ message: "Internal server error" });
     }
-  };
-  
+};
+
 let AddProductToOrder = async (req, res) => {
     const userId = req.params.id;
 
