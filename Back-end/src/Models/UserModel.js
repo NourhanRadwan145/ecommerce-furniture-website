@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
         type: String, 
         enum: ['male', 'female']
     },
-    "image": String, 
+    "image": {type: String, default: "https://res.cloudinary.com/dh7osyxvl/image/upload/v1714489565/Users/pngwing.com_10_lnfy4w.png"}, 
     "orders": [ { type: mongoose.Schema.Types.ObjectId, ref: "orders" }, ],
     "carts": [cartSchema],
     "isAdmin": { type: Boolean, default: false } 

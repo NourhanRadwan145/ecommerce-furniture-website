@@ -14,7 +14,9 @@
         <h6 class="mb-0" style="font-size: medium;">User Name</h6>
       </div>
       <div class="col-sm-9 text-secondary">
-        {{userInfo.username}}
+        @if(userInfo){
+          {{userInfo.username}}
+        }
       </div>
     </div>
     <hr>
@@ -23,7 +25,9 @@
         <h6 class="mb-0"style="font-size: medium;">Email</h6>
       </div>
       <div class="col-sm-9 text-secondary">
-        {{userInfo.email}}
+        @if(userInfo){
+          {{userInfo.email}}
+        }
       </div>
     </div>
     <hr>

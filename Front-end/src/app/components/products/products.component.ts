@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
-        this.products = response['All Products'];
+        this.products = response;
         this.selectedCategory = 'All Categories';
         this.applyCategoryFilter(); 
       },

@@ -4,10 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { OrderServiceService } from '../../../../Services/order-service.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { CommonModule } from '@angular/common';
 import { UserServiceService } from '../../../../services/user-service.service';
+import { OrderServiceService } from '../../../../services/order-service.service';
 
 @Component({
   selector: 'app-rejected-orders',

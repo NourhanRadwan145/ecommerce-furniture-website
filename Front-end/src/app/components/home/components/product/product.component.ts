@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HomeProductService } from '../../../../Services/home-product.service';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
@@ -12,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { SingleProductService } from '../../../../Services/single-product.service';
+import { HomeProductService } from '../../../../services/home-product.service';
 
 @Component({
   selector: 'app-product',

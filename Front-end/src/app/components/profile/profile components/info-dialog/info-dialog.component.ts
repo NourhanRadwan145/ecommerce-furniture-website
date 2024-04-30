@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import { OrderServiceService } from '../../../../Services/order-service.service';
 import { UserServiceService } from '../../../../services/user-service.service';
+import { OrderServiceService } from '../../../../services/order-service.service';
 
 @Component({
   selector: 'app-info-dialog',
