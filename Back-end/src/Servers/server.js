@@ -10,7 +10,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 //#endregion
 //app.use(cors());
-mongoose.connect("mongodb://127.0.0.1:27017/E-Commerce");
+mongoose.connect("mongodb+srv://mohamedalgharabawy1:E_Commerce@cluster0.6rct3ri.mongodb.net/E-Commerce?retryWrites=true&w=majority&appName=Cluster0");
+// mongoose.connect("mongodb://127.0.0.1:27017/E-Commerce");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({
@@ -21,7 +22,7 @@ app.use(cookieParser())
 
 
 //#region Routes
-app.use(cors({ origin: 'http://localhost:4200' }));
+// app.use(cors({ origin: 'http://localhost:4200' }));
 app.use("/api/users", UserRoutes)
 app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
@@ -34,5 +35,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
+    
     console.log("Runs at: http://localhost:" + PORT);
 });

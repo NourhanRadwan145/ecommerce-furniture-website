@@ -121,11 +121,13 @@ const getUserByToken = async (req, res) => {
       }
       const claims = jwt.verify(cookie, "secret"); 
       if (!claims) {
+          console.log("Invalid token");
           return res.status(401).json({ message: "Unauthorized: Invalid token" });
       }
 
       let user = await userModel.findOne({ _id: claims._id });
       if (!user) {
+        console.log("User not found");
           return res.status(401).json({ message: "Unauthorized: User not found" });
       }
 
@@ -144,6 +146,7 @@ const getUserByToken = async (req, res) => {
 
 let addToCart = async (req, res) => {
   const { user_id, product, quantity } = req.body;
+  // console.log(quantity);
 
   try {
     const user = await userModel.findById(user_id);
@@ -159,19 +162,18 @@ let addToCart = async (req, res) => {
     if (existingItem) 
     {
       const newQuantity = existingItem.quantity + quantity;
-      if (newQuantity > productt.quantity) {
-        return res.status(400).json({ message: "Quantity exceeds stock" });
-      } else {
+      // console.log(quantity);
+      // console.log(existingItem.quantity);
+      // console.log(newQuantity);
+      // console.log(productt.quantity);
         existingItem.quantity = newQuantity;
         productt.quantity -= quantity;
-      }
+      // }
       await productt.save();
     } else {
-      if (quantity > productt.quantity) {
-        return res.status(400).json({ message: "Quantity exceeds stock" });
-      } else {
         user.carts.push({ "product": product, "quantity": quantity });
-      }
+        productt.quantity -= quantity;
+      // }
       await productt.save();
     }
     await user.save();

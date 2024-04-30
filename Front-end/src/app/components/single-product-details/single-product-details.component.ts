@@ -48,15 +48,11 @@ export class SingleProductDetailsComponent implements OnInit
   email: any;
   relatedProducts: any[] = [];
   allProducts: any[] = [];
-
   currentProductIndex: number = 0;
   isFirstProduct: boolean = false;
   isLastProduct: boolean = false;
-
   user_id: any;
-
   product_number: number = 0;
-  
   reviewForm: FormGroup;
   submitted: boolean = false;
   ratingSelected: boolean = false;
@@ -97,14 +93,18 @@ export class SingleProductDetailsComponent implements OnInit
     /********** get related products **********/
     this.productService.getAllProducts().subscribe({
       next: (data: any) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         this.allProducts = data;
         if (this.product && this.product.category) {
-          this.relatedProducts = data.filter((product: any) => product.category === this.product.category && product._id !== this.product._id);
+          let relatedProducts = data.filter((product: any) => product.category === this.product.category && product._id !== this.product._id);
+          for (let i = 0; i < 8; i++) {
+            this.relatedProducts.push(relatedProducts[i]);
+          }
+          console.log(this.relatedProducts);
         }
         console.log("Filtered related products:", this.relatedProducts);
         if (this.relatedProducts.length == 0) {
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < 8; i++) {
             this.relatedProducts.push(data[i]);
           }
         }
@@ -211,6 +211,8 @@ export class SingleProductDetailsComponent implements OnInit
     rating: 0
   };
 
+  /***************************** Validate add review form **************************/
+
   get f() 
   {
     return this.reviewForm.controls;
@@ -234,7 +236,7 @@ export class SingleProductDetailsComponent implements OnInit
       // console.log('You already reviewed this product');
       this.productService.addReview(this.ID, newReview).subscribe({
         next: (data) => {
-          console.log(data);
+          // console.log(data);
           if (!this.product.reviews) {
             this.product.reviews = [];
           }
@@ -282,10 +284,7 @@ export class SingleProductDetailsComponent implements OnInit
   navigateToRelatedProduct(productId: string) {
     this.router.navigate(['/product', productId]);
   }
-
-  /***************************** Validate add review form **************************/
   
-
 
   /****************** paginate to next and prev product ****************/
 
@@ -356,7 +355,7 @@ export class SingleProductDetailsComponent implements OnInit
 
   addProductToCart() 
   {
-    if(this.product.quantity > this.quantity)
+    if(this.product.quantity >= this.quantity)
     {
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
@@ -368,7 +367,7 @@ export class SingleProductDetailsComponent implements OnInit
             }).then(() => {
               window.location.reload();
             });
-            console.log(this.product_number);
+            // console.log(this.product_number);
           },
           error: (err) => {
             console.log('Cannot add product to cart:', err);

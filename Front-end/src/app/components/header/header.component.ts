@@ -24,19 +24,34 @@ import { SingleProductService } from '../../Services/single-product.service';
 export class HeaderComponent implements OnInit{
 matMenu: any;
   data: number = 0;
+  oredersTotalPrice: number = 0;
+  user_id: any;
 
   constructor(private productService: SingleProductService) { }
 
   ngOnInit() {
-    this.productService.getUserToken().subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.data = data.data.carts.length;
-      },
-      error: (err) => {
-        console.log('cannot get user token !!', err);
-      }
-    });
+        this.productService.getUserToken().subscribe({
+          next: (data: any) => {
+            console.log(data);
+            console.log(data.data.orders);
+            this.data = data.data.carts.length;
+            data.data.orders.forEach((element: { totalPrice: number; }) => {
+              console.log(element);
+              this.productService.getOrderById(element).subscribe({
+                next: (data: any) => {
+                  console.log(data.totalPrice);
+                  this.oredersTotalPrice += data.totalPrice;
+                },
+                error: (err) => {
+                  console.log('cannot get user token !!', err);
+                }
+              });
+            });
+          },
+          error: (err) => {
+            console.log('cannot get user token !!', err);
+          }
+        });
   }
 
 }
