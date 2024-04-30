@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router){}
 
   ngOnInit() {
+    // this.checkLogin();
     this.form = this.formBuilder.group({
       username: '',
       email: '',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
+// ----------------------------- Login function --------------------------------  
   login() {
     let user = this.form.getRawValue();
     const emailRegex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -44,18 +45,25 @@ export class LoginComponent implements OnInit {
         text: 'Password must be at least 8 characters long!',
       });
       return;
-    }
-
+    } 
     this.http.post<any>('http://localhost:7000/api/users/login', user, { withCredentials: true })
       .subscribe({ next:(response) => {
-          // console.log('User Logged In Successfully', response.user);
-          console.log(response);
           let loggedInUser = response.user;
           if(loggedInUser && loggedInUser.isAdmin == true){
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome ${loggedInUser.username}!`,
+              text: 'You are logged in successfully!',
+            })
             this.router.navigate(['/admin']);
           }
           else if(loggedInUser && loggedInUser.isAdmin == false){
-            this.router.navigate(['/products']);
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome ${loggedInUser.username}!`,
+              text: 'You are logged in successfully!',
+            })
+            this.router.navigate(['/home']);
           }
 
         },
@@ -64,6 +72,22 @@ export class LoginComponent implements OnInit {
         }
   });
   }
-
-
+// ----------------------------- Check if user is already logged in --------------------------------
+  checkLogin(){
+    this.http.get<any>('http://localhost:7000/api/users/user/user', { withCredentials: true }).subscribe({
+      next: (response) => {
+        if(response.data){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You Are Already Logged In!',  
+          })
+          this.router.navigate(['/home']);
+        }
+        else{
+          this.router.navigate(['/login']);
+        }
+      }
+    })
+  }
 }

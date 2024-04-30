@@ -339,33 +339,7 @@ let GetOrdersByUserId = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
-
-    const GetUserByToken = async (req, res) => {
-        try {
-            const cookie = req.cookies["jwt"];
-            if (!cookie) {
-                // console.log("JWT cookie not found")
-                return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
-            }
-            const claims = jwt.verify(cookie, "secret"); 
-            if (!claims) {
-                return res.status(401).json({ message: "Unauthorized: Invalid token" });
-            }
-      
-            const user = await UserModel.findOne({ _id: claims._id });
-            if (!user) {
-                return res.status(401).json({ message: "Unauthorized: User not found" });
-            }
-      
-            const { password, ...data } = user.toJSON();
-            return res.json({ data: data });
-        } catch (error) {
-            console.error("Error in GetUserByToken:", error);
-            return res.status(500).json({ message: "Internal Server Error" });
-        }
-      
-      };
-};
+}
 
 const GetUserByToken = async (req, res) => {
     try {
@@ -393,6 +367,19 @@ const GetUserByToken = async (req, res) => {
   
   };
 
+  const userLogout = async (req, res) => {
+    try {
+        const cookie = req.cookies["jwt"];
+        if (cookie) {
+            res.clearCookie("jwt").send("Logout successful");
+        } else {
+            res.send("No JWT cookie found");
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 
 // ---------------------------------- Export All Functions  ------------------------------
 module.exports = {
@@ -410,6 +397,7 @@ module.exports = {
     GetCartByUserId, 
     GetOrdersByUserId,
     AddProductToOrder,
-    GetUserByToken
+    GetUserByToken,
+    userLogout
 }
 // ---------------------------------- End Of Controller ----------------------------------

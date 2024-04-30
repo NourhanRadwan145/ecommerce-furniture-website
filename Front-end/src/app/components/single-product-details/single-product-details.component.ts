@@ -4,7 +4,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SingleProductService } from '../../Services/single-product.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { OneProductComponent } from './one-product/one-product.component';
@@ -72,7 +72,6 @@ export class SingleProductDetailsComponent implements OnInit
   {
 
     /******* get single product ********/
-
     this.productService.getProductById(this.ID).subscribe({
       next:(data)=>{
         // console.log(data)

@@ -6,7 +6,9 @@
           <h1 style="font-size:xx-large; font-weight:500;" class="d-flex">My Account</h1>
         </div>
         <div class="col-lg-1 col-md-2 col-sm-2" style="margin-right: 10px;">
-          <button class="btn btn-danger d-flex justify-content-end mb-3">Logout</button>
+            <form action="post">
+                <button class="btn btn-danger d-flex justify-content-end mb-3" (click)="logout()">Logout</button>
+            </form>
         </div>
       </div>
       <!-- <hr style="height: 5px; background-color: black; border: black;"> -->

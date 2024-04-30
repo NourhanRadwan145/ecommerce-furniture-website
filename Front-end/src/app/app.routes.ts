@@ -12,21 +12,24 @@ import { SingleProductDetailsComponent } from './components/single-product-detai
 import { RegisterComponent } from './components/register/register.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.component';
+import { AuthGuard } from './Guards/auth.guard';
+import { AdminGuard } from './Guards/admin.guard';
+import { AllProductsGuard } from './Guards/all-products.guard';
+
 
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product/:id', component: SingleProductDetailsComponent },
+  { path: 'product/:id', component: SingleProductDetailsComponent, canActivate: [AuthGuard]},
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard]},  
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
+  { path: 'products', component: ProductsComponent, canActivate: [AllProductsGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'payment', component: PaymentComponent },
   { path: 'confirm', component: ConfirmOrderComponent },  
   { path: '**', redirectTo: '/home' },
