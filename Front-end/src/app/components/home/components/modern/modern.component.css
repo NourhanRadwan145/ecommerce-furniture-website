@@ -6,12 +6,19 @@
   width: 100%;
   color: rgb(0, 0, 0);
   margin: auto;
+  padding-top: 0px;
 }
 
 .heading2{
   margin-left: 80px;
   margin-top: 100px;
-  line-height: 1.2; /* Default line height */
+  font-weight: bold;
+  line-height: 1.2; 
+}
+
+h1{
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 
@@ -19,6 +26,7 @@
   position: relative;
   left: 10%;
   margin-top: 20px;
+  margin-left: 20px;
   transform: translate(-50%, -50%);
 }
 

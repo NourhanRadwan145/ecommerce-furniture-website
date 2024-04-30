@@ -16,7 +16,7 @@ const productsSchema = new mongoose.Schema({
     "details": String,
     "quantity": Number, // in stock
     "category": String,
-    "reviews": [reviewsSchema],
+    "reviews": [reviewsSchema] || [],
 })
 
 

@@ -1,7 +1,7 @@
 .parent{
     font-size: 50px;
     font-weight: bold;
-    background-color: #a1c3c5;
+    background-color: #A6957B;
     color: white;
     height: 450px;
 }
@@ -14,7 +14,7 @@
 
 }
 .explore:hover{
-    color: #a1c3c5;
+    color: #A6957B;
 }
 h1{
     font-weight: bold;

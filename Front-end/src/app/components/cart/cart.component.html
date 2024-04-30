@@ -13,13 +13,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of cart; let i = index">
-          <td data-label=" " class="align-middle "><button (click)="deleteProduct(product._id)" class="btn-delete">
-              <i class="fas fa-times"></i>
-            </button>
+          <td data-label=" " class="align-middle ">
+              <form action="">
+                <button (click)="deleteProduct(product._id)" class="btn-delete">
+                  <i class="fas fa-times"></i>
+                </button>
+            </form>
           </td>
           <td class="align-middle "><img [src]="product.image" alt="Product Image" style="height: 70px; width: 100px;">
           </td>
-          <td data-label="Product" class="align-middle ">{{ product.details }}</td>
+          <td data-label="Product" class="align-middle ">{{ product.title }}</td>
           <td data-label="Price" class="align-middle ">{{ product.price }}$</td>
           <td data-label="Quantity" class="align-middle ">
             <div class="quantity-group">
@@ -32,7 +35,7 @@
               </button>
             </div>
           </td>
-          <td data-label="Subtotal" class="align-middle">{{ product.price * product.quantity }}$</td>
+          <td data-label="Subtotal" class="align-middle">{{ (product.price * product.quantity).toFixed(2) }}$</td>
         </tr>
       </tbody>
     </table>
@@ -44,7 +47,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <diV class="col-6">Subtotal : {{this.total}}</diV>
+          <diV class="col-6">Subtotal : {{(this.total).toFixed(2)}}</diV>
           <diV class="col-6"></diV>
         </div>
         <div class="row">
@@ -71,7 +74,7 @@
         </div>
         <div class="row">
           <diV class="col-6">Total</diV>
-          <diV class="col-6">{{this.total+8}}$</diV>
+          <diV class="col-6">{{(this.total+8).toFixed(2)}}$</diV>
         </div>
         <div class="row">
           <div class="col-12">

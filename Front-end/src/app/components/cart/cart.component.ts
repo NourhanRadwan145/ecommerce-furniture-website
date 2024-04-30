@@ -1,9 +1,10 @@
 import { ProductsService } from './../../Services/products.service';
 import { CartService } from '../../Services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -22,18 +23,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  userid = "662fe09589d82ad3153423f4";
-  cart: { _id: string, details: string, image: string, quantity: number, price: number }[] = [];
+  userid = "";
+  cart: { _id: string, title: string, image: string, quantity: number, price: number }[] = [];
   total: number = 0;
   showAddressForm: boolean = false;
   showCouponForm: boolean = false;
   selectedCountry: string = 'Egypt';
   countries: string[] = ["Algeria", "Bahrain", "Djibouti", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Libya", "Mauritania", "Morocco", "Oman", "Palestine", "Qatar", "Saudi Arabia", "Somalia", "Sudan", "Syria", "Tunisia"];
 
-  deletedProduct: { _id: string, details: string, image: string, quantity: number, price: number } | null = null;
+  deletedProduct: { _id: string, title: string, image: string, quantity: number, price: number } | null = null;
 
-  constructor(private userService: CartService, private productsService: ProductsService) { }
-
+  constructor(private userService: CartService, private productsService: ProductsService, private http: HttpClient) { }
 
   updateTotal() {
     this.total = 0;
@@ -103,7 +103,7 @@ export class CartComponent implements OnInit {
           this.cart.splice(index, 1);
           this.updateTotal();
         }
-        this.ngOnInit();
+        // this.ngOnInit();
       },
       error: (error: any) => {
         console.error("Failed to delete product", error);
@@ -111,29 +111,39 @@ export class CartComponent implements OnInit {
     });
   }
 
+  getAuthUser(): Observable<string> {
+    return this.http.get<any>("http://localhost:7000/api/users/user/user", { withCredentials: true })
+      .pipe(
+        map(response => response.data._id)
+      );
+  }
+
   ngOnInit() {
-    this.cart = [];
-    this.selectedCountry = localStorage.getItem('selectedCountry') || 'Egypt';
-    this.userService.getUserById(this.userid).subscribe({
-      next: (data: any) => {
-        data.carts.forEach((item: { product: string; quantity: number }) => {
-          const productid = item.product;
-          const quantity = item.quantity;
-          this.productsService.getProductById(productid).subscribe({
-            next: (productData: any) => {
-              productData["quantity"] = quantity
-              this.cart.push(productData);
-              this.updateTotal();
-            },
-            error: (error: any) => {
-              console.log(error);
-            }
+    this.getAuthUser().subscribe(userid => {
+      this.userid = userid;
+      this.cart = [];
+      this.selectedCountry = localStorage.getItem('selectedCountry') || 'Egypt';
+      this.userService.getUserById(this.userid).subscribe({
+        next: (data: any) => {
+          data.carts.forEach((item: { product: string; quantity: number }) => {
+            const productid = item.product;
+            const quantity = item.quantity;
+            this.productsService.getProductById(productid).subscribe({
+              next: (productData: any) => {
+                productData["quantity"] = quantity
+                this.cart.push(productData);
+                this.updateTotal();
+              },
+              error: (error: any) => {
+                console.log(error);
+              }
+            });
           });
-        });
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
     });
   }
 }
