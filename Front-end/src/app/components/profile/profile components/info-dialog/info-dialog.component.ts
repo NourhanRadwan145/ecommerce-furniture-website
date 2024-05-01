@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderServiceService } from '../../../../Services/order-service.service';
-import { UserServiceService } from '../../../../services/user-service.service';
+import { UserServiceService } from '../../../../Services/user-service.service';
 
 @Component({
   selector: 'app-info-dialog',
@@ -29,6 +29,10 @@ export class InfoDialogComponent implements OnInit {
   imageUrl: any;
   showIcon: string = '../../../../../assets/visibility-icon-16.jpg';
   hideIcon: string = '../../../../../assets/visible-icon-28.jpg';
+  imageFile: File| null=null;
+
+
+
 
 
   constructor(
@@ -51,7 +55,7 @@ passwordMatchValidator(frm: FormGroup) {
       fullName: ['', Validators.required],  // Ensure validators are properly set
       email: ['', [Validators.required, Validators.email]],
       image: [''],
-      password: [''],
+      password: ['',Validators.minLength(8)],
       confirmPassword: ['']}, { validator: this.passwordMatchValidator }
   );
     //this.loadUserInfo();
@@ -123,7 +127,14 @@ passwordMatchValidator(frm: FormGroup) {
   //     console.log('Selected file:', this.name);
   //   }
   // }
-
+  // onFileSelected(event: any) {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     console.log(file.name);
+  //     this.imageFile = file;
+  //     // Handle the file here. You can add it to a FormData object if you're sending it to a server.
+  //   }
+  // }
   updateUser() {
     if (this.personalInfoForm.valid) {
       const updatePayload = {

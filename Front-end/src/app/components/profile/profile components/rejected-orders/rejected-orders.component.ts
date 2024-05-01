@@ -7,7 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrderServiceService } from '../../../../Services/order-service.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { CommonModule } from '@angular/common';
-import { UserServiceService } from '../../../../services/user-service.service';
+import { UserServiceService } from '../../../../Services/user-service.service';
 
 @Component({
   selector: 'app-rejected-orders',

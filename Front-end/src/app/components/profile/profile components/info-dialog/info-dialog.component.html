@@ -17,12 +17,15 @@
         <div>
           <label>Update Password:</label>
           <div class="input-group">
-            <input [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <input [formControl]="password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
             <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
               <img src="{{ hidePassword ? hideIcon : showIcon }}" alt="Toggle Password" style="width: 20px; height: 20px;">
             </button>
           </div>
+
         </div>
+
+
         <div>
           <label>Confirm Password:</label>
           <div class="input-group">
@@ -35,9 +38,11 @@
         <div *ngIf="personalInfoForm.errors?.['mismatch'] && personalInfoForm.get('confirmPassword')?.touched"  style="color: red;">
           Passwords must match!
         </div>
-        <!-- <div>
-          <label>Image:</label>
-          <input type="text" formControlName="image" value="{{userInfo.image}}">
+        <!-- <div *ngIf="password.errors?.minLength">
+          Password must be at least 8 characters long.
+        </div> -->
+        <!-- <div *ngIf="personalInfoForm.get('password').errors?.minLength && personalInfoForm.get('password').touched">
+          Password must be at least 8 characters long.
         </div> -->
 
         <div>

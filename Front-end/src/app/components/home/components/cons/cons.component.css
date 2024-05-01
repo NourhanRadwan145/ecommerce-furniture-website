@@ -30,18 +30,22 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media (min-width: 600px) and (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 765px) {
   .width{
-    width:25%;
+    width:30%;
   }
   .font{
     font-size:large;
   }
 }
 /* Medium devices (landscape tablets, 768px and up) */
-@media (min-width: 769px) and (max-width: 992px) {
+@media (min-width: 766px) and (max-width: 992px) {
   .width{
-    width:60%;
+    width:80%;
+    justify-content: center;
+  }
+  .container{
+    justify-content: center;
   }
   .font{
     font-size:xx-small;

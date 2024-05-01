@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'; // Import MatDialog here
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { UserServiceService } from '../../../../services/user-service.service';
+import { UserServiceService } from '../../../../Services/user-service.service';
 
 
 @Component({

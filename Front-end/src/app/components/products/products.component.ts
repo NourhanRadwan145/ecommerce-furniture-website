@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-products',
   standalone: true,
   imports: [CommonModule,HttpClientModule,FormsModule],
-  providers: [ProductsService], 
+  providers: [ProductsService],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
   encapsulation: ViewEncapsulation.None
@@ -26,14 +26,14 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
   }
-  
+
   // Load products from service
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
-        this.products = response['All Products'];
+        this.products = response;
         this.selectedCategory = 'All Categories';
-        this.applyCategoryFilter(); 
+        this.applyCategoryFilter();
       },
       (error) => {
         console.error('Error loading products:', error);
@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
       );
     }
   }
-  
+
   // Apply price filter
   applyPriceFilter(): void {
     this.filteredProducts = this.products.filter((product) => {
@@ -75,7 +75,7 @@ export class ProductsComponent implements OnInit {
     this.filteredProducts = this.products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }  
+  }
 
   ngAfterViewInit(): void {
     // After view initialization

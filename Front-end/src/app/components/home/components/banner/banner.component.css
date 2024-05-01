@@ -18,11 +18,12 @@
 
 .button {
   position: relative; /* Position relative to nearest positioned ancestor (here .image-background) */
-  left: 10%; /* Center horizontally */
+  left: 20%; /* Center horizontally */
   margin-top: 30px;
-  transform: translate(-50%, -50%); /* Centering adjustment */
+  transform: translate(-40%, -50%); /* Centering adjustment */
   padding: 10px 20px; /* Example padding */
-  font-size: 1em; /* Adjust font size */
+  font-size: .7em; /* Adjust font size */
+  margin-left: 15px;
 }
 
 /* Very small devices (small phones, less than 400px) */
@@ -65,7 +66,7 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media (min-width: 600px) and (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 765px) {
   .image-background {
     height: 45vh;
     background-position: center;
@@ -84,7 +85,7 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media (min-width: 769px) and (max-width: 992px) {
+@media (min-width: 766px) and (max-width: 992px) {
   .image-background {
     height: 50vh;
     background-position: center;
@@ -96,7 +97,7 @@
   }
   .button {
       position:relative;
-      left: 22%;
+      left: 24%;
       margin-top: 23px;
       transform: translate(-50%, -50%);
   }
@@ -134,9 +135,11 @@
   }
   .button{
     position:relative;
-    left: 29%;
+    left: 27%;
     margin-top: 60px;
     font-size: 1.7em;
+    width: 30%;
+    height: 10%;
 
   }
 }

@@ -1,12 +1,13 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../../../../services/user-service.service';
+
+
 
 @Component({
   selector: 'app-user-picture',
   standalone: true,
   imports: [HttpClientModule],
-  providers:[UserServiceService],
+  providers:[],
   templateUrl: './user-picture.component.html',
   styleUrl: './user-picture.component.css'
 })
@@ -14,7 +15,7 @@ export class UserPictureComponent implements OnInit{
   userInfo: any;
   id:any;
   image:any;
-  constructor(private userService: UserServiceService,private http: HttpClient){} // Corrected the naming of matDialog
+  constructor(private http: HttpClient){} // Corrected the naming of matDialog
 
 
   ngOnInit() {
