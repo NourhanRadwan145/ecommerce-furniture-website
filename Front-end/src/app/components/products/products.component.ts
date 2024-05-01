@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string = 'All Categories';
   minPrice: number | undefined;
   maxPrice: number | undefined;
+  isLargeView: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -40,7 +41,7 @@ export class ProductsComponent implements OnInit {
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
-        this.products = response['All Products'].filter((product: any) => product.quantity > 0);
+        this.products = response.filter((product: any) => product.quantity > 0);
         this.applyCategoryFilter();
       },
       (error) => {
@@ -95,11 +96,6 @@ export class ProductsComponent implements OnInit {
       (response: any) => {
         const userId = response.data._id;
         const quantity = 1;
-
-        console.log('userId:', userId);
-        console.log('product._id:', product._id);
-        console.log('quantity:', quantity);
-
         this.userService.addProductToCart(userId, product._id, quantity).subscribe(
           (response: any) => {
             console.log('Item added to cart successfully:', response);
@@ -126,60 +122,38 @@ export class ProductsComponent implements OnInit {
   ngAfterViewInit(): void {
 
     // Set default view mode to grid
-    document.addEventListener('DOMContentLoaded', () => {
-      const gridElement = document.querySelector('.grid') as HTMLElement;
-      if (gridElement) {
-        gridElement.click();
-      }
+  const setDefaultGridView = () => {
+    document.querySelector('.grid')?.classList.add('active');
+    document.querySelector('.large')?.classList.remove('active');
+    document.querySelectorAll('.products-area-wrapper').forEach((view) => {
+      view.classList.remove('tableView', 'largeView');
+      view.classList.add('gridView');
     });
-    
-    // Set default mode to light
-    document.documentElement.classList.add('light');
-    document.querySelector('.mode-switch')?.classList.add('active');
+    this.isLargeView = false;
+  };
 
-    // Event listener for list view
-    document.querySelector('.list')?.addEventListener('click', () => {
-      document.querySelector('.list')?.classList.add('active');
-      document.querySelector('.grid')?.classList.remove('active');
-      document.querySelector('.large')?.classList.remove('active');
-      document.querySelectorAll('.products-area-wrapper').forEach((view) => {
-        view.classList.remove('gridView', 'largeView');
-        view.classList.add('tableView');
-      });
+  // Event listener for grid view
+  document.querySelector('.grid')?.addEventListener('click', () => {
+    setDefaultGridView();
+  });
+
+  // Event listener for large view
+  document.querySelector('.large')?.addEventListener('click', () => {
+    document.querySelector('.grid')?.classList.remove('active');
+    document.querySelector('.large')?.classList.add('active');
+    document.querySelectorAll('.products-area-wrapper').forEach((view) => {
+      view.classList.remove('tableView', 'gridView');
+      view.classList.add('largeView');
     });
+    this.isLargeView = true;
+  });
 
-    // Event listener for grid view
-    document.querySelector('.grid')?.addEventListener('click', () => {
-      document.querySelector('.list')?.classList.remove('active');
-      document.querySelector('.grid')?.classList.add('active');
-      document.querySelector('.large')?.classList.remove('active');
-      document.querySelectorAll('.products-area-wrapper').forEach((view) => {
-        view.classList.remove('tableView', 'largeView');
-        view.classList.add('gridView');
-      });
-    });
-
-    // Event listener for large view
-    document.querySelector('.large')?.addEventListener('click', () => {
-      document.querySelector('.list')?.classList.remove('active');
-      document.querySelector('.grid')?.classList.remove('active');
-      document.querySelector('.large')?.classList.add('active');
-      document.querySelectorAll('.products-area-wrapper').forEach((view) => {
-        view.classList.remove('tableView', 'gridView');
-        view.classList.add('largeView');
-      });
-    });
-
+  // Set default view mode to grid
+  setDefaultGridView();
+  
     // Event listener for filter menu
     document.querySelector('.jsFilter')?.addEventListener('click', () => {
       document.querySelector('.filter-menu')?.classList.toggle('active');
-    });
-
-    // Event listener for mode switch
-    const modeSwitch = document.querySelector('.mode-switch');
-    modeSwitch?.addEventListener('click', () => {
-      document.documentElement.classList.toggle('light');
-      modeSwitch?.classList.toggle('active');
     });
 
     // Event listener for toggle sidebar visibility

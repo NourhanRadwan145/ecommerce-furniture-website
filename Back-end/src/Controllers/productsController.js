@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 const getAllProducts = async (req, res) => {
   try {
       let query = {};
-
       // Filtering logic by (Price and Category)
       if (req.query.minPrice) {
           query.price = { $gte: parseInt(req.query.minPrice) };
@@ -27,12 +26,13 @@ const getAllProducts = async (req, res) => {
       }
 
       const products = await productModel.find(query);
-      res.json({ "All Products": products });
+      res.json(products );
   } catch (err) {
       console.error('Error loading products:', err);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 /**
  * Get Product by name
  */
