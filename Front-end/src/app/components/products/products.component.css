@@ -20,7 +20,7 @@
   max-height: 3000px;
   max-width: 1300px;
   display: flex;
-  height: 100vh; 
+  height: 100%; 
   margin: 0 auto;
   overflow-y: auto; 
 }
