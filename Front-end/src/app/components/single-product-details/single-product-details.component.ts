@@ -11,6 +11,7 @@ import { OneProductComponent } from './one-product/one-product.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '../header/header.component';
+import { CartProductsCountService } from '../../Services/cart-products-count.service';
 
 
 
@@ -62,6 +63,7 @@ export class SingleProductDetailsComponent implements OnInit
     private router:Router, 
     private productService:SingleProductService,
     private formBuilder: FormBuilder,
+    private productsCount: CartProductsCountService
   ) 
   {
     this.ID = route.snapshot.params["id"];
@@ -364,9 +366,9 @@ export class SingleProductDetailsComponent implements OnInit
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
-              window.location.reload();
+              // console.log(this.product_number);
+              this.productsCount.updateData(this.product_number + 1);
             });
-            // console.log(this.product_number);
           },
           error: (err) => {
             console.log('Cannot add product to cart:', err);

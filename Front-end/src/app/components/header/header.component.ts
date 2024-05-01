@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { SingleProductService } from '../../Services/single-product.service';
+import { CartProductsCountService } from '../../Services/cart-products-count.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ matMenu: any;
   oredersTotalPrice: number = 0;
   user_id: any;
 
-  constructor(private productService: SingleProductService) { }
+  constructor(private productService: SingleProductService, private productsCount: CartProductsCountService) { }
 
   ngOnInit() {
         this.productService.getUserToken().subscribe({
@@ -50,6 +51,13 @@ matMenu: any;
           },
           error: (err) => {
             console.log('cannot get user token !!', err);
+          }
+        });
+
+        this.productsCount.data$.subscribe({
+          next: (data) => {
+            this.data = data;
+            console.log('Data:', data);
           }
         });
   }

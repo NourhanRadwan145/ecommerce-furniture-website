@@ -12,16 +12,6 @@ export class SingleProductService {
   DB_Config = "http://localhost:7000/api/products/";
   DB_Config_order = "http://localhost:7000/api/orders";
   
-  // private data = new BehaviorSubject<number>(10);
-  // data$ = this.data.asObservable();
-
-  // updateData(data: number) {
-  //   this.data = new BehaviorSubject<number>(data);
-  //   this.data$ = this.data.asObservable();
-  //   this.data.next(data);
-  //   console.log("Data updated:", data);
-  // }
-
 
   getProductById(id:number)
   {
