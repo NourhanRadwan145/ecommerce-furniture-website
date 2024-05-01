@@ -28,7 +28,9 @@ export class OneProductComponent
 {
   @Input() product: any;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+
+  }
 
   openDialog() 
   {
@@ -36,7 +38,7 @@ export class OneProductComponent
       data: {
         product: this.product
       }
-    });
+  });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -112,7 +114,9 @@ export class DialogContentExampleDialog {
   /**************** Add to cart ****************/
   addProductToCart() 
   {
-    if(this.product.quantity > this.quantity)
+    console.log(this.product.quantity);
+    console.log(this.quantity);
+    if(this.product.quantity >= this.quantity)
     {
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
@@ -122,8 +126,8 @@ export class DialogContentExampleDialog {
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
-              // window.location.reload();
-              this.productsCount.updateData(this.product_number + 1);
+              window.location.reload();
+              // this.productsCount.updateData(this.product_number + 1);
             });
 
           },

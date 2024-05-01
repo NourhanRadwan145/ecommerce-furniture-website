@@ -14,7 +14,7 @@ const productsSchema = new mongoose.Schema({
     "image": String,
     "price": Number,
     "details": String,
-    "quantity": Number, // in stock
+    "quantity": {type: Number, minimum: 0}, // in stock
     "category": String,
     "reviews": [reviewsSchema] || [],
 })

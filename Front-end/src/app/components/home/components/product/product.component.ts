@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { SingleProductService } from '../../../../Services/single-product.service';
 import { HomeProductService } from '../../../../services/home-product.service';
+import { CartProductsCountService } from '../../../../Services/cart-products-count.service';
 
 @Component({
   selector: 'app-product',
@@ -72,11 +73,13 @@ export class DialogContentExampleDialog {
   quantity: number = 1;
   user_id: any;
   ID: any;
+  products_number: number;
   constructor(
     public dialogRef: MatDialogRef<DialogContentExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private productService:SingleProductService,
     private route: ActivatedRoute,
+    private productsCount: CartProductsCountService
   ) {
 
     this.product = data.product;
@@ -90,6 +93,8 @@ export class DialogContentExampleDialog {
       next: (data: any) => {
         console.log(data);
         this.user_id = data.data._id;
+        // console.log(data.data.carts.length);
+        this.products_number = data.data.carts.length;
         // console.log(this.user_id);
       },
       error: (err :any) => {
@@ -120,9 +125,9 @@ export class DialogContentExampleDialog {
 
 
   /**************** Add to cart ****************/
-  addProductToCart()
+  addProductToCart() 
   {
-    if(this.product.quantity > this.quantity)
+    if(this.product.quantity >= this.quantity)
     {
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
@@ -133,10 +138,10 @@ export class DialogContentExampleDialog {
               title: 'Product added to cart successfully',
             }).then(() => {
               window.location.reload();
+              // this.productsCount.updateData(this.products_number + 1);
             });
-
           },
-          error: (err:any) => {
+          error: (err) => {
             console.log('Cannot add product to cart:', err);
             Swal.fire({
               icon: 'error',

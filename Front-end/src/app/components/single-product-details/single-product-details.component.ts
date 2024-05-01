@@ -82,7 +82,6 @@ export class SingleProductDetailsComponent implements OnInit
           this.router.navigate(['/']);
         }
         this.product = data;
-        // console.log(this.product);
         
       },
       error:(err)=>{
@@ -366,8 +365,8 @@ export class SingleProductDetailsComponent implements OnInit
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
-              // console.log(this.product_number);
-              this.productsCount.updateData(this.product_number + 1);
+              window.location.reload();
+              // this.productsCount.updateData(this.product_number + 1);
             });
           },
           error: (err) => {

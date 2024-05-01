@@ -8,11 +8,15 @@
       <form [formGroup]="personalInfoForm" >
         <div>
           <label>User Name:</label>
-          <input type="text" formControlName="fullName" value="{{userInfo.username}}">
+          @if(userInfo){
+            <input type="text" formControlName="fullName" value="{{userInfo.username}}">
+          }
         </div>
         <div>
           <label>Email:</label>
-          <input type="email" formControlName="email" value="{{userInfo.email}}">
+          @if(userInfo){
+            <input type="email" formControlName="email" value="{{userInfo.email}}">
+          }
         </div>
         <div>
           <label>Update Password:</label>

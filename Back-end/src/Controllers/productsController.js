@@ -147,6 +147,8 @@ const getUserByToken = async (req, res) => {
 let addToCart = async (req, res) => {
   const { user_id, product, quantity } = req.body;
   // console.log(quantity);
+  // console.log('User:', user_id);
+  // console.log('Product:', product);
 
   try {
     const user = await userModel.findById(user_id);
@@ -161,22 +163,20 @@ let addToCart = async (req, res) => {
 
     if (existingItem) 
     {
-      const newQuantity = existingItem.quantity + quantity;
-      // console.log(quantity);
-      // console.log(existingItem.quantity);
-      // console.log(newQuantity);
-      // console.log(productt.quantity);
-        existingItem.quantity = newQuantity;
-        productt.quantity -= quantity;
-      // }
-      await productt.save();
+        const newQuantity = existingItem.quantity + quantity;
+        // console.log(quantity);
+        // console.log(existingItem.quantity);
+        // console.log(newQuantity);
+        // console.log(productt.quantity);
+          existingItem.quantity = newQuantity;
+          productt.quantity -= quantity;
+        // }
+        await productt.save();
     } else {
         user.carts.push({ "product": product, "quantity": quantity });
         productt.quantity -= quantity;
-      // }
-      await productt.save();
+        await productt.save();
     }
-    await user.save();
     return res.status(201).json({ message: "Item added to cart successfully", user });
   } catch (error) {
     console.error('Error adding item to cart:', error);
