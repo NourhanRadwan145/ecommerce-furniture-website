@@ -3,6 +3,7 @@ const Router = express.Router()
 const UserController = require("../Controllers/UserController")
 const multerConfig = require("../Middlewares/multer");
 
+Router.post("/:id/cart", UserController.AddProductToCart);
 Router.get("/", UserController.GetAllUsers)
 Router.get("/:id/cart", UserController.GetCartByUserId);
 Router.get("/:id/orders", UserController.GetOrdersByUserId);

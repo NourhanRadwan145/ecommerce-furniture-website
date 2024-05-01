@@ -40,6 +40,7 @@ matMenu: any;
               console.log(element);
               this.productService.getOrderById(element).subscribe({
                 next: (data: any) => {
+                  console.log(data);
                   console.log(data.totalPrice);
                   this.oredersTotalPrice += data.totalPrice;
                 },
