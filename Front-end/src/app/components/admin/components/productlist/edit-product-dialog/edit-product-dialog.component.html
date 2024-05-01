@@ -41,15 +41,47 @@
               />
             </div>
             <div class="mb-3">
-              <label for="productImage" class="form-label"
-                >Product Image URL</label
+              <label for="productQuantity" class="form-label"
+                >Product Quantity</label
               >
               <input
-                formControlName="image"
-                type="text"
+                formControlName="productQuantity"
+                type="number"
+                class="form-control"
+                id="productQuantity"
+                placeholder="Enter Product Quantity"
+                value="{{ product.quantity }}"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="poductCategory" class="form-label"
+                >Product Category</label
+              >
+              <select
+                formControlName="poductCategory"
+                class="form-select"
+                id="poductCategory"
+                aria-label="Select Category"
+              >
+                <option
+                  [value]="product.category"
+                  [attr.selected]="product.category ? 'selected' : null"
+                >
+                  {{ product.category }}
+                </option>
+                <option value="table">Table</option>
+                <option value="chair">Chair</option>
+                <option value="sofa">Sofa</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productImage" class="form-label">Product Image</label>
+              <input
+                type="file"
                 class="form-control"
                 id="productImage"
-                placeholder="Enter product image URL"
+                placeholder="Enter product image"
+                (change)="onFileSelected($event)"
               />
             </div>
             <button
@@ -57,7 +89,7 @@
               class="btn btn-primary"
               (click)="editFormSubmit()"
             >
-              Save Changes
+              Update Product
             </button>
           </form>
         </div>

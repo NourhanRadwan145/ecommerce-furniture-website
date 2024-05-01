@@ -30,8 +30,8 @@
                   class="rounded-circle"
                 />
                 <div class="ms-3 d-flex flex-column align-items-start">
-                  <h5 class="mb-0 font-medium">{{ order.user_name }}</h5>
-                  <span class="text-muted">{{ order.id }}</span>
+                  <h5 class="mb-0 font-medium">{{ order.username }}</h5>
+                  <span class="text-muted">{{ order._id }}</span>
                 </div>
               </div>
             </td>
@@ -39,39 +39,46 @@
             <td>
               <button
                 class="btn btn-success me-1"
-                [disabled]="order.state == 'accepted'"
-                (click)="accepted(order.id)"
+                [disabled]="order.status == 'accepted'"
+                (click)="accepted(order._id)"
               >
                 Accept
               </button>
               <button
                 class="btn btn-danger"
-                [disabled]="order.state == 'rejected'"
-                (click)="rejected(order.id)"
+                [disabled]="order.status == 'rejected'"
+                (click)="rejected(order._id)"
               >
                 Reject
+              </button>
+              <button
+                class="btn btn-warning d-felx mx-1 p-1 align-items-center"
+                [disabled]="order.status == 'pending'"
+                (click)="pending(order._id)"
+              >
+                <mat-icon>refresh</mat-icon>
               </button>
             </td>
             <td class="">
               <span
                 class="p-2 rounded-circle d-inline-block ms-3"
                 [ngClass]="{
-                  'bg-success': order.state === 'accepted',
-                  'bg-warning': order.state === 'pending',
-                  'bg-danger': order.state === 'rejected'
+                  'bg-success': order.status === 'accepted',
+                  'bg-warning': order.status === 'pending',
+                  'bg-danger': order.status === 'rejected'
                 }"
               ></span
               ><span>
-                {{ order.state }}
+                {{ order.status }}
               </span>
             </td>
 
             <td>
               <!-- <h5 class="mb-0 fw-normal">{{ new Date()-order.date }}</h5> -->
-              <h5 class="mb-0 fw-normal">{{ order.date }}</h5>
+              <h5 class="mb-0 fw-medium">{{ order.daysDifference }} Days</h5>
             </td>
             <td>
-              <h5 class="mb-0 fw-normal">{{ order.total_price.toFixed() }}</h5>
+              <h5 class="mb-0 fw-medium">{{ order.totalPrice.toFixed() }} $</h5>
             </td>
           </tr>
         </tbody>

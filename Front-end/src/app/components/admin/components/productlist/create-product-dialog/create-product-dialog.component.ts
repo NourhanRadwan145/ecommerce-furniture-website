@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '../../../Services/product.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-product-dialog',
@@ -19,52 +20,57 @@ export class CreateProductDialogComponent implements OnInit {
   products: any;
   newProductId: any;
   createForm: any;
+  imageFile: File | null = null;
   constructor(
     private productService: ProductService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialogRef<any>,
     private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.productService.getProducts().subscribe((data) => {
-      this.products = Object.values(data);
-      this.count = this.products.length;
-      this.newProductId = String(this.count + 1);
-      console.log(this.newProductId);
-
-      this.createForm = new FormGroup({
-        id: new FormControl({ value: this.newProductId, disabled: true }),
-        title: new FormControl(''),
-        price: new FormControl(''),
-        details: new FormControl(''),
-        image: new FormControl(''),
-      });
-    });
+  ) {
     this.createForm = new FormGroup({
-      id: new FormControl({ value: this.newProductId, disabled: true }),
       title: new FormControl(''),
       price: new FormControl(''),
       details: new FormControl(''),
-      image: new FormControl(''),
+      productQuantity: new FormControl(''),
+      poductCategory: new FormControl(''),
     });
   }
 
+  ngOnInit() {}
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      console.log(file.name);
+      this.imageFile = file;
+      // Handle the file here. You can add it to a FormData object if you're sending it to a server.
+    }
+  }
   sumbitForm() {
-    this.product = {
-      id: this.createForm.controls['id'].value,
-      title: this.createForm.controls['title'].value,
-      price: this.createForm.controls['price'].value,
-      details: this.createForm.controls['details'].value,
-      image: this.createForm.controls['image'].value,
-    };
-    console.log(this.product); // id is undefunded
+    this.product = new FormData();
+    this.product.append('title', this.createForm.value.title);
+    this.product.append('price', this.createForm.value.price);
+    this.product.append('details', this.createForm.value.details);
+    this.product.append(
+      'productQuantity',
+      this.createForm.value.productQuantity
+    );
+    this.product.append('poductCategory', this.createForm.value.poductCategory);
+    this.product.append('image', this.imageFile);
 
     this.productService.createProduct(this.product).subscribe(
       (data) => {
         console.log(data); // id has a random value now
         this.dialog.close();
-        this.router.navigate(['/admin/product']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Your Prodcut Created successfully',
+        }).then(() => {
+          this.router
+            .navigateByUrl('/', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate(['/admin/prodcuts']);
+            });
+        });
       },
       (error) => {
         // Explicitly specify the type of 'error' as 'any'

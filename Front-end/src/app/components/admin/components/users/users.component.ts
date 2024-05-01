@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../Services/user.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -17,9 +18,14 @@ import { CreateUserComponent } from './create-user/create-user.component';
   providers: [UserService],
 })
 export class UsersComponent {
-  constructor(private myuserService: UserService, private dialog: MatDialog) {}
+  constructor(
+    private myuserService: UserService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   users: any;
+  userId: any;
   ngOnInit() {
     this.myuserService.getUsers().subscribe((data) => {
       this.users = data;
@@ -31,7 +37,18 @@ export class UsersComponent {
     this.myuserService.deleteUser(id).subscribe((data) => {
       console.log(data);
       this.users = this.users.filter((user: any) => user.id !== id);
+      Swal.fire({
+        icon: 'success',
+        title: 'User was Deleted successfully',
+      }).then(() => {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/admin/users']);
+          });
+      });
     });
+    this.router.navigate(['/admin/users']);
   }
 
   editUser(id: any) {

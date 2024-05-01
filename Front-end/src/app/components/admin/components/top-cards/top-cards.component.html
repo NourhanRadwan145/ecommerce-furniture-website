@@ -1,18 +1,76 @@
 <div class="row mb-5">
-  <div class="col-md-6 col-lg-3" *ngFor="let topcard of topcards">
+  <div class="col-md-6 col-lg-3">
     <div class="card">
       <div class="card-body d-flex align-items-center">
         <div
-          class="rounded-circle bg-{{ topcard.bgcolor }} text-light
+          class="rounded-circle bg-{{ topcards[0].bgcolor }} text-light
            btn btn-lg d-flex align-items-center justify-content-center"
           style="width: 60px; height: 60px"
         >
-          <i class="{{ topcard.icon }}" style="font-size: 24px"></i>
+          <i class="{{ topcards[0].icon }}" style="font-size: 24px"></i>
         </div>
 
         <div class="ms-3 d-flex flex-column align-items-start">
-          <h3 class="font-weight-bold mb-0">{{ totalSales }}</h3>
-          <small class="text-muted fs-5">{{ topcard.subtitle }}</small>
+          <h3 class="font-weight-bold mb-0">{{ totalSales }} $</h3>
+          <small class="text-muted fs-5">{{ topcards[0].subtitle }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card">
+      <div class="card-body d-flex align-items-center">
+        <div
+          class="rounded-circle bg-{{ topcards[1].bgcolor }} text-light
+           btn btn-lg d-flex align-items-center justify-content-center"
+          style="width: 60px; height: 60px"
+        >
+          <i class="{{ topcards[1].icon }}" style="font-size: 24px"></i>
+        </div>
+
+        <div class="ms-3 d-flex flex-column align-items-start">
+          <h3 class="font-weight-bold mb-0">{{ totalDailySales }} $</h3>
+          <small class="text-muted fs-5">{{ topcards[1].subtitle }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card">
+      <div class="card-body d-flex align-items-center">
+        <div
+          class="rounded-circle bg-{{ topcards[2].bgcolor }} text-light
+           btn btn-lg d-flex align-items-center justify-content-center"
+          style="width: 60px; height: 60px"
+        >
+          <i class="{{ topcards[2].icon }}" style="font-size: 24px"></i>
+        </div>
+
+        <div class="ms-3 d-flex flex-column align-items-start">
+          <h3 class="font-weight-bold mb-0">
+            {{ weeklyOrders }}
+          </h3>
+          <small class="text-muted fs-5">{{ topcards[2].subtitle }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card">
+      <div class="card-body d-flex align-items-center">
+        <div
+          class="rounded-circle bg-{{ topcards[3].bgcolor }} text-light
+           btn btn-lg d-flex align-items-center justify-content-center"
+          style="width: 60px; height: 60px"
+        >
+          <i class="{{ topcards[3].icon }}" style="font-size: 24px"></i>
+        </div>
+
+        <div class="ms-3 d-flex flex-column align-items-start">
+          <h3 class="font-weight-bold mb-0">
+            {{ dailyOrders }}
+          </h3>
+          <small class="text-muted fs-5">{{ topcards[3].subtitle }}</small>
         </div>
       </div>
     </div>

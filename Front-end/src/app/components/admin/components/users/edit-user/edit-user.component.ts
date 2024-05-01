@@ -35,17 +35,19 @@ export class EditUserComponent {
     this.editForm.patchValue({
       username: this.user.username,
       email: this.user.email,
+      // image: this.user.image,
       password: this.user.password,
-      passwordConfirm: null,
     });
   }
 
   editFormSubmit() {
-    const editedUser = {
-      id: this.user.id,
+    let editedUser = {
+      _id: this.user._id,
       username: this.editForm.controls['username'].value,
       email: this.editForm.controls['email'].value,
       password: this.user.password,
+      image: this.user.image,
+      gender: this.user.gender,
     };
 
     this.userService.updateUser(editedUser).subscribe((data) => {

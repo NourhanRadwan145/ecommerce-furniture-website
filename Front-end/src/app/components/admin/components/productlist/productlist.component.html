@@ -33,14 +33,11 @@
       <table class="table align-middle">
         <thead>
           <tr class="">
-            <th class="text-dark font-medium fs-4" style="text-align: end">
-              ID
-            </th>
+            <th class="text-dark font-medium fs-4">Image</th>
             <th class="text-dark font-medium fs-4">Name</th>
             <th class="text-dark font-medium fs-4">Price</th>
             <th class="text-dark font-medium fs-4">Description</th>
-            <th class="text-dark font-medium fs-4">Actions</th>
-            <!-- <th class="text-dark font-medium fs-4">Total</th> -->
+            <th class="text-dark font-medium fs-4 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -48,18 +45,14 @@
             <td>
               <div class="d-flex align-items-center">
                 <img
-                  [src]="image"
+                  [src]="product.image"
                   alt="user"
                   width="50"
                   class="rounded-circle"
                 />
-                <div class="ms-3 d-flex flex-column align-items-start">
-                  <h5 class="mb-0 font-medium">{{ product.id }}</h5>
-                  <!-- <span class="text-muted">{{ product.id }}</span> -->
-                </div>
               </div>
             </td>
-            <td class="fs-5">{{ product.title }}</td>
+            <td class="fs-5 fw-medium">{{ product.title }}</td>
             <td class="fs-5">{{ product.price }}</td>
 
             <td>
@@ -69,19 +62,19 @@
               <div class="d-flex flex-row">
                 <button
                   class="btn btn-success me-1"
-                  (click)="viewProduct(product.id)"
+                  (click)="viewProduct(product._id)"
                 >
                   View
                 </button>
                 <button
                   class="btn btn-info me-1"
-                  (click)="editProduct(product.id)"
+                  (click)="editProduct(product._id)"
                 >
                   Edit
                 </button>
                 <button
                   class="btn btn-danger"
-                  (click)="deleteProduct(product.id)"
+                  (click)="deleteProduct(product._id)"
                 >
                   Delete
                 </button>

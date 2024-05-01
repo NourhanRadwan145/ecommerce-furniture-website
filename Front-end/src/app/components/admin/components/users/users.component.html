@@ -33,14 +33,12 @@
       <table class="table align-middle">
         <thead>
           <tr class="">
-            <th class="text-dark font-medium fs-4" style="text-align: left">
-              User
-            </th>
+            <th class="text-dark font-medium fs-4 text-start">User</th>
             <!-- <th class="text-dark font-medium fs-4">Order</th>
             <th class="text-dark font-medium fs-4">Actions</th>
             <th class="text-dark font-medium fs-4">Status</th>
             <th class="text-dark font-medium fs-4">Since</th> -->
-            <th class="text-dark font-medium fs-4">Actions</th>
+            <th class="text-dark font-medium fs-4 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +46,7 @@
             <td>
               <div class="d-flex align-items-center">
                 <img
-                  src="../../../../../assets/images/users/user1.jpg"
+                  [src]="user.image"
                   alt="user"
                   width="45"
                   class="rounded-circle"
@@ -59,35 +57,18 @@
                 </div>
               </div>
             </td>
-            <!-- <td class="fs-4">{{ order.order_name }}</td> -->
-            <!-- <td>
-              <button
-                class="btn btn-success me-1"
-                [disabled]="order.state == 'accepted'"
-                (click)="accepted(order.id)"
-              >
-                Accept
-              </button>
-              <button
-                class="btn btn-danger"
-                [disabled]="order.state == 'rejected'"
-                (click)="rejected(order.id)"
-              >
-                Reject
-              </button> -->
-            <!-- </td> -->
             <td>
-              <div class="d-flex flex-row">
+              <div class="d-flex flex-row justify-content-center">
                 <button
                   class="btn btn-success me-1"
-                  (click)="viewUser(user.id)"
+                  (click)="viewUser(user._id)"
                 >
                   View
                 </button>
-                <button class="btn btn-info me-1" (click)="editUser(user.id)">
+                <button class="btn btn-info me-1" (click)="editUser(user._id)">
                   Edit
                 </button>
-                <button class="btn btn-danger" (click)="deleteUser(user.id)">
+                <button class="btn btn-danger" (click)="deleteUser(user._id)">
                   Delete
                 </button>
               </div>

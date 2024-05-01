@@ -6,17 +6,6 @@
           <h5 class="card-title mb-4">Create New Product</h5>
           <form [formGroup]="createForm">
             <div class="mb-3">
-              <label for="productName" class="form-label">Product ID</label>
-              <input
-                formControlName="id"
-                type="text"
-                class="form-control"
-                id="productId"
-                placeholder="Enter product name"
-                value="{{ newProductId }}"
-              />
-            </div>
-            <div class="mb-3">
               <label for="productName" class="form-label">Product Name</label>
               <input
                 formControlName="title"
@@ -49,15 +38,41 @@
               />
             </div>
             <div class="mb-3">
-              <label for="productImage" class="form-label"
-                >Product Image URL</label
+              <label for="productQuantity" class="form-label"
+                >Product Quantity</label
               >
               <input
-                formControlName="image"
-                type="text"
+                formControlName="productQuantity"
+                type="number"
+                class="form-control"
+                id="productQuantity"
+                placeholder="Enter Product Quantity"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="poductCategory" class="form-label"
+                >Product Category</label
+              >
+              <select
+                formControlName="poductCategory"
+                class="form-select"
+                id="poductCategory"
+                aria-label="Select Category"
+              >
+                <option value="" selected disabled>Select Category</option>
+                <option value="table">Table</option>
+                <option value="chair">Chair</option>
+                <option value="sofa">Sofa</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productImage" class="form-label">Product Image</label>
+              <input
+                type="file"
                 class="form-control"
                 id="productImage"
-                placeholder="Enter product image URL"
+                placeholder="Enter product image"
+                (change)="onFileSelected($event)"
               />
             </div>
             <button
@@ -65,7 +80,7 @@
               class="btn btn-primary"
               (click)="sumbitForm()"
             >
-              Save Changes
+              Add Product
             </button>
           </form>
         </div>

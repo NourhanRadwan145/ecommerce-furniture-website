@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OrderService {
-  private API_URL = 'http://localhost:3000/orders';
+  private API_URL = 'http://localhost:7000/api/orders';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,7 @@ export class OrderService {
   }
 
   updateOrder(order: any) {
-    return this.http.put(this.API_URL + `/${order.id}`, order);
+    return this.http.put(this.API_URL + `/${order._id}`, order);
   }
 
   deleteOrder(id: string) {
@@ -33,13 +33,23 @@ export class OrderService {
     return this.http.put(this.API_URL + `/${order.id}`, order);
   }
 
-  pendingCounter(orders: any) {
-    let pending = 0;
-    for (let order of orders) {
-      if (order.state == 'pending') {
-        pending += 1;
-      }
-    }
-    return pending;
+  weeklyOrders() {
+    return this.http.get(this.API_URL + '/weekly');
+  }
+
+  dailyOrders() {
+    return this.http.get(this.API_URL + '/daily');
+  }
+
+  weeklySales() {
+    return this.http.get(this.API_URL + '/weeklySales');
+  }
+
+  dailySales() {
+    return this.http.get(this.API_URL + '/dailySales');
+  }
+
+  salesPerWeek() {
+    return this.http.get(this.API_URL + '/salesPerWeek');
   }
 }

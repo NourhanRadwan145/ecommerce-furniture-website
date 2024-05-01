@@ -5,17 +5,7 @@
         <div class="card-body">
           <h5 class="card-title mb-4">Create New User</h5>
           <form [formGroup]="createForm">
-            <div class="mb-3">
-              <label for="userName" class="form-label">User ID</label>
-              <input
-                formControlName="id"
-                type="text"
-                class="form-control"
-                id="userId"
-                placeholder="Enter product name"
-                value="{{ newUserId }}"
-              />
-            </div>
+            <div class="mb-3"></div>
             <div class="mb-3">
               <label for="userName" class="form-label">User Name</label>
               <input
@@ -38,9 +28,20 @@
               />
             </div>
             <div class="mb-3">
+              <label for="image" class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="image"
+                accept="image/*"
+                placeholder="Upload Image"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+            <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input
-                formControlName="passowrd"
+                formControlName="password"
                 type="text"
                 class="form-control"
                 id="passowrd"
@@ -58,6 +59,19 @@
                 id="PasswordConfirmation"
                 placeholder="Enter Password Confirmation"
               />
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select
+                formControlName="gender"
+                class="form-select"
+                id="gender"
+                aria-label="Select Gender"
+              >
+                <option value="" selected disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
             <button
               type="submit"

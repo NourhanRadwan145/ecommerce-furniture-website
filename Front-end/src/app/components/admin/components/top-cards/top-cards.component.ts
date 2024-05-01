@@ -12,79 +12,86 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './top-cards.component.css',
 })
 export class TopCardsComponent implements OnInit {
-  // bgcolor: any;
-  // icon: string = '';
-  // title: string = '';
-  // subtitle: string = '';
-  // topcards: any;
   orders: any;
   totalSales = 0;
   rejected = 0;
   accepted = 0;
   pending = 0;
+  weekly: any;
+  weeklyOrders: any;
+  daily: any;
+  dailyOrders: any;
+  topcards: any;
+  dailySales: any;
+  totalDailySales = 0;
   constructor(private myorderService: OrderService) {}
+
   ngOnInit() {
-    this.myorderService.getOrders().subscribe(
+    this.myorderService.weeklyOrders().subscribe(
       (data) => {
-        this.orders = data;
-        for (let order of this.orders) {
-          // Added type annotation 'let'
-          this.totalSales += order.total_price;
-          if (order.state == 'Accepted') {
-            this.accepted += 1;
-          } else if (order.state == 'Rejected') {
-            this.rejected += 1;
-          } else if (order.state == 'Pending') {
-            this.pending += 1;
-          } else if (order.state == 'Delivered') {
-            this.topcards[3].title = order.total_price;
-          }
-        }
-        this.totalSales = parseFloat(this.totalSales.toFixed(2));
+        this.weekly = data;
+        this.weeklyOrders = this.weekly[0].totalOrders;
       },
       (error) => {
         console.log(error);
       }
     );
+
+    this.myorderService.dailyOrders().subscribe(
+      (data) => {
+        this.daily = data;
+        this.dailyOrders = this.daily[0].totalOrders;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.myorderService.weeklySales().subscribe(
+      (data) => {
+        this.weekly = data;
+        this.totalSales = this.weekly[0].totalSales;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.myorderService.dailySales().subscribe(
+      (data) => {
+        this.dailySales = data;
+        this.totalDailySales = this.dailySales[0].totalSales;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.topcards = [
+      {
+        bgcolor: 'success',
+        icon: 'bi bi-wallet',
+        title: this.totalSales,
+        subtitle: 'Weekly Sales',
+      },
+      {
+        bgcolor: 'danger',
+        icon: 'bi bi-coin',
+        title: this.dailyOrders,
+        subtitle: 'Daily Sales',
+      },
+      {
+        bgcolor: 'warning',
+        icon: 'bi bi-basket3',
+        title: this.weeklyOrders,
+        subtitle: 'Weekly Orders',
+      },
+      {
+        bgcolor: 'info',
+        icon: 'bi bi-bag',
+        title: '210',
+        subtitle: 'Daily Orders',
+      },
+    ];
   }
-
-  // this.myorderService.getOrders().subscribe(
-  //     (data) => {
-  //       this.orders = data;
-  //       for (let order of this.orders) {
-  //         // Added type annotation 'let'
-  //         this.totalSales += order.total;
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-
-  topcards = [
-    {
-      bgcolor: 'success',
-      icon: 'bi bi-wallet',
-      title: '$21k',
-      subtitle: 'Weekly Sales',
-    },
-    {
-      bgcolor: 'danger',
-      icon: 'bi bi-coin',
-      title: '$1k',
-      subtitle: 'Daily Sales',
-    },
-    {
-      bgcolor: 'warning',
-      icon: 'bi bi-basket3',
-      title: '456',
-      subtitle: 'weekly Orders',
-    },
-    {
-      bgcolor: 'info',
-      icon: 'bi bi-bag',
-      title: '210',
-      subtitle: 'Daily Orders',
-    },
-  ];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewProductDialogComponent } from './view-product-dialog/view-product-dialog.component';
 import { EditProductDialogComponent } from './edit-product-dialog/edit-product-dialog.component';
 import { CreateProductDialogComponent } from './create-product-dialog/create-product-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productlist',
@@ -22,7 +23,8 @@ export class ProductlistComponent implements OnInit {
     'https://w7.pngwing.com/pngs/249/759/png-transparent-chair-comfort-furniture-commode-comfortable-chairs-angle-furniture-fashion-thumbnail.png';
   constructor(
     private myproductService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
   ngOnInit() {
     this.myproductService.getProducts().subscribe((data) => {
@@ -35,6 +37,16 @@ export class ProductlistComponent implements OnInit {
     this.myproductService.deleteProduct(id).subscribe((data) => {
       console.log(data);
       this.products = this.products.filter((product: any) => product.id !== id);
+      Swal.fire({
+        icon: 'success',
+        title: 'Your Product Deleted successfully',
+      }).then(() => {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/admin/product']);
+          });
+      });
     });
   }
 
