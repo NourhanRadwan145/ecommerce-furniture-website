@@ -1,0 +1,88 @@
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Create New User</h5>
+          <form [formGroup]="createForm">
+            <div class="mb-3"></div>
+            <div class="mb-3">
+              <label for="userName" class="form-label">User Name</label>
+              <input
+                formControlName="username"
+                type="text"
+                class="form-control"
+                id="userName"
+                placeholder="Enter User Name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="email"
+                rows="3"
+                placeholder="Enter Email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="image" class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="image"
+                accept="image/*"
+                placeholder="Upload Image"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                formControlName="password"
+                type="text"
+                class="form-control"
+                id="passowrd"
+                placeholder="Enter Password"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="passwordConfirmation" class="form-label"
+                >Passowrd Confirmation</label
+              >
+              <input
+                formControlName="passwordConfirmation"
+                type="text"
+                class="form-control"
+                id="PasswordConfirmation"
+                placeholder="Enter Password Confirmation"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select
+                formControlName="gender"
+                class="form-select"
+                id="gender"
+                aria-label="Select Gender"
+              >
+                <option value="" selected disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="sumbitForm()"
+            >
+              Add User
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

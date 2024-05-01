@@ -6,21 +6,59 @@ const UserValidate = require("../Utils/UserValidate")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const crypto = require("crypto")
-
+const cloudUpload = require("../Utils/Cloudinary");
 // ---------------------------------- Get All Users  ------------------------------------
 let GetAllUsers = async (req, res) => {
-    // => for testing routes
-    let users = await UserModel.find({})
-    return res.json(users)
-}
+  // => for testing routes
+  try {
+    let users = await UserModel.find({});
+    if (!users) return res.json({ message: "No Users Found" });
+    return res.json(users);
+  } catch (err) {
+    return res.json(err);
+  }
+};
 // ---------------------------------- Get User By ID  -----------------------------------
 let GetUserById = async (req, res) => {
-    let userId = req.params.id
-    let user = await UserModel.findById(userId)
-    return res.json(user)
-}
+  try {
+    console.log(req.params.id);
+    let user = await UserModel.findById(req.params.id);
+    if (!user) return res.json({ message: "No User Found" });
+    return res.json(user);
+  } catch (err) {
+    return res.json(err);
+  }
+};
 // ---------------------------------- Add New User  -------------------------------------
-let AddNewUser = async (req, res) => { }
+let AddNewUser = async (req, res) => {
+  try {
+    let { error } = UserValidate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    let salt = await bcrypt.genSalt(10);
+    let password = req.body.password;
+    let hashedPassword = await bcrypt.hash(password, salt);
+
+    // Adding Image to Cloudinary
+
+    let uploadedImage = await cloudUpload(req.files[0].path);
+    console.log(uploadedImage);
+
+    let user = new UserModel({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+      image: uploadedImage.url,
+      gender: req.body.gender,
+    });
+    console.log(user);
+    await user.save();
+    return res.json({ message: "User Added Successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
 // ---------------------------------- Update User By ID  --------------------------------
 const UpdateUser = async (req, res) => {
     const id = req.params.id;
@@ -62,7 +100,15 @@ const UpdateUser = async (req, res) => {
 };
 
 // ---------------------------------- Delete User By ID  ---------------------------------
-let DeleteUser = async (req, res)=>{}
+let DeleteUser = async (req, res) => {
+  try {
+    let user = await UserModel.findByIdAndDelete(req.params.id);
+    if (!user) return res.json({ message: "No User Found" });
+    return res.json({ message: "User Deleted Successfully" });
+  } catch (err) {
+    return res.json(err);
+  }
+};
 // ---------------------------------- Login User  ---------------------------------------
 let LoginUser = async (req, res)=>{
     const user = await UserModel.findOne({email:req.body.email})

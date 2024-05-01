@@ -15,22 +15,36 @@ import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.
 import { AuthGuard } from './Guards/auth.guard';
 import { AdminGuard } from './Guards/admin.guard';
 import { AllProductsGuard } from './Guards/all-products.guard';
-
-
+import { UsersComponent } from './components/admin/components/users/users.component';
+import { ProductlistComponent } from './components/admin/components/productlist/productlist.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product/:id', component: SingleProductDetailsComponent, canActivate: [AuthGuard]},
+  {
+    path: 'product/:id',
+    component: SingleProductDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard]},  
-  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
-  { path: 'products', component: ProductsComponent, canActivate: [AllProductsGuard]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'admin/users', component: UsersComponent, canActivate: [AdminGuard] },
+  {
+    path: 'admin/product',
+    component: ProductlistComponent,
+    canActivate: [AdminGuard],
+  },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [AllProductsGuard],
+  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'payment', component: PaymentComponent },
-  { path: 'confirm', component: ConfirmOrderComponent },  
+  { path: 'confirm', component: ConfirmOrderComponent },
   { path: '**', redirectTo: '/home' },
 ];

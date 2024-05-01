@@ -1,4 +1,22 @@
 <div class="text-center"><h1>Admin Dashboard</h1></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div
+    class="collapse navbar-collapse d-flex justify-content-center"
+    id="navbarSupportedContent"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin']">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/product']">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/users']">Users</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="cont p-5">
   <div class="top-cards"><app-top-cards></app-top-cards></div>
   <!-- ============================================================== -->

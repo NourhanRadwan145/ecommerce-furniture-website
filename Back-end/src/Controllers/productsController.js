@@ -2,6 +2,8 @@ const productModel = require("../Models/productsModel");
 const productValidate = require("../Utils/productsValidate");
 const userModel = require("../Models/UserModel");
 const jwt = require("jsonwebtoken");
+const cloudUpload = require("../Utils/Cloudinary");
+
 
 /**
  * Get all Products
@@ -38,42 +40,101 @@ const getAllProducts = async (req, res) => {
  * Get Product by name
  */
 let getProductByName = async (req, res) => {
-    //
+  //
 };
 
 /**
  * Get Product by ID
  */
 let getProductByID = async (req, res) => {
-    try {
-        let product = await productModel.findById(req.params.id);
-        if (!product) {
-            return res.status(404).json({ message: "Product not found" });
-        }
-        return res.json(product);
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error" });
+  try {
+    let product = await productModel.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
+    return res.json(product);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 /**
  * Create a new Product
  */
 let createNewProduct = async (req, res) => {
-    //
+  try {
+    let { error } = productValidate(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+    let uploadedImage = await cloudUpload(req.files[0].path);
+
+    let product = new productModel({
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      category: req.body.category,
+      image: uploadedImage.url,
+    });
+    console.log(product);
+    await product.save();
+    return res.json({ message: "Product Added Successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 /**
  * Update Product by ID
  */
 let updateProductByID = async (req, res) => {
-    //
+  try {
+    let product = await productModel.findById(req.params.id);
+    // console.log(uploadedImage);
+    console.log(product);
+    if (req.files[0] !== undefined) {
+      let uploadedImage = await cloudUpload(req.files[0].path);
+      console.log("Image uploaded");
+      product.image = uploadedImage.url;
+    }
+    product.title = req.body.title;
+    product.details = req.body.details;
+    product.price = req.body.price;
+    product.quantity = req.body.quantity;
+    product.category = req.body.category;
+
+    let productUpdated = await productModel.findByIdAndUpdate(
+      req.params.id,
+      product,
+      { new: true }
+    );
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.json(productUpdated);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
 };
 
 /**
  * Delete Product by ID
  */
-let deleteProductByID = async (req, res) => {};
+let deleteProductByID = async (req, res) => {
+  try {
+    let product = await productModel.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+/**
+ * Add Review Method
+ */
 let addReview = async (req, res) => {
     const { user_id, name, comment, rating } = req.body;
     // console.log('User:', user_id);

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  private API_URL = 'http://localhost:3000/users';
+  private API_URL = 'http://localhost:7000/api/users';
   constructor(private http: HttpClient) {}
 
   getUsers() {
@@ -21,7 +21,7 @@ export class UserService {
   }
 
   updateUser(user: any) {
-    return this.http.put(this.API_URL + `/${user.id}`, user);
+    return this.http.put(this.API_URL + `/${user._id}`, user);
   }
 
   deleteUser(id: string) {

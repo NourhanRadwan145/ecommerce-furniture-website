@@ -1,0 +1,99 @@
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Edit Product Details</h5>
+          <form [formGroup]="editForm">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Product Name</label>
+              <input
+                formControlName="title"
+                type="text"
+                class="form-control"
+                id="productName"
+                placeholder="Enter product name"
+                value="{{ product.title }}"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productDescription" class="form-label"
+                >Product Description</label
+              >
+              <textarea
+                formControlName="details"
+                class="form-control"
+                id="productDescription"
+                rows="3"
+                placeholder="Enter product description"
+                value="{{ product.details }}"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="productPrice" class="form-label">Product Price</label>
+              <input
+                formControlName="price"
+                type="number"
+                class="form-control"
+                id="productPrice"
+                placeholder="Enter product price"
+                value="{{ product.price }}"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productQuantity" class="form-label"
+                >Product Quantity</label
+              >
+              <input
+                formControlName="productQuantity"
+                type="number"
+                class="form-control"
+                id="productQuantity"
+                placeholder="Enter Product Quantity"
+                value="{{ product.quantity }}"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="poductCategory" class="form-label"
+                >Product Category</label
+              >
+              <select
+                formControlName="poductCategory"
+                class="form-select"
+                id="poductCategory"
+                aria-label="Select Category"
+              >
+                <option
+                  [value]="product.category"
+                  [attr.selected]="product.category ? 'selected' : null"
+                >
+                  {{ product.category }}
+                </option>
+                <option value="table">Table</option>
+                <option value="chair">Chair</option>
+                <option value="sofa">Sofa</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productImage" class="form-label">Product Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="productImage"
+                placeholder="Enter product image"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="editFormSubmit()"
+            >
+              Update Product
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

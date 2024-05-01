@@ -1,0 +1,88 @@
+<div class="text-center"><h1>Admin Dashboard</h1></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div
+    class="collapse navbar-collapse d-flex justify-content-center"
+    id="navbarSupportedContent"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin']">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/product']">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/users']">Users</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="card mt-3">
+  <div class="card-body">
+    <!-- title -->
+    <div class="d-flex justify-content-between">
+      <h3 class="card-title">Products List</h3>
+      <button class="btn btn-primary" (click)="createProduct()">
+        Create Product
+      </button>
+    </div>
+    <!-- <h5 class="card-subtitle">Overview of the Orders</h5> -->
+
+    <!-- title -->
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr class="">
+            <th class="text-dark font-medium fs-4">Image</th>
+            <th class="text-dark font-medium fs-4">Name</th>
+            <th class="text-dark font-medium fs-4">Price</th>
+            <th class="text-dark font-medium fs-4">Description</th>
+            <th class="text-dark font-medium fs-4 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                  [src]="product.image"
+                  alt="user"
+                  width="50"
+                  class="rounded-circle"
+                />
+              </div>
+            </td>
+            <td class="fs-5 fw-medium">{{ product.title }}</td>
+            <td class="fs-5">{{ product.price }}</td>
+
+            <td>
+              <h5 class="mb-0 fw-normal fs-6">{{ product.details }}</h5>
+            </td>
+            <td>
+              <div class="d-flex flex-row">
+                <button
+                  class="btn btn-success me-1"
+                  (click)="viewProduct(product._id)"
+                >
+                  View
+                </button>
+                <button
+                  class="btn btn-info me-1"
+                  (click)="editProduct(product._id)"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteProduct(product._id)"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
