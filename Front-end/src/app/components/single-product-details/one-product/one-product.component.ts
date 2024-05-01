@@ -10,6 +10,7 @@ import { SingleProductService } from '../../../Services/single-product.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { CartProductsCountService } from '../../../Services/cart-products-count.service';
 
 
 
@@ -58,11 +59,13 @@ export class DialogContentExampleDialog {
   quantity: number = 1;
   user_id: any;
   ID: any;
+  product_number: number;
   constructor(
     public dialogRef: MatDialogRef<DialogContentExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private productService:SingleProductService,
     private route: ActivatedRoute, 
+    private productsCount: CartProductsCountService
   ) {
 
     this.product = data.product;
@@ -76,6 +79,7 @@ export class DialogContentExampleDialog {
       next: (data: any) => {
         console.log(data);
         this.user_id = data.data._id;
+        this.product_number = data.data.carts.length;
         // console.log(this.user_id);
       },
       error: (err) => {
@@ -118,7 +122,8 @@ export class DialogContentExampleDialog {
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
-              window.location.reload();
+              // window.location.reload();
+              this.productsCount.updateData(this.product_number + 1);
             });
 
           },
