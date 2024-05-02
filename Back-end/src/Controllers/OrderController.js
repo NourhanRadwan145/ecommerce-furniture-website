@@ -28,7 +28,6 @@ let getAllOrders = async (req, res) => {
     },
   ];
   let orders = await orderModel.aggregate(pipeline);
-  // console.log(orders);
   return res.json(orders);
 };
 
@@ -69,7 +68,6 @@ let updateOrderByID = async (req, res) => {
     }
     return res.json(order);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
@@ -107,22 +105,20 @@ let weeklyOrders = async (req, res) => {
       {
         $match: {
           date: {
-            $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), // Filter orders from the last 7 days
+            $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
           },
         },
       },
       {
         $group: {
           _id: null,
-          totalOrders: { $sum: 1 }, // Count the number of orders
+          totalOrders: { $sum: 1 },
         },
       },
     ];
     let orders = await orderModel.aggregate(pipeline);
-    console.log(orders);
     return res.json(orders);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
@@ -151,7 +147,7 @@ let dailyOrders = async (req, res) => {
       {
         $group: {
           _id: null,
-          totalOrders: { $sum: 1 }, // Count the number of orders
+          totalOrders: { $sum: 1 }, 
         },
       },
     ];
@@ -178,22 +174,20 @@ let weeklySales = async (req, res) => {
       {
         $match: {
           date: {
-            $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), // Filter orders from the last 7 days
+            $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
           },
         },
       },
       {
         $group: {
           _id: null,
-          totalSales: { $sum: "$totalPrice" }, // Count the number of orders
+          totalSales: { $sum: "$totalPrice" },
         },
       },
     ];
     let orders = await orderModel.aggregate(pipeline);
-    console.log(orders);
     return res.json(orders);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
@@ -208,22 +202,20 @@ let dailySales = async (req, res) => {
       {
         $match: {
           date: {
-            $gte: new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000), // Filter orders from the last 1 days
+            $gte: new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000),
           },
         },
       },
       {
         $group: {
           _id: null,
-          totalSales: { $sum: "$totalPrice" }, // Count the number of orders
+          totalSales: { $sum: "$totalPrice" },
         },
       },
     ];
     let orders = await orderModel.aggregate(pipeline);
-    console.log(orders);
     return res.json(orders);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
@@ -243,10 +235,8 @@ let salesPerWeek = async (req, res) => {
       },
     ];
     let orders = await orderModel.aggregate(pipeline);
-    console.log(orders);
     return res.json(orders);
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });

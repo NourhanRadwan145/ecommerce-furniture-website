@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SingleProductService } from '../../Services/single-product.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { OneProductComponent } from './one-product/one-product.component';
@@ -12,6 +12,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '../header/header.component';
 import { CartProductsCountService } from '../../Services/cart-products-count.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 
@@ -63,10 +64,19 @@ export class SingleProductDetailsComponent implements OnInit
     private router:Router, 
     private productService:SingleProductService,
     private formBuilder: FormBuilder,
-    private productsCount: CartProductsCountService
+    private productsCount: CartProductsCountService,
+    private dialog: MatDialog
   ) 
   {
     this.ID = route.snapshot.params["id"];
+  }
+
+  /************** Open dialog for image full screen ***************/
+  openImageDialog(imageSrc: string): void {
+    this.dialog.open(ImageDialogComponent, {
+      data: { imageSrc: imageSrc },
+      panelClass: 'full-screen-dialog'
+    });
   }
   
   
@@ -76,7 +86,6 @@ export class SingleProductDetailsComponent implements OnInit
     /******* get single product ********/
     this.productService.getProductById(this.ID).subscribe({
       next:(data)=>{
-        // console.log(data)
         if(data == null)
         {
           this.router.navigate(['/']);
@@ -86,23 +95,19 @@ export class SingleProductDetailsComponent implements OnInit
       },
       error:(err)=>{
         console.log("cannot get the product !!");
-        // this.router.navigate(['/error']);
       }
     })
 
     /********** get related products **********/
     this.productService.getAllProducts().subscribe({
       next: (data: any) => {
-        // console.log("Received data:", data);
         this.allProducts = data;
         if (this.product && this.product.category) {
           let relatedProducts = data.filter((product: any) => product.category === this.product.category && product._id !== this.product._id);
           for (let i = 0; i < 8; i++) {
             this.relatedProducts.push(relatedProducts[i]);
           }
-          console.log(this.relatedProducts);
         }
-        console.log("Filtered related products:", this.relatedProducts);
         if (this.relatedProducts.length == 0) {
           for (let i = 0; i < 8; i++) {
             this.relatedProducts.push(data[i]);
@@ -126,11 +131,8 @@ export class SingleProductDetailsComponent implements OnInit
 
     this.productService.getUserToken().subscribe({
       next: (data: any) => {
-        console.log(data);
-        // console.log(data.data.carts.length);
         this.product_number = data.data.carts.length;
         this.user_id = data.data._id;
-        // console.log(this.user_id);
       },
       error: (err) => {
         console.log('cannot get user token !!', err);
@@ -223,7 +225,6 @@ export class SingleProductDetailsComponent implements OnInit
   {
 
     this.submitted = true;
-    // console.log(this.reviewForm.invalid);
     if (!this.reviewForm.invalid) {
     
       const newReview = {
@@ -233,10 +234,8 @@ export class SingleProductDetailsComponent implements OnInit
         rating: this.newReview.rating
       };
 
-      // console.log('You already reviewed this product');
       this.productService.addReview(this.ID, newReview).subscribe({
         next: (data) => {
-          // console.log(data);
           if (!this.product.reviews) {
             this.product.reviews = [];
           }
@@ -360,13 +359,11 @@ export class SingleProductDetailsComponent implements OnInit
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
           next: (data:any) => {
-            console.log(data);
             Swal.fire({
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
               window.location.reload();
-              // this.productsCount.updateData(this.product_number + 1);
             });
           },
           error: (err) => {
@@ -390,4 +387,21 @@ export class SingleProductDetailsComponent implements OnInit
   /********************************************************************/
   
 
+}
+
+
+@Component({
+  selector: 'app-image-dialog',
+  templateUrl: './ImageDialog/image-dialog.component.html',
+  styleUrls: ['./ImageDialog/image-dialog.component.css']
+})
+export class ImageDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ImageDialogComponent>
+  ) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

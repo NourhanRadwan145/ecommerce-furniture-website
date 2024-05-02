@@ -123,6 +123,7 @@ placeOrder() {
           const userId = response.data._id;
           this.userService.addProductToOrder(userId).subscribe(
               (response) => {
+                  window.location.href = '/confirm';
                   this.router.navigate(['/confirm']);
               },
               (error) => {

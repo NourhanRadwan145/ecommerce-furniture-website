@@ -21,7 +21,6 @@ let GetAllUsers = async (req, res) => {
 // ---------------------------------- Get User By ID  -----------------------------------
 let GetUserById = async (req, res) => {
   try {
-    console.log(req.params.id);
     let user = await UserModel.findById(req.params.id);
     if (!user) return res.json({ message: "No User Found" });
     return res.json(user);
@@ -39,10 +38,8 @@ let AddNewUser = async (req, res) => {
     let password = req.body.password;
     let hashedPassword = await bcrypt.hash(password, salt);
 
-    // Adding Image to Cloudinary
 
     let uploadedImage = await cloudUpload(req.files[0].path);
-    console.log(uploadedImage);
 
     let user = new UserModel({
       username: req.body.username,
@@ -51,7 +48,6 @@ let AddNewUser = async (req, res) => {
       image: uploadedImage.url,
       gender: req.body.gender,
     });
-    console.log(user);
     await user.save();
     return res.json({ message: "User Added Successfully" });
   } catch (err) {
@@ -62,31 +58,30 @@ let AddNewUser = async (req, res) => {
 // ---------------------------------- Update User By ID  --------------------------------
 const UpdateUser = async (req, res) => {
   const id = req.params.id;
-  // Getting the User from the DB
   const user = await UserModel.findById(id);
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
-  //   const updateData = req.body;
-  // if the user changed his opassword
   if (req.body.password) {
     try {
-      // Hash the password
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(updateData.password, saltRounds);
       user.password = hashedPassword;
     } catch (error) {
-      console.log("Error hashing password:", error.message);
       return res
         .status(500)
         .json({ message: "Error hashing password", error: error.message });
     }
   }
-  //Upload the image to Cloudinary
-  if (req.files[0] !== undefined) {
+  if (req.files && req.files[0] !== undefined) {
     let uploadedImage = await cloudUpload(req.files[0].path);
     user.image = uploadedImage.url;
   }
+
+  if(req.body.orders){
+    user.orders = req.body.orders
+  }
+
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
       id,
@@ -99,12 +94,10 @@ const UpdateUser = async (req, res) => {
         { userId: id },
         { $set: { username: req.body.username } }
       );
-      console.log("OrderModel Update Result:", updateResult);
     }
 
     return res.json(updatedUser);
   } catch (error) {
-    console.log("Error updating user:", error.message);
     return res
       .status(500)
       .json({ message: "Error updating user", error: error.message });
@@ -167,13 +160,11 @@ let RegisterUser = async (req, res) => {
       });
       let savedUser = await newUser.save();
       const { _id } = savedUser.toJSON();
-      // const secretKey = crypto.randomBytes(32).toString("hex")
       const token = jwt.sign({ _id: _id }, "secret");
       res.cookie("jwt", token, {
         httpOnly: true,
         maxAge: 24 * 30 * 60 * 60 * 1000,
       });
-      // console.log(token)
       return res
         .status(201)
         .json({ message: "User Created Successfully", user: savedUser });
@@ -223,65 +214,58 @@ let AddProductToCart = async (req, res) => {
       .status(201)
       .json({ message: "Item added to cart successfully", user: userData });
   } catch (error) {
-    console.error("Error adding item to cart:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
+/**
+ * Add products to order
+ */
 let AddProductToOrder = async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const user = await UserModel.findById(userId);
+      const user = await UserModel.findById(userId);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Fetch products from the database
-    const productIds = user.carts.map((item) => item.product);
-    const products = await ProductModel.find({ _id: { $in: productIds } });
-
-    // Calculate total price of the order
-    let totalPrice = 0;
-    user.carts.forEach((item) => {
-      const product = products.find(
-        (p) => p._id.toString() === item.product.toString()
-      );
-      if (product) {
-        totalPrice += product.price * item.quantity;
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
       }
-    });
-    // Add delivery fee
-    totalPrice += 300;
 
-    // Move products from carts to orders
-    const orderProducts = user.carts.map((item) => item.product);
-    user.orders.push(...orderProducts);
+      const productIds = user.carts.map(item => item.product);
+      const products = await ProductModel.find({ _id: { $in: productIds } });
 
-    // Clear the carts
-    user.carts = [];
+      let totalPrice = 0;
+      user.carts.forEach(item => {
+          const product = products.find(p => p._id.toString() === item.product.toString());
+          if (product) {
+              totalPrice += product.price * item.quantity;
+          }
+      });
+      totalPrice += 300;
 
-    // Save the updated user
-    await user.save();
+      const orderProducts = user.carts.map(item => item.product);
 
-    // Create a new order
-    const order = new OrderModel({
-      userId: user._id,
-      username: user.username,
-      date: new Date(),
-      totalPrice: totalPrice,
-      products: orderProducts,
-      status: "Pending",
-    });
+      user.carts = [];
 
-    // Save the order
-    await order.save();
+      await user.save();
 
-    res.status(200).json({ message: "Products added to order successfully" });
+      const order = new OrderModel({
+          userId: user._id,
+          username: user.username,
+          date: new Date(),
+          totalPrice: totalPrice,
+          products: orderProducts,
+          status: "Pending"
+      });
+
+      await order.save();
+      user.orders.push(order._id);
+      await user.save();
+
+      res.status(200).json({ message: "Products added to order successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -321,7 +305,6 @@ let RemoveProductFromCart = async (req, res) => {
 
     res.status(200).json({ message: "Product removed from cart successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -360,7 +343,6 @@ let IncreaseProductQuantity = async (req, res) => {
       .status(200)
       .json({ message: "Product quantity increased successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -399,7 +381,6 @@ let DecreaseProductQuantity = async (req, res) => {
       .status(200)
       .json({ message: "Product quantity decreased successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -417,7 +398,6 @@ let GetCartByUserId = async (req, res) => {
 
     res.status(200).json({ cart: user.carts });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -434,7 +414,6 @@ let GetOrdersByUserId = async (req, res) => {
 
     res.status(200).json({ orders: user.orders });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -461,7 +440,6 @@ const GetUserByToken = async (req, res) => {
     const { password, ...data } = user.toJSON();
     return res.json({ data: data });
   } catch (error) {
-    console.error("Error in GetUserByToken:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

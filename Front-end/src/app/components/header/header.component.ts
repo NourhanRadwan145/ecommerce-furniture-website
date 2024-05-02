@@ -33,11 +33,8 @@ matMenu: any;
   ngOnInit() {
         this.productService.getUserToken().subscribe({
           next: (data: any) => {
-            console.log(data);
-            console.log(data.data.orders);
             this.data = data.data.carts.length;
             data.data.orders.forEach((element: { totalPrice: number; }) => {
-              // console.log(element);
               this.productService.getOrderById(element).subscribe({
                 next: (data: any) => {
                   if(data && data.totalPrice){
@@ -58,7 +55,6 @@ matMenu: any;
         this.productsCount.data$.subscribe({
           next: (data) => {
             this.data = data;
-            console.log('Data:', data);
           }
         });
   }
