@@ -66,22 +66,6 @@ export class InfoDialogComponent implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
-  // loadUserInfo() {
-  //   this.userService.getUserById(this.id).subscribe({
-  //     next: (data) => {
-  //       this.userInfo = data;
-  //       // Use patchValue to update form values
-  //       this.personalInfoForm.patchValue({
-  //         fullName: data.username, // assuming 'username' is the correct field
-  //         email: data.email,
-  //         image: data.image,
-  //         //password: data.password
-  //       });
-  //     },
-  //     error: (error) => console.error('Error fetching user info', error)
-  //   });
-  // }
-
   authSingleProducts() {
     this.http
       .get<any>('http://localhost:7000/api/users/user/user', {
@@ -105,27 +89,6 @@ export class InfoDialogComponent implements OnInit {
       });
   }
 
-  // onFileSelected(event: Event): void {
-  //   const element = event.target as HTMLInputElement;
-  //   if (element.files && element.files.length) {
-  //     const file = element.files[0];
-  //     const reader = new FileReader();
-
-  //     reader.onload = (e: ProgressEvent<FileReader>) => {
-  //       this.imageUrl = e.target?.result; // This is now the data URL
-  //     };
-  //     reader.readAsDataURL(file); // Reads the file as a data URL
-  //   }
-  // }
-
-  // onFileSelected(event: Event) {
-  //   const element = event.target as HTMLInputElement;
-  //   if (element.files && element.files.length) {
-  //     this.selectedFile = element.files[0];
-  //     this.name = this.selectedFile.name;
-  //     console.log('Selected file:', this.name);
-  //   }
-  // }
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -139,13 +102,6 @@ export class InfoDialogComponent implements OnInit {
 
   updateUser() {
     if (this.personalInfoForm.valid) {
-      // const updatePayload = {
-      //   username: this.personalInfoForm.value.fullName,
-      //   email: this.personalInfoForm.value.email,
-      //   image: this.imageUrl,
-      //   password: this.personalInfoForm.value.password ? this.personalInfoForm.value.password : this.password,
-
-      // };
       // Creating a FormData object to send the data
       const updatePayload = new FormData();
       updatePayload.append('username', this.personalInfoForm.value.fullName);
