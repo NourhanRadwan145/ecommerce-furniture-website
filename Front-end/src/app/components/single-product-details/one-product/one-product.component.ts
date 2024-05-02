@@ -79,10 +79,8 @@ export class DialogContentExampleDialog {
 
     this.productService.getUserToken().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.user_id = data.data._id;
         this.product_number = data.data.carts.length;
-        // console.log(this.user_id);
       },
       error: (err) => {
         console.log('cannot get user token !!', err);
@@ -114,20 +112,16 @@ export class DialogContentExampleDialog {
   /**************** Add to cart ****************/
   addProductToCart() 
   {
-    console.log(this.product.quantity);
-    console.log(this.quantity);
     if(this.product.quantity >= this.quantity)
     {
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
           next: (data:any) => {
-            console.log(data);
             Swal.fire({
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
               window.location.reload();
-              // this.productsCount.updateData(this.product_number + 1);
             });
 
           },

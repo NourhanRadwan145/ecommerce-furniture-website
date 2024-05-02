@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv').config({path: "../../.env"});
 const DATABASE_URL = process.env.DATABASE_URL;
-console.log(DATABASE_URL);
 //#endregion
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -35,7 +34,6 @@ app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
 //#endregion
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');

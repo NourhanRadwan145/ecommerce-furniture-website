@@ -86,7 +86,6 @@ export class SingleProductDetailsComponent implements OnInit
     /******* get single product ********/
     this.productService.getProductById(this.ID).subscribe({
       next:(data)=>{
-        // console.log(data)
         if(data == null)
         {
           this.router.navigate(['/']);
@@ -96,23 +95,19 @@ export class SingleProductDetailsComponent implements OnInit
       },
       error:(err)=>{
         console.log("cannot get the product !!");
-        // this.router.navigate(['/error']);
       }
     })
 
     /********** get related products **********/
     this.productService.getAllProducts().subscribe({
       next: (data: any) => {
-        // console.log("Received data:", data);
         this.allProducts = data;
         if (this.product && this.product.category) {
           let relatedProducts = data.filter((product: any) => product.category === this.product.category && product._id !== this.product._id);
           for (let i = 0; i < 8; i++) {
             this.relatedProducts.push(relatedProducts[i]);
           }
-          console.log(this.relatedProducts);
         }
-        console.log("Filtered related products:", this.relatedProducts);
         if (this.relatedProducts.length == 0) {
           for (let i = 0; i < 8; i++) {
             this.relatedProducts.push(data[i]);
@@ -136,11 +131,8 @@ export class SingleProductDetailsComponent implements OnInit
 
     this.productService.getUserToken().subscribe({
       next: (data: any) => {
-        console.log(data);
-        // console.log(data.data.carts.length);
         this.product_number = data.data.carts.length;
         this.user_id = data.data._id;
-        // console.log(this.user_id);
       },
       error: (err) => {
         console.log('cannot get user token !!', err);
@@ -233,7 +225,6 @@ export class SingleProductDetailsComponent implements OnInit
   {
 
     this.submitted = true;
-    // console.log(this.reviewForm.invalid);
     if (!this.reviewForm.invalid) {
     
       const newReview = {
@@ -243,10 +234,8 @@ export class SingleProductDetailsComponent implements OnInit
         rating: this.newReview.rating
       };
 
-      // console.log('You already reviewed this product');
       this.productService.addReview(this.ID, newReview).subscribe({
         next: (data) => {
-          // console.log(data);
           if (!this.product.reviews) {
             this.product.reviews = [];
           }
@@ -370,13 +359,11 @@ export class SingleProductDetailsComponent implements OnInit
       this.productService.addProductToCart(this.user_id, this.ID, this.quantity)
         .subscribe({
           next: (data:any) => {
-            console.log(data);
             Swal.fire({
               icon: 'success',
               title: 'Product added to cart successfully',
             }).then(() => {
               window.location.reload();
-              // this.productsCount.updateData(this.product_number + 1);
             });
           },
           error: (err) => {

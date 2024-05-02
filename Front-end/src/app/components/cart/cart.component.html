@@ -53,7 +53,7 @@
         <div class="row">
           <diV class="col-6">Shipping</diV>
           <div class="col-6">
-            <diV class="col-12">Flat rate: 8.00$</diV>
+            <diV class="col-12">Flat rate: {{cart.length===0 ? 0 :'8$'}}</diV>
             <diV class="col-12">Shipping to: {{this.selectedCountry}}</diV>
             <div class="col-12">
               <a href="javascript:void(0);" (click)="toggleAddressForm()" class="a-custom">Change address</a>
@@ -74,7 +74,7 @@
         </div>
         <div class="row">
           <diV class="col-6">Total</diV>
-          <diV class="col-6">{{(this.total+8).toFixed(2)}}$</diV>
+          <diV class="col-6">{{cart.length===0 ? 0 : (this.total+8).toFixed(2)}}$</diV>
         </div>
         <div class="row">
           <div class="col-12">
@@ -92,7 +92,9 @@
           </div>
         </div>
         <div class="row">
-          <a href="/checkout" class="btn btn-custom col-10"><b>Proceed to checkout</b></a>
+          <a href="/checkout" class="btn btn-custom col-10" [ngClass]="{'dis-btn': cart.length === 0}">
+            <b>Proceed to checkout</b>
+          </a>
         </div>
 
       </div>

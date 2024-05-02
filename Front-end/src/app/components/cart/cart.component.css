@@ -112,3 +112,8 @@ table thead th {
 .a-custom:hover{
   color: #01363fea;
 }
+
+.dis-btn {
+  pointer-events: none;
+  opacity: 0.5;
+}

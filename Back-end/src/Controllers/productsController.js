@@ -11,7 +11,6 @@ const cloudUpload = require("../Utils/Cloudinary");
 const getAllProducts = async (req, res) => {
   try {
       let query = {};
-      // Filtering logic by (Price and Category)
       if (req.query.minPrice) {
           query.price = { $gte: parseInt(req.query.minPrice) };
       }
@@ -22,7 +21,6 @@ const getAllProducts = async (req, res) => {
           query.category = req.query.category;
       }
 
-      // Search logic
       if (req.query.searchTerm) {
           query.title = { $regex: new RegExp(req.query.searchTerm, 'i') };
       }
@@ -30,7 +28,6 @@ const getAllProducts = async (req, res) => {
       const products = await productModel.find(query);
       res.json(products );
   } catch (err) {
-      console.error('Error loading products:', err);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -76,7 +73,6 @@ let createNewProduct = async (req, res) => {
       category: req.body.category,
       image: uploadedImage.url,
     });
-    console.log(product);
     await product.save();
     return res.json({ message: "Product Added Successfully" });
   } catch (error) {
@@ -90,11 +86,8 @@ let createNewProduct = async (req, res) => {
 let updateProductByID = async (req, res) => {
   try {
     let product = await productModel.findById(req.params.id);
-    // console.log(uploadedImage);
-    console.log(product);
     if (req.files[0] !== undefined) {
       let uploadedImage = await cloudUpload(req.files[0].path);
-      console.log("Image uploaded");
       product.image = uploadedImage.url;
     }
     product.title = req.body.title;
@@ -136,7 +129,6 @@ let deleteProductByID = async (req, res) => {
  */
 let addReview = async (req, res) => {
     const { user_id, name, comment, rating } = req.body;
-    // console.log('User:', user_id);
     const { id } = req.params;
     try {
       const product = await productModel.findById(id).exec();
@@ -164,7 +156,6 @@ let addReview = async (req, res) => {
       await product.save();
       return res.status(201).json({ message: "Review added successfully", review });
     } catch (error) {
-      console.error('Error adding review:', error);
       return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -176,25 +167,21 @@ const getUserByToken = async (req, res) => {
   try {
       const cookie = req.cookies["jwt"];
       if (!cookie) {
-          console.log("JWT cookie not found")
           return res.status(401).json({ message: "Unauthorized: JWT cookie not found" });
       }
       const claims = jwt.verify(cookie, "secret"); 
       if (!claims) {
-          console.log("Invalid token");
           return res.status(401).json({ message: "Unauthorized: Invalid token" });
       }
 
       let user = await userModel.findOne({ _id: claims._id });
       if (!user) {
-        console.log("User not found");
           return res.status(401).json({ message: "Unauthorized: User not found" });
       }
 
       const { password, ...data } = user.toJSON();
       return res.json({ data: data });
   } catch (error) {
-      console.error("Error in GetUserByToken:", error);
       return res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -203,12 +190,8 @@ const getUserByToken = async (req, res) => {
 /**
 * add to cart
 */
-
 let addToCart = async (req, res) => {
   const { user_id, product, quantity } = req.body;
-  // console.log(quantity);
-  // console.log('User:', user_id);
-  // console.log('Product:', product);
 
   try {
     const user = await userModel.findById(user_id);
@@ -224,13 +207,8 @@ let addToCart = async (req, res) => {
     if (existingItem) 
     {
         const newQuantity = existingItem.quantity + quantity;
-        // console.log(quantity);
-        // console.log(existingItem.quantity);
-        // console.log(newQuantity);
-        // console.log(productt.quantity);
           existingItem.quantity = newQuantity;
           productt.quantity -= quantity;
-        // }
         await productt.save();
     } else {
         user.carts.push({ "product": product, "quantity": quantity });
@@ -240,7 +218,6 @@ let addToCart = async (req, res) => {
     await user.save();
     return res.status(201).json({ message: "Item added to cart successfully", user });
   } catch (error) {
-    console.error('Error adding item to cart:', error);
     return res.status(500).json({ message: "Internal server error" });
   }
 }
