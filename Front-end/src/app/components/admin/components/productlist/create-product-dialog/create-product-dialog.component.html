@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-4">Create New Product</h5>
+          <h5 class="card-title mb-4 fs-4 fw-medium">Create New Product</h5>
           <form [formGroup]="createForm">
             <div class="mb-3">
               <label for="productName" class="form-label">Product Name</label>
@@ -50,19 +50,19 @@
               />
             </div>
             <div class="mb-3">
-              <label for="poductCategory" class="form-label"
+              <label for="productCategory" class="form-label"
                 >Product Category</label
               >
               <select
-                formControlName="poductCategory"
+                formControlName="productCategory"
                 class="form-select"
-                id="poductCategory"
+                id="productCategory"
                 aria-label="Select Category"
               >
                 <option value="" selected disabled>Select Category</option>
-                <option value="table">Table</option>
-                <option value="chair">Chair</option>
-                <option value="sofa">Sofa</option>
+                <option value="Table">Table</option>
+                <option value="Chair">Chair</option>
+                <option value="Sofa">Sofa</option>
               </select>
             </div>
             <div class="mb-3">

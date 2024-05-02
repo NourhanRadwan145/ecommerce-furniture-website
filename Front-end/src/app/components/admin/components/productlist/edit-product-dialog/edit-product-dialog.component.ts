@@ -31,7 +31,6 @@ export class EditProductDialogComponent {
     private dialog: MatDialogRef<any>,
     private router: Router
   ) {
-    console.log(data.productFromParent);
     this.product = data.productFromParent;
 
     // Set default values for form controls based on product data
@@ -46,9 +45,7 @@ export class EditProductDialogComponent {
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file.name);
       this.imageFile = file;
-      console.log(this.imageFile);
 
       // Handle the file here. You can add it to a FormData object if you're sending it to a server.
     }
@@ -57,8 +54,6 @@ export class EditProductDialogComponent {
   product = this.data.productFromParent;
 
   editFormSubmit() {
-    console.log(this.product);
-
     this.productUpdated = new FormData();
     this.productUpdated.append('_id', this.product._id);
     this.productUpdated.append('title', this.editForm.value.title);

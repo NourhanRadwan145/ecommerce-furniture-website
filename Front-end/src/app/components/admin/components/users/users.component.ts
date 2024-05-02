@@ -30,7 +30,6 @@ export class UsersComponent {
   ngOnInit() {
     this.myuserService.getUsers().subscribe((data) => {
       this.users = data;
-      console.log(this.users);
     });
   }
 
@@ -55,8 +54,6 @@ export class UsersComponent {
   editUser(id: any) {
     this.myuserService.getUserById(id).subscribe((data) => {
       const user = data;
-      console.log(user);
-
       this.dialog.open(EditUserComponent, {
         width: '500px',
         data: {
@@ -75,7 +72,6 @@ export class UsersComponent {
   viewUser(id: any) {
     this.myuserService.getUserById(id).subscribe((data) => {
       const user = data;
-      console.log(user);
 
       this.dialog.open(ViewUserComponent, {
         width: '500px',

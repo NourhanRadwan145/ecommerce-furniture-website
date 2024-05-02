@@ -32,7 +32,7 @@ export class CreateProductDialogComponent implements OnInit {
       price: new FormControl(''),
       details: new FormControl(''),
       productQuantity: new FormControl(''),
-      poductCategory: new FormControl(''),
+      productCategory: new FormControl(''),
     });
   }
 
@@ -40,7 +40,6 @@ export class CreateProductDialogComponent implements OnInit {
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file.name);
       this.imageFile = file;
       // Handle the file here. You can add it to a FormData object if you're sending it to a server.
     }
@@ -54,7 +53,10 @@ export class CreateProductDialogComponent implements OnInit {
       'productQuantity',
       this.createForm.value.productQuantity
     );
-    this.product.append('poductCategory', this.createForm.value.poductCategory);
+    this.product.append(
+      'productCategory',
+      this.createForm.value.productCategory
+    );
     this.product.append('image', this.imageFile);
 
     this.productService.createProduct(this.product).subscribe(
@@ -68,7 +70,7 @@ export class CreateProductDialogComponent implements OnInit {
           this.router
             .navigateByUrl('/', { skipLocationChange: true })
             .then(() => {
-              this.router.navigate(['/admin/prodcuts']);
+              this.router.navigate(['/admin/prodcut']);
             });
         });
       },
