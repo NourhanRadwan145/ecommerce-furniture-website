@@ -13,6 +13,6 @@ export class ConfirmOrderComponent {
   constructor(private router: Router) { }
 
 continueShopping() {
-  this.router.navigate(['/products']);
+  window.location.href = '/products';
 }
 }

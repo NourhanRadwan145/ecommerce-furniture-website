@@ -37,12 +37,12 @@ matMenu: any;
             console.log(data.data.orders);
             this.data = data.data.carts.length;
             data.data.orders.forEach((element: { totalPrice: number; }) => {
-              console.log(element);
+              // console.log(element);
               this.productService.getOrderById(element).subscribe({
                 next: (data: any) => {
-                  console.log(data);
-                  console.log(data.totalPrice);
-                  this.oredersTotalPrice += data.totalPrice;
+                  if(data && data.totalPrice){
+                    this.oredersTotalPrice += data.totalPrice;
+                  }
                 },
                 error: (err) => {
                   console.log('cannot get user token !!', err);
