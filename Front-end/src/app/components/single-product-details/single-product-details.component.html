@@ -4,7 +4,7 @@
     <!--------------------------------------- Product Div ---------------------------------------->
     <div class="row">
         <div class="col-6 col-lg-6 col-md-12 col-sm-12 p-0 img-div">
-            <img src="{{ product.image }}" alt="chair" class="product-img" width="100%" height="500px" (mousemove)="moveImage($event)">
+            <img src="{{ product.image }}" alt="chair" class="product-img" width="100%" height="500px" (mousemove)="moveImage($event)" (click)="openImageDialog(product.image)">
         </div>
         <div class="col-6 col-lg-6 col-md-12 col-sm-12 p-lg-0 pt-md-3 pt-sm-3">
             <div class="containner px-4 pe-4 pt-0">

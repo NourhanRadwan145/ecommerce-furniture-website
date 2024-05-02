@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SingleProductService } from '../../Services/single-product.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { OneProductComponent } from './one-product/one-product.component';
@@ -12,6 +12,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '../header/header.component';
 import { CartProductsCountService } from '../../Services/cart-products-count.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 
@@ -63,10 +64,19 @@ export class SingleProductDetailsComponent implements OnInit
     private router:Router, 
     private productService:SingleProductService,
     private formBuilder: FormBuilder,
-    private productsCount: CartProductsCountService
+    private productsCount: CartProductsCountService,
+    private dialog: MatDialog
   ) 
   {
     this.ID = route.snapshot.params["id"];
+  }
+
+  /************** Open dialog for image full screen ***************/
+  openImageDialog(imageSrc: string): void {
+    this.dialog.open(ImageDialogComponent, {
+      data: { imageSrc: imageSrc },
+      panelClass: 'full-screen-dialog'
+    });
   }
   
   
@@ -390,4 +400,21 @@ export class SingleProductDetailsComponent implements OnInit
   /********************************************************************/
   
 
+}
+
+
+@Component({
+  selector: 'app-image-dialog',
+  templateUrl: './ImageDialog/image-dialog.component.html',
+  styleUrls: ['./ImageDialog/image-dialog.component.css']
+})
+export class ImageDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ImageDialogComponent>
+  ) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

@@ -8,8 +8,10 @@ const orderRoute = require('../Routes/OrderRoute');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+require('dotenv').config({path: "../../.env"});
+const DATABASE_URL = process.env.DATABASE_URL;
+console.log(DATABASE_URL);
 //#endregion
-mongoose.connect("mongodb+srv://mohamedalgharabawy1:E_Commerce@cluster0.6rct3ri.mongodb.net/E-Commerce?retryWrites=true&w=majority&appName=Cluster0");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({
@@ -18,6 +20,14 @@ app.use(cors({
 }))
 app.use(cookieParser())
 
+mongoose
+  .connect(DATABASE_URL)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+  });
 
 //#region Routes
 app.use("/api/users", UserRoutes)

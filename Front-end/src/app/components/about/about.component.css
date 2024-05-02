@@ -58,7 +58,7 @@ h6{
     text-align: center;
     color: #6c7d8b;
 }
-.card h5{
+.card h4{
     color: #6c7d8b;
 }
 .second{
@@ -71,7 +71,7 @@ h6{
     background-color:#e6ebed ;
 
 }
-h5{
+h4{
     text-align: center;
 }
 .team h2{
@@ -93,4 +93,15 @@ blockquote:hover{
     width: 110px;
     height: 100px;
     border-radius: 50%;
+}
+
+h4{
+    color: #6c7d8b;
+    transition: all;
+    transition-duration: 500ms;
+}
+
+h4:hover{
+    color: black !important;
+    letter-spacing: 5px;
 }
