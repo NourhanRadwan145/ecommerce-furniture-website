@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from './product.model';
 
@@ -11,6 +11,11 @@ export class ProductsService {
   private baseUrl = 'http://localhost:7000/api/products';
 
   constructor(private http: HttpClient) { }
+
+  getUserByToken(): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`${this.baseUrl}/user/product/token`, { headers: headers, withCredentials: true });
+  }
 
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
@@ -39,5 +44,5 @@ export class ProductsService {
   getCartByUserId(userId: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${userId}/cart`);
   }  
-  
+
 }

@@ -4,6 +4,7 @@ import { ProductsService } from '../products/product.service';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-payment',
@@ -15,7 +16,10 @@ import { CommonModule } from '@angular/common';
 })
 export class PaymentComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, 
+    private productService: ProductsService,
+    private router: Router, 
+    private snackBar: MatSnackBar) { }
 
   ngAfterViewInit() {
     const cardNumberInput = document.getElementById('card-number') as HTMLInputElement;
@@ -80,7 +84,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       return cvcRegex.test(cvc);
     }
 
-    payButton.addEventListener('click', function(event) {
+    payButton.addEventListener('click', (event) => {
       event.preventDefault();
 
       const cardNumber = cardNumberInput.value.trim();
@@ -89,45 +93,47 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       const cvc = cardCvcInput.value.trim();
 
       if (!isValidCardNumber(cardNumber)) {
-        alert('Invalid card number. Please enter a valid card number.');
+        this.snackBar.open('Invalid card number. Please enter a valid card number.', 'Close', { duration: 3000 });
         return;
       }
 
       if (!isValidCardHolder(cardHolder)) {
-        alert('Invalid card holder name. Please enter a valid name.');
+        this.snackBar.open('Invalid card holder name. Please enter a valid name.', 'Close', { duration: 3000 });
         return;
       }
 
       if (!isValidExpiryDate(expiryDate)) {
-        alert('Invalid expiry date. Please enter a valid expiry date.');
+        this.snackBar.open('Invalid expiry date. Please enter a valid expiry date.', 'Close', { duration: 3000 });
         return;
       }
 
       if (!isValidCvc(cvc)) {
-        alert('Invalid CVC. Please enter a valid CVC.');
+        this.snackBar.open('Invalid CVC. Please enter a valid CVC.', 'Close', { duration: 3000 });
         return;
       }
 
-      alert('Payment successful!');
+      this.snackBar.open('Payment successful!', 'Close', { duration: 3000 });
     });
   }
   ngOnInit(): void {
   }
 
   placeOrder() {
-    const userId = '662b8775a566fe5003f222ee'; 
-    this.userService.addProductToOrder(userId).subscribe(
-        (response) => {
-            console.log('Order placed successfully', response);
-            // Clear cart and user info from local storage
-            localStorage.removeItem('cart');
-            localStorage.removeItem('userInfo');
-            // Navigate to confirmation page or home page
-            this.router.navigate(['/confirm']);
-        },
-        (error) => {
-            console.error('Failed to place order:', error);
-        }
-    );
-  }
+    this.productService.getUserByToken().subscribe((response: any) => {
+        const userId = response.data._id;
+        this.userService.addProductToOrder(userId).subscribe(
+            (response) => {
+                console.log('Order placed successfully', response);
+                // Clear cart and user info from local storage
+                localStorage.removeItem('cart');
+                localStorage.removeItem('userInfo');
+                // Navigate to confirmation page or home page
+                this.router.navigate(['/confirm']);
+            },
+            (error) => {
+                console.error('Failed to place order:', error);
+            }
+        );
+    });
+}
 }

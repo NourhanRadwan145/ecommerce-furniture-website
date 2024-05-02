@@ -19,15 +19,15 @@ export class OrderServiceService {
 
   // methods for each status
   getPendingOrders(userId: string) {
-    return this.getOrdersByStatusAndUserId('pending', userId);
+    return this.getOrdersByStatusAndUserId('Pending', userId);
   }
 
   getAcceptedOrders(userId: string) {
-    return this.getOrdersByStatusAndUserId('accepted', userId);
+    return this.getOrdersByStatusAndUserId('Accepted', userId);
   }
 
   getRejectedOrders(userId: string) {
-    return this.getOrdersByStatusAndUserId('rejected', userId);
+    return this.getOrdersByStatusAndUserId('Rejected', userId);
   }
 
   getOrderById(id: string) {
