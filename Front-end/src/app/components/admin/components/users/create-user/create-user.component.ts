@@ -54,7 +54,16 @@ export class CreateUserComponent {
     this.user.append('gender', this.createForm.value.gender);
     this.user.append('password', this.createForm.value.password);
     console.log(this.user); // id is undefunded
-
+    if (
+      this.createForm.value.password !==
+      this.createForm.value.passwordConfirmation
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Passwords do not match',
+      });
+      return;
+    }
     this.userService.createUser(this.user).subscribe((data) => {
       console.log(data); // id has a random value now
       this.dialog.close();

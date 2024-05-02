@@ -1,56 +1,107 @@
 <body>
-<div class="row">
-  <div class="col-4 col-lg-4 col-sm-11 d-flex align-items-center justify-content-center">
-    <img class="img-fluid image" src="https://i.pinimg.com/736x/d7/62/4b/d7624b3cc22ef6a437b0e43fdbf796ef--french-sofa-fine-furniture.jpg">
-  </div>
-  <div class="col-7 col-sm-11 col-lg-7">
-    <div class="row" style="margin-top: 80px; margin-left: 50px;">
-      <form [formGroup]="personalInfoForm" >
-        <div>
-          <label>User Name:</label>
-          @if(userInfo){
-            <input type="text" formControlName="fullName" value="{{userInfo.username}}">
-          }
-        </div>
-        <div>
-          <label>Email:</label>
-          @if(userInfo){
-            <input type="email" formControlName="email" value="{{userInfo.email}}">
-          }
-        </div>
-        <div>
-          <label>Update Password:</label>
-          <div class="input-group">
-            <input [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-              <img src="{{ hidePassword ? hideIcon : showIcon }}" alt="Toggle Password" style="width: 20px; height: 20px;">
-            </button>
+  <div class="row">
+    <div
+      class="col-4 col-lg-4 col-sm-11 d-flex align-items-center justify-content-center"
+    >
+      <img
+        class="img-fluid image"
+        src="https://i.pinimg.com/736x/d7/62/4b/d7624b3cc22ef6a437b0e43fdbf796ef--french-sofa-fine-furniture.jpg"
+        alt="User Image"
+      />
+    </div>
+    <div class="col-7 col-sm-11 col-lg-7">
+      <div class="row" style="margin-top: 80px; margin-left: 50px">
+        <form [formGroup]="personalInfoForm">
+          <div>
+            <label for="fullName">User Name:</label>
+            @if(userInfo){
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              value="{{ userInfo.username }}"
+            />
+            }
           </div>
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <div class="input-group">
-            <input [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword" class="password-input">
-            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-              <img src="{{ hidePassword ? hideIcon : showIcon }}" alt="Toggle Password" style="width: 20px; height: 20px;">
-            </button>
+          <div>
+            <label for="email">Email:</label>
+            @if(userInfo){
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              value="{{ userInfo.email }}"
+            />
+            }
           </div>
-        </div>
-        <div *ngIf="personalInfoForm.errors?.['mismatch'] && personalInfoForm.get('confirmPassword')?.touched"  style="color: red;">
-          Passwords must match!
-        </div>
-        <!-- <div>
+          <div>
+            <label for="password">Update Password:</label>
+            <div class="input-group">
+              <input
+                id="password"
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="togglePasswordVisibility()"
+              >
+                <img
+                  src="{{ hidePassword ? hideIcon : showIcon }}"
+                  alt="Toggle Password"
+                  style="width: 20px; height: 20px"
+                />
+              </button>
+            </div>
+          </div>
+          <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <div class="input-group">
+              <input
+                id="confirmPassword"
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="confirmPassword"
+                class="password-input"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="togglePasswordVisibility()"
+              >
+                <img
+                  src="{{ hidePassword ? hideIcon : showIcon }}"
+                  alt="Toggle Password"
+                  style="width: 20px; height: 20px"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            *ngIf="personalInfoForm.errors?.['mismatch'] && personalInfoForm.get('confirmPassword')?.touched"
+            style="color: red"
+          >
+            Passwords must match!
+          </div>
+          <!-- <div>
           <label>Image:</label>
           <input type="text" formControlName="image" value="{{userInfo.image}}">
         </div> -->
 
-        <div>
-          <label>Personal Image:</label>
-          <input type="file" (change)="onFileSelected($event)">
-        </div>
-        <button (click)="updateUser()" style="margin-right: 10px;"  class="btn btn-warning" type="submit">Update Info</button>
-      </form>
+          <div>
+            <label for="image">Personal Image:</label>
+            <input id="image" type="file" (change)="onFileSelected($event)" />
+          </div>
+          <button
+            (click)="updateUser()"
+            style="margin-right: 10px"
+            class="btn btn-warning"
+            type="submit"
+          >
+            Update Info
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </body>
