@@ -8,22 +8,24 @@
           alt="Product Image"
         />
         <div class="card-body">
-          <h5 class="card-title">{{ data.userFromParent.username }}</h5>
-          <p class="card-text">
+          <h5 class="card-title fs-3 fw-medium">
+            {{ data.userFromParent.username }}
+          </h5>
+          <!-- <p class="card-text fs-5">
             {{ user.email }}
-          </p>
+          </p> -->
           <ul class="list-group">
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="list-group-item d-flex justify-content-between align-items-center fs-6 fw-bold"
             >
               Email:
-              <span class="badge bg-primary">{{ user.email }}</span>
+              <span class="fs-6">{{ user.email }}</span>
             </li>
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="list-group-item d-flex justify-content-between align-items-center fs-6 fw-bold"
             >
               Gender:
-              <span class="badge bg-primary">{{ user.gender }}</span>
+              <span class="fs-6">{{ user.gender }}</span>
             </li>
           </ul>
         </div>

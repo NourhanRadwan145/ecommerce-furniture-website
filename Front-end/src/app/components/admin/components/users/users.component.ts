@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../Services/user.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -21,7 +21,8 @@ export class UsersComponent {
   constructor(
     private myuserService: UserService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   users: any;
@@ -83,5 +84,16 @@ export class UsersComponent {
         },
       });
     });
+  }
+  logout(): void {
+    this.http
+      .post(
+        'http://localhost:7000/api/users/user/logout',
+        {},
+        { withCredentials: true }
+      )
+      .subscribe({
+        complete: () => this.router.navigate(['/login']),
+      });
   }
 }

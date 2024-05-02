@@ -3,10 +3,10 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title mb-4">Edit Product Details</h5>
+          <h5 class="card-title mb-4 fw-medium fs-4">Edit User Details</h5>
           <form [formGroup]="editForm">
             <div class="mb-3">
-              <label for="productName" class="form-label">User Name</label>
+              <label for="productName" class="form-label fs-6">User Name</label>
               <input
                 formControlName="username"
                 type="text"
@@ -17,7 +17,9 @@
               />
             </div>
             <div class="mb-3">
-              <label for="productDescription" class="form-label">Email</label>
+              <label for="productDescription" class="form-label fs-6"
+                >Email</label
+              >
               <textarea
                 formControlName="email"
                 class="form-control"

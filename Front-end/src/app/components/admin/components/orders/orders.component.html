@@ -1,18 +1,18 @@
 <div class="card mt-3">
   <div class="card-body">
     <!-- title -->
-    <h3 class="card-title">Orders Dashboard</h3>
-    <!-- <h5 class="card-subtitle">Overview of the Orders</h5> -->
-
+    <h3 class="card-title fw-medium fs-3">Orders Dashboard</h3>
     <!-- title -->
     <div class="table-responsive">
       <table class="table align-middle">
         <thead>
           <tr class="">
-            <th class="text-dark font-medium fs-4" style="text-align: left">
+            <th
+              class="text-dark font-medium fs-4 ps-5"
+              style="text-align: left"
+            >
               User
             </th>
-            <th class="text-dark font-medium fs-4">Order</th>
             <th class="text-dark font-medium fs-4">Actions</th>
             <th class="text-dark font-medium fs-4">Status</th>
             <th class="text-dark font-medium fs-4">Since</th>
@@ -30,12 +30,11 @@
                   class="rounded-circle"
                 />
                 <div class="ms-3 d-flex flex-column align-items-start">
-                  <h5 class="mb-0 font-medium">{{ order.username }}</h5>
-                  <span class="text-muted">{{ order._id }}</span>
+                  <h5 class="mb-0 fw-medium fs-6">{{ order.username }}</h5>
+                  <span class="text-muted"></span>
                 </div>
               </div>
             </td>
-            <td class="fs-4">{{ order.order_name }}</td>
             <td>
               <button
                 class="btn btn-success me-1"
@@ -59,26 +58,31 @@
                 <mat-icon>refresh</mat-icon>
               </button>
             </td>
-            <td class="">
-              <span
-                class="p-2 rounded-circle d-inline-block ms-3"
-                [ngClass]="{
-                  'bg-success': order.status === 'Accepted',
-                  'bg-warning': order.status === 'Pending',
-                  'bg-danger': order.status === 'Rejected'
-                }"
-              ></span
-              ><span>
-                {{ order.status }}
-              </span>
+            <td class="flex-d flex-row align-items-center">
+              <div class="d-flex align-items-center">
+                <div
+                  class="p-2 rounded-circle me-1"
+                  [ngClass]="{
+                    'bg-success': order.status === 'Accepted',
+                    'bg-warning': order.status === 'Pending',
+                    'bg-danger': order.status === 'Rejected'
+                  }"
+                ></div>
+                <div>
+                  {{ order.status }}
+                </div>
+              </div>
             </td>
 
             <td>
-              <!-- <h5 class="mb-0 fw-normal">{{ new Date()-order.date }}</h5> -->
-              <h5 class="mb-0 fw-medium">{{ order.daysDifference }} Days</h5>
+              <h5 class="mb-0 fw-medium fs-6">
+                {{ order.daysDifference }} Days
+              </h5>
             </td>
             <td>
-              <h5 class="mb-0 fw-medium">{{ order.totalPrice.toFixed() }} $</h5>
+              <h5 class="mb-0 fw-medium fs-6">
+                {{ order.totalPrice.toFixed(1) }} $
+              </h5>
             </td>
           </tr>
         </tbody>

@@ -45,8 +45,6 @@ export class TopCardsComponent implements OnInit {
             this.dailyOrders = 0;
           }
         }
-        // this.daily = data;
-        // this.dailyOrders = this.daily[0].totalOrders;
       },
       (error) => {
         console.log(error);
@@ -100,7 +98,7 @@ export class TopCardsComponent implements OnInit {
       {
         bgcolor: 'info',
         icon: 'bi bi-bag',
-        title: '210',
+        title: this.totalDailySales,
         subtitle: 'Daily Orders',
       },
     ];

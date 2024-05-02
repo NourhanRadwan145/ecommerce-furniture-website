@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Feeds</h4>
-    <h5 class="card-subtitle text-muted">Insights about your orders</h5>
+    <h4 class="card-title fw-medium fs-3">Feeds</h4>
+    <h5 class="card-subtitle text-muted fw-medium fs-5">
+      Insights about your orders
+    </h5>
     <div class="feed-widget mt-4">
       <ul class="list-unstyled feed-body m-0">
         <li
@@ -9,14 +11,14 @@
           *ngFor="let feed of feeds"
         >
           <div
-            class="feed-icon rounded-circle round-sm text-white d-flex align-items-center justify-content-center  {{
+            class="feed-icon rounded-circle round-sm text-white d-flex align-items-center justify-content-center fs-5 {{
               feed.class
             }}"
-            style="width: 35px; height: 35px; padding: 10px"
+            style="width: 40px; height: 40px; padding: 10px"
           >
             <i class="{{ feed.icon }}"></i>
           </div>
-          <h5 class="mb-0 fw-normal ms-3">{{ feed.task }}</h5>
+          <h5 class="mb-0 fw-normal ms-3 fs-6">{{ feed.task }}</h5>
           <span class="text-muted ms-auto fs-5"></span>
         </li>
       </ul>

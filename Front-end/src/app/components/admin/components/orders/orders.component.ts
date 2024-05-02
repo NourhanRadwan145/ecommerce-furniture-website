@@ -14,7 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class OrdersComponent implements OnInit {
   orders: any;
-  image = 'assets/images/users/user1.jpg';
+  image =
+    'https://res.cloudinary.com/dh7osyxvl/image/upload/v1714652925/ssokevooyjmtitnpcctn.png';
   dateFormat: any;
   constructor(private myorderService: OrderService) {}
 
@@ -27,7 +28,7 @@ export class OrdersComponent implements OnInit {
     );
     return daysDifference;
   }
-
+  // Getting All Orders from the Database
   ngOnInit() {
     this.myorderService.getOrders().subscribe(
       (data) => {
@@ -39,12 +40,12 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
-
+  //  Function of the Accept Button
   accepted(orderID: number) {
     let order = this.orders.find(
       (order: { _id: any }) => order._id === orderID
     );
-    order.status = 'accepted';
+    order.status = 'Accepted';
     this.myorderService.updateOrder(order).subscribe(
       (data: any) => {
         console.log(data);
@@ -54,12 +55,12 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
-
+  // Function of the Reject Button
   rejected(orderID: number) {
     let order = this.orders.find(
       (order: { _id: any }) => order._id === orderID
     );
-    order.status = 'rejected';
+    order.status = 'Rejected';
     this.myorderService.updateOrder(order).subscribe(
       (data) => {
         console.log(data);
@@ -69,12 +70,12 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
-
+  // Function of the Pending Button
   pending(orderID: number) {
     let order = this.orders.find(
       (order: { _id: any }) => order._id === orderID
     );
-    order.status = 'pending';
+    order.status = 'Pending';
     this.myorderService.updateOrder(order).subscribe(
       (data) => {
         console.log(data);

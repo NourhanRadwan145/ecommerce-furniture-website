@@ -8,24 +8,26 @@
           alt="Product Image"
         />
         <div class="card-body">
-          <h5 class="card-title">{{ data.productFromParent.title }}</h5>
+          <h5 class="card-title fs-4 fw-normal">
+            {{ data.productFromParent.title }}
+          </h5>
           <p class="card-text">
             {{ data.productFromParent.details }}
           </p>
           <ul class="list-group">
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="list-group-item d-flex justify-content-between align-items-center fs-6 fw-bold"
             >
               Price:
-              <span class="badge bg-primary">{{
+              <span class="badge bg-primary fs-6">{{
                 data.productFromParent.price
               }}</span>
             </li>
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="list-group-item d-flex justify-content-between align-items-center fs-6 fw-bold"
             >
               Quantity:
-              <span class="badge bg-primary">{{
+              <span class="badge bg-primary fs-6">{{
                 data.productFromParent.quantity
               }}</span>
             </li>

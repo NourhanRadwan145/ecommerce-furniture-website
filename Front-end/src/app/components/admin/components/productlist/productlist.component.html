@@ -1,4 +1,4 @@
-<div class="text-center"><h1>Admin Dashboard</h1></div>
+<div class="text-center"><h1 class="fs-1 fw-bold">Admin Dashboard</h1></div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div
     class="collapse navbar-collapse d-flex justify-content-center"
@@ -6,13 +6,31 @@
   >
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/admin']">Orders</a>
+        <a
+          class="nav-link fw-medium fs-5 ms-3 me-3"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          [routerLink]="['/admin']"
+          >Orders</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/admin/product']">Products</a>
+        <a
+          class="nav-link fw-medium fs-5 ms-3 me-3"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          [routerLink]="['/admin/product']"
+          >Products</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/admin/users']">Users</a>
+        <a
+          class="nav-link fw-medium fs-5 ms-3 me-3"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          [routerLink]="['/admin/users']"
+          >Users</a
+        >
       </li>
     </ul>
   </div>
@@ -21,7 +39,7 @@
   <div class="card-body">
     <!-- title -->
     <div class="d-flex justify-content-between">
-      <h3 class="card-title">Products List</h3>
+      <h3 class="card-title fw-medium fs-3">Products List</h3>
       <button class="btn btn-primary" (click)="createProduct()">
         Create Product
       </button>
@@ -33,11 +51,11 @@
       <table class="table align-middle">
         <thead>
           <tr class="">
-            <th class="text-dark font-medium fs-4">Image</th>
-            <th class="text-dark font-medium fs-4">Name</th>
-            <th class="text-dark font-medium fs-4">Price</th>
-            <th class="text-dark font-medium fs-4">Description</th>
-            <th class="text-dark font-medium fs-4 text-center">Actions</th>
+            <th class="text-dark fw-medium fs-4">Image</th>
+            <th class="text-dark fw-medium fs-4">Name</th>
+            <th class="text-dark fw-medium fs-4">Price</th>
+            <th class="text-dark fw-medium fs-4">Description</th>
+            <th class="text-dark fw-medium fs-4 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -86,4 +104,16 @@
       </table>
     </div>
   </div>
+</div>
+<div
+  class="col-lg-1 col-md-2 col-sm-2 d-flex justify-content-center w-100 mt-3"
+>
+  <form action="post" class="">
+    <button
+      class="btn btn-danger d-flex justify-content-end mb-3"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </form>
 </div>

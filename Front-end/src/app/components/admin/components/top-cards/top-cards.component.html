@@ -5,52 +5,56 @@
         <div
           class="rounded-circle bg-{{ topcards[0].bgcolor }} text-light
            btn btn-lg d-flex align-items-center justify-content-center"
-          style="width: 60px; height: 60px"
+          style="width: 50px; height: 50px"
         >
           <i class="{{ topcards[0].icon }}" style="font-size: 24px"></i>
         </div>
 
         <div class="ms-3 d-flex flex-column align-items-start">
-          <h3 class="font-weight-bold mb-0">{{ totalSales }} $</h3>
-          <small class="text-muted fs-5">{{ topcards[0].subtitle }}</small>
+          <h3 class="font-weight-bold mb-0 fs-5">
+            {{ totalSales.toFixed(2) }} $
+          </h3>
+          <small class="text-muted fs-6">{{ topcards[0].subtitle }}</small>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3">
     <div class="card">
-      <div class="card-body d-flex align-items-center">
+      <div class="card-body d-flex align-items-start">
         <div
           class="rounded-circle bg-{{ topcards[1].bgcolor }} text-light
            btn btn-lg d-flex align-items-center justify-content-center"
-          style="width: 60px; height: 60px"
+          style="width: 50px; height: 50px"
         >
           <i class="{{ topcards[1].icon }}" style="font-size: 24px"></i>
         </div>
 
         <div class="ms-3 d-flex flex-column align-items-start">
-          <h3 class="font-weight-bold mb-0">{{ totalDailySales }} $</h3>
-          <small class="text-muted fs-5">{{ topcards[1].subtitle }}</small>
+          <h3 class="font-weight-bold mb-0 fs-5">
+            {{ totalDailySales.toFixed(2) }} $
+          </h3>
+          <small class="text-muted fs-6">{{ topcards[1].subtitle }}</small>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3">
     <div class="card">
-      <div class="card-body d-flex align-items-center">
+      <div class="card-body d-flex align-items-start">
         <div
           class="rounded-circle bg-{{ topcards[2].bgcolor }} text-light
            btn btn-lg d-flex align-items-center justify-content-center"
-          style="width: 60px; height: 60px"
+          style="width: 50px; height: 50px"
         >
           <i class="{{ topcards[2].icon }}" style="font-size: 24px"></i>
         </div>
 
         <div class="ms-3 d-flex flex-column align-items-start">
-          <h3 class="font-weight-bold mb-0">
+          <h3 class="font-weight-bold mb-0 fs-5">
             {{ weeklyOrders }}
           </h3>
-          <small class="text-muted fs-5">{{ topcards[2].subtitle }}</small>
+          <small class="text-muted fs-6">{{ topcards[2].subtitle }}</small>
         </div>
       </div>
     </div>
@@ -61,16 +65,16 @@
         <div
           class="rounded-circle bg-{{ topcards[3].bgcolor }} text-light
            btn btn-lg d-flex align-items-center justify-content-center"
-          style="width: 60px; height: 60px"
+          style="width: 50px; height: 50px"
         >
           <i class="{{ topcards[3].icon }}" style="font-size: 24px"></i>
         </div>
 
         <div class="ms-3 d-flex flex-column align-items-start">
-          <h3 class="font-weight-bold mb-0">
+          <h3 class="font-weight-bold mb-0 fs-5">
             {{ dailyOrders }}
           </h3>
-          <small class="text-muted fs-5">{{ topcards[3].subtitle }}</small>
+          <small class="text-muted fs-6">{{ topcards[3].subtitle }}</small>
         </div>
       </div>
     </div>

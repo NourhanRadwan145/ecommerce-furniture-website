@@ -32,7 +32,6 @@ let getAllOrders = async (req, res) => {
   return res.json(orders);
 };
 
-
 /**
  * Get order by status
  */
@@ -44,11 +43,10 @@ let getOrderByStatus = (req, res) => {
  * Get order by ID
  */
 let getOrderById = async (req, res) => {
-    let orderId = req.params.id;
-    let order = await OrderModel.findById(orderId);
-    return res.json(order);
-}
-
+  let orderId = req.params.id;
+  let order = await OrderModel.findById(orderId);
+  return res.json(order);
+};
 
 /**
  * Create a new order
@@ -81,23 +79,25 @@ let updateOrderByID = async (req, res) => {
 /**
  * Delete order by ID
  */
-let deleteOrderByID = async(req, res) => {
-    const orderId = req.params.id;  // ID from the URL parameter
+let deleteOrderByID = async (req, res) => {
+  const orderId = req.params.id; // ID from the URL parameter
 
-    if (!orderId) {
-        return res.status(400).send({ message: "Order ID is required" });
-    }
+  if (!orderId) {
+    return res.status(400).send({ message: "Order ID is required" });
+  }
 
-    try {
-        const deletedOrder = await OrderModel.findByIdAndDelete(orderId);
-        if (!deletedOrder) {
-            return res.status(404).send({ message: "Order not found" });
-        }
-        res.send({ message: "Order deleted successfully", order: deletedOrder });
-    } catch (error) {
-        res.status(500).send({ message: "Error deleting order", error: error.message });
+  try {
+    const deletedOrder = await OrderModel.findByIdAndDelete(orderId);
+    if (!deletedOrder) {
+      return res.status(404).send({ message: "Order not found" });
     }
-}
+    res.send({ message: "Order deleted successfully", order: deletedOrder });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error deleting order", error: error.message });
+  }
+};
 /**
  * Get weekly orders
  */
@@ -133,11 +133,18 @@ let weeklyOrders = async (req, res) => {
  */
 let dailyOrders = async (req, res) => {
   try {
+    let now = new Date();
+    let yesterday = new Date(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate() - 1
+    );
+
     let pipeline = [
       {
         $match: {
           date: {
-            $gte: new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000), // Filter orders from the last 1 days
+            $gte: yesterday,
           },
         },
       },
@@ -150,14 +157,18 @@ let dailyOrders = async (req, res) => {
     ];
     let orders = await orderModel.aggregate(pipeline);
     console.log(orders);
+    if (orders.length === 0) {
+      return res.status(404).json({ message: "No orders found" });
+    }
     return res.json(orders);
   } catch (error) {
-    console.error(error);
+    console.error("Error in dailyOrders:", error);
     return res
       .status(500)
-      .json({ message: "Internal server error", error: error.message });
+      .json({ message: "Internal server error", error: error.toString() });
   }
 };
+
 /**
  * Get weekly sales
  */
