@@ -17,7 +17,7 @@ Welcome to our Online E-commerce Furniture Store! This platform is designed to o
 
 ## Project Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x9JopZqdfn4" frameborder="0" allowfullscreen></iframe>
+Check out our project demo [here](https://www.youtube.com/watch?v=x9JopZqdfn4)!
 
 ## Features
 
